@@ -1,0 +1,8 @@
+Which library do I link?
+------------------------
+
+If you want to use fmodex.dll
+
+Visual Studio users          - fmodex_vc.lib.
+
+No other compilers are supported for 64bit libraries.
