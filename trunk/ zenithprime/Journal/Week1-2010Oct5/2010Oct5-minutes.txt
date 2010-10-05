@@ -1,3 +1,19 @@
+Date: 5 October 2010
+
+Start: 	1105
+End:	1155
+
+Attendance:
+Alan Branch
+Matt Smith
+Taylor Grimes
+
+Minutes:
+
+The meeting began with an unofficial motion from Matt that owing to comlpexity of civilization portion of PZP,
+	focus should change to the ship combat system.
+Motion carried unanimously.
+
 Combat has the following dependencies:
 	System - the solar system combat takes place in...affects movement, shields, fleets in attendance, etc.
 	Planet - location of combat.  Considered a ship with no movement.
@@ -67,3 +83,14 @@ applyHitDmg()
 	Structure
 	Systems
 }
+
+-------------------------------------------
+
+Next Step:
+Matt will work on building interface, space combat map, etc.
+Taylor and Alan will work together to flesh out Beam weapon specifics.
+
+Next Meeting:
+1100 Saturday, 9 October 2010
+
+Meeting closed at 1155.
