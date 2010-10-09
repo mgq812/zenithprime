@@ -8,14 +8,6 @@ clean:
 #Default Build of Excutable
 bin:
 
-#Mac-build
-mac_bin:
-	
-#Linux-build
-linux_bin:
-	
-#Windows-build
-win_bin:
 		
 #Execute
 run:
@@ -27,4 +19,5 @@ run:
 #All Testing	
 test: BattleBoard_test
 
-BattleBoard_test:
+BattleBoard_test: obj/BattleBoard.o
+	@echo TESTING BattleBoard
