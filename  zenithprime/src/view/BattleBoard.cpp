@@ -13,7 +13,7 @@ BattleBoardView::BattleBoardView(BattleBoardModel* model){
   updateCamera();
   
   x_div = model->width/2;
-  y_div = model->height/2;
+  y_div = model->hieght/2;
   
   showGrid = false;
   showBoundry = false;

@@ -1,4 +1,6 @@
-//#pgram once
+#pragma once
+#include <gl\gl.h>			// Header File For The OpenGL32 Library
+#include <gl\glu.h>			// Header File For The GLu32 Library
 #include <vector>
 
 #define ShipID int*
@@ -35,7 +37,7 @@ struct ParticlePlacement
   float y;
   float z;
   ParticleID particle;
-}
+};
 
 class BattleBoardModel
 {
@@ -87,7 +89,7 @@ class BattleBoardView
     BattleBoardModel* model;
     
     float camera[3];
-}
+};
 
 class BattleBoardController{
   public:
@@ -96,5 +98,5 @@ class BattleBoardController{
       ShipPlacement* currentShip;
       
       
-}
+};
 
