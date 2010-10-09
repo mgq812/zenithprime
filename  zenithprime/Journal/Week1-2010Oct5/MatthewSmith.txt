@@ -1,0 +1,10 @@
+#October 8, 2010
+
+Updated Respository file directories
+Generated makefile structure a updated them to include some files
+Contributed BattleBoard class, incomplete but concept is there
+uploaded previously written code for a OBJloader and OBJModel and updated them
+uploaded Keyboard and Mouse class, needs further adaptation
+uploaded some of my math libraries that OBJloader and OBJModel are dependent on
+
+Many updates are still needed to make to include new files in makefile
