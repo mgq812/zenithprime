@@ -69,7 +69,7 @@ OBJModel* OBJloader::loadModel(string objData){
 	currentmaterial.startTri = -1;
 	
 	//Look for Verticies
-	for(int line = 0; line< tokenLines.size(); line++)
+	for(unsigned int line = 0; line< tokenLines.size(); line++)
 	{
 		vector<string> tokens;
 		
@@ -227,7 +227,7 @@ OBJModel* OBJloader::loadModel(string objData){
 	return currentModel;
 }
 
-void OBJloader::PrintModel(Model& model){
+void OBJloader::PrintModel(OBJModel& model){
 	cout<<"Model "<<model.objectName<<endl;
 	cout<<"Vertex["<<model.vertexXYZ.size()<<"]:"<<endl;
 	//cout<<model.vertexXYZ.size()<<endl;

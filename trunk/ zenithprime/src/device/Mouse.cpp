@@ -15,7 +15,7 @@ void Mouse::addMouseListener(MouseListener* mouseListener){
 void Mouse::removeMouseListener(MouseListener* mouseListener){
 	std::vector<MouseListener*> changestack;
 
-	for(int i = 0 ; i < mouseListeners.size(); i++){
+	for(unsigned  int i = 0 ; i < mouseListeners.size(); i++){
 		if(mouseListeners[i] == mouseListener)
 		{
 			continue;
@@ -40,7 +40,7 @@ Mouse* Mouse::getCurrentMouse(){
 }
 
 void Mouse::mouseMoved(int targetX, int targetY){
-	for(int i = 0 ; i < mouseListeners.size(); i++)
+	for(unsigned  int i = 0 ; i < mouseListeners.size(); i++)
 		mouseListeners[i]->mouseMoved(targetX, targetY);
 
 	X = targetX;
@@ -50,33 +50,31 @@ void Mouse::mouseMoved(int targetX, int targetY){
 		mouseDragged(targetX,targetY, buttonState);
 }
 void Mouse::mouseDragged(int targetX, int targetY, int buttons){
-	for(int i = 0 ; i < mouseListeners.size(); i++)
+	for(unsigned int i = 0 ; i < mouseListeners.size(); i++)
 		mouseListeners[i]->mouseDragged(targetX, targetY,buttons);
 }
 void Mouse::mousePressed(int buttons){
-	for(int i = 0 ; i < mouseListeners.size(); i++)
+	for(unsigned int i = 0 ; i < mouseListeners.size(); i++)
 		mouseListeners[i]->mousePressed(X, Y,buttons);
 }
 void Mouse::mouseReleased(int buttons){
-	for(int i = 0 ; i < mouseListeners.size(); i++)
+	for(unsigned int i = 0 ; i < mouseListeners.size(); i++)
 		mouseListeners[i]->mouseReleased(X, Y,buttons);
 }
 void Mouse::mouseClicked(int buttons){
-	for(int i = 0 ; i < mouseListeners.size(); i++)
+	for(unsigned int i = 0 ; i < mouseListeners.size(); i++)
 		mouseListeners[i]->mouseClicked(X, Y,buttons);
 }
 void Mouse::mouseDoubleClicked(int buttons){
-	for(int i = 0 ; i < mouseListeners.size(); i++)
+	for(unsigned int i = 0 ; i < mouseListeners.size(); i++)
 		mouseListeners[i]->mouseDoubleClicked(X, Y,buttons);
 }
 void Mouse::mouseWheel(int delta){
-	for(int i = 0 ; i < mouseListeners.size(); i++)
+	for(unsigned int i = 0 ; i < mouseListeners.size(); i++)
 		mouseListeners[i]->mouseWheel(X, Y,delta);
 }
 
 void Mouse::WindProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam){
-	int deltaX =0;
-	int deltaY =0;
 
 	switch(message){
 		case WM_RBUTTONDOWN:

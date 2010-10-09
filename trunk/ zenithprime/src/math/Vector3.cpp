@@ -29,7 +29,7 @@ Vector3 Vector3::Transform(Vector3 point, std::vector<Matrix> matrix){
 	Matrix temp;
 	float vals[] = {point.x, point.y, point.z, 1};
 	Matrix::loadMatrix(&temp, 1, 4, vals);
-	for(int i = 0 ; i < matrix.size(); i++)
+	for(unsigned int i = 0 ; i < matrix.size(); i++)
 		temp = matrix[i] * temp;
 
 	return Vector3(temp.Get(0,0), temp.Get(1,0), temp.Get(2,0));
