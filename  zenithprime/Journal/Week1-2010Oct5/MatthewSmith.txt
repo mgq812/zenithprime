@@ -8,3 +8,5 @@ uploaded Keyboard and Mouse class, needs further adaptation
 uploaded some of my math libraries that OBJloader and OBJModel are dependent on
 
 Many updates are still needed to make to include new files in makefile
+
+Makefiles are updated and files succefully migrated
