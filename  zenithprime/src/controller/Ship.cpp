@@ -1,11 +1,13 @@
 #include "Ship.h"
 
+#include <string>
+
 Ship::Ship()
   :engine('\0'), size(0)
 {}
 
-Ship::Ship(Engine* e, float s)
-  :engine(e), size(s)
+Ship::Ship(Engine* engine1, float size1, string name1)
+  :engine(engine1), size(size1), name(name1)
 {}
 
 float Ship::getSpeed()
@@ -16,4 +18,9 @@ float Ship::getSpeed()
 float Ship::getSize()
 {
   return size;
+}
+
+string Ship::getName()
+{
+  return name;
 }
