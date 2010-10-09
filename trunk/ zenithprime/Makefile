@@ -1,25 +1,5 @@
-
-#Clean
-clean:
-#	del /obj/*.*
-#	del /bin/*
-
-#Default Build of Excutable
-bin:
-	@echo HI
-
-#Mac-build
-mac_bin:
-	
-#Linux-build
-linux_bin:
-	
-#Windows-build
-win_bin:
-	
-
-	
-#Execute
-run:
-	
-test:
+include Make/Operations.mk
+include Make/OSVariables.mk
+include Make/BuildVariables.mk
+include Make/Dependencies.mk
+include Make/ExternalDefines.mk
