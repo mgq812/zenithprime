@@ -7,9 +7,13 @@ Ship::Ship()
   :/*engine('\0'), */size(0)
 {}
 
-Ship::Ship(/* Engine* engine1, */ int size1, string name1, float mass1)
-  :/* engine(engine1), */ size(size1), name(name1), mass(mass1)
-{}
+Ship::Ship(/* Engine* engine1, */string name1, int size1)
+  :/* engine(engine1), */ size(size1), name(name1)
+{
+	float equalizer = 0;
+	float multiplier = 100;
+	mass = ((float)size1 + equalizer) * multiplier;
+}
 
 // getters
 float Ship::getSpeed()
