@@ -3,20 +3,29 @@
 
 #include <string>
 
+using namespace std;
+
 class Ship
 {
  public:
    Ship();
-   Ship(Engine* engine1, float size1, string name1);
+   Ship(/* Engine* engine1, */ int size1, string name1, float mass1);
    
-   float getSize();        
+   int getSize();        
    float getSpeed();
-   string getSpeed();
+   float getMass();
+   string getName();
+   // Engine* getEngine();
+   
+   void setSize(int size1);
+   void setName(string name1);
+   void setMass(float mass1);
+   // void setEngine(Engine* engine1);
+
    
  private:      
    // components of a ship
-   Engine* engine;
-   // This is an idea of future components
+   // Engine* engine;
    // Structure* structure;
    // Armor* armor;
    // Shields* shields;
@@ -27,7 +36,8 @@ class Ship
    // Specials* specials; ??? have no clue what this class is yet
    
    // attributes of a ship
-   float size;
+   int size;
+   float mass;
    string name;
 };
 
