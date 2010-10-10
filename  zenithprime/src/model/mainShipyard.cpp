@@ -13,6 +13,35 @@ void intro()
 	cout << "..." << endl << endl << endl;
 }
 
+void addEnginesOptions()
+{
+	cout << "1. Add existing engine" << endl;
+	cout << "2. Add new engine" << endl;
+	cout << "q. Back" << endl;
+}
+
+void addEngines()
+{
+	string q;
+
+	while (q != "q" && q != "quit")
+	{
+		system("cls");
+		addEnginesOptions();
+		cout << ": ";
+		getline(cin, q);
+
+		if (q == "1")
+		{
+			cout << "Not yet implemented" << endl;
+		}
+		else if (q == "2")
+		{
+			cout << "Not yet implemented" << endl;
+		}
+	}
+}
+
 void makeShipOptions()
 {
 	cout << "1. Add Engines" << endl;
@@ -36,7 +65,7 @@ void makeShip()
 
 		if (q == "1")
 		{
-			cout << "Not yet implemented" << endl;
+			addEngines();
 		}
 		else if (q == "2")
 		{
@@ -50,6 +79,11 @@ void makeShip()
 		{
 			cout << "Not yet implemented" << endl;
 		}
+		else if (q == "5")
+		{
+			cout << "Not yet implemented" << endl;
+		}
+
 	}
 }
 
@@ -73,6 +107,26 @@ void mainMenu()
 
 		if (q == "1")
 		{
+			system("cls");
+
+			cout << "Ship name: ";
+			string name;
+			getline(cin, name);
+
+			int size = -1;
+			while (true)
+			{
+				cout << "Ship size [0 - 10]" << endl; 
+				string sSize;
+				getline(cin, sSize);
+				size = atoi(sSize.c_str());
+				if (size >= 0 || size <= 10)
+					break;
+				cout << "Invalid Size" << endl;
+				getline(cin, sSize);
+			}
+
+			Ship* ship = new Ship(name, size);
 			makeShip();
 		}
 		else if (q == "2")
@@ -84,12 +138,28 @@ void mainMenu()
 
 int main()
 {
+	while (true)
+	{
+		system("cls");
+		string temp;
+		cout << "Size [0 - 10] " << endl;
+		getline(cin, temp);
+	
+		if (temp == "q")
+			break;
+
+		Ship s("bob", atoi(temp.c_str()));
+		cout << "Base Mass = " << s.getMass() << endl;
+		getline(cin, temp);
+	}
+
+	/*
 	string enter;
 	
 	intro();
 	getline(cin, enter);
 
 	mainMenu();
-	
+	*/
 	return 0;
 }

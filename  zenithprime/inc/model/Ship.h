@@ -9,7 +9,7 @@ class Ship
 {
  public:
    Ship();
-   Ship(/* Engine* engine1, */ int size1, string name1, float mass1);
+   Ship(/* Engine* engine1, */ string name1, int size);
    
    int getSize();        
    float getSpeed();
