@@ -2,6 +2,9 @@
 obj$(SLASH)BattleBoard.o : $(VIEW_INC)$(SLASH)BattleBoard.h $(VIEW_SRC)$(SLASH)BattleBoard.cpp
 	@gcc $(COMP_FLAGS) -c -o obj$(SLASH)BattleBoard.o $(VIEW_SRC)$(SLASH)BattleBoard.cpp $(ALL_INC)
 	@echo BattleBoard Built
+	
+obj$(SLASH)SpaceCombatViewport.o :  $(VIEW_INC)$(SLASH)SpaceCombatViewport.h $(VIEW_INC)$(SLASH)OpenGLViewport.h $(VIEW_SRC)$(SLASH)SpaceCombatViewport.cpp
+	@gcc $(COMP_FLAGS) -c -o obj$(SLASH)SpaceCombatViewport.o $(VIEW_SRC)$(SLASH)SpaceCombatViewport.cpp $(ALL_INC)
 
 # LOADER OBJECT FILES
 obj$(SLASH)OBJloader.o :  $(LOADER_INC)$(SLASH)OBJloader.h $(LOADER_SRC)$(SLASH)OBJloader.cpp obj$(SLASH)OBJModel.o $(MATH_OBJ)
