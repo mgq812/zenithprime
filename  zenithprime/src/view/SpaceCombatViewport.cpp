@@ -10,6 +10,8 @@ SpaceCombatViewport::~SpaceCombatViewport(){
 
 int SpaceCombatViewport::Draw(){
 	glPushMatrix();
+	glLoadIdentity();
+	gluPerspective(45.0f,(GLfloat)width/(GLfloat)height),0.1f,10000.0f);
 	glViewport(offsetX,offsetY,Width,Height);
 	battleBoardView->Draw();
 	glFlush();
