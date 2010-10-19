@@ -31,7 +31,6 @@ FuelCell::FuelCell(Enums::Cell cell)
  */
 void FuelCell::initCell(Enums::Cell cell)
 {
-standard, hydrogen, deuterium, anti-hydrogen
 	switch (cell)
 	{
 		case(Enums::standard):
