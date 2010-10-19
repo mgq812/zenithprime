@@ -380,7 +380,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				SwapBuffers(hDC);					// Swap Buffers (Double Buffering)
 			}
 
-			
+			scView.Update()
 		}
 	}
 

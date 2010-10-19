@@ -18,7 +18,7 @@ run:
 #TESTING
 
 #All Testing	
-test: BattleBoard_test DeviceTest LoaderTest
+test: BattleBoard_test DeviceTest LoaderTest CombatTest
 	@echo ALL TESTS COMPLETE
 
 BattleBoard_test: obj$(SLASH)BattleBoard.o
@@ -29,3 +29,6 @@ DeviceTest: obj$(SLASH)Mouse.o obj$(SLASH)Keyboard.o
 
 LoaderTest: obj$(SLASH)OBJloader.o obj$(SLASH)OBJModel.o
 	@echo TESTING Loaders
+
+CombatTest: bin$(SLASH)SpaceCombat$(EXE)
+	./bin/SpaceCombat$(EXE)

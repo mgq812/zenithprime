@@ -5,8 +5,8 @@
 class OpenGLViewport
 {
 public:
-	OpenGLViewport(int width, int height, int offsetX =0; int offsetY=0);
-	~OpenGLViewport();
+	//OpenGLViewport(int width, int height, int offsetX =0; int offsetY=0);
+	//~OpenGLViewport();
 
 	virtual int Draw();
 	virtual int Update();

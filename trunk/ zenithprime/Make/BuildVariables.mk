@@ -9,6 +9,7 @@ VIEW_SRC = src$(SLASH)view
 LOADER_SRC = src$(SLASH)loader
 DEVICE_SRC = src$(SLASH)device
 MATH_SRC = src$(SLASH)math
+DRIVER_SRC = src$(SLASH)driver
 
 VIEW_OBJ = obj$(SLASH)BattleBoard.o obj$(SLASH)SpaceCombatViewport.o
 LOADER_OBJ = obj$(SLASH)OBJloader.o obj$(SLASH)OBJModel.o

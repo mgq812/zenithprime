@@ -5,7 +5,7 @@
 class SpaceCombatViewport
 {
 public:
-	SpaceCombatViewport(int width, int height, int offsetX =0; int offsetY=0);
+	SpaceCombatViewport(int width, int height, int offsetX =0, int offsetY=0);
 	~SpaceCombatViewport();
 
 	virtual int Draw();
@@ -14,9 +14,7 @@ public:
 	virtual int MoveTo(int offsetX, int offsetY);
 
 	
-	BattleBoardView* battleBoardView;
+	BattleBoardView* battleBoardView; 
 	BattleBoardController* battleBoardController;
-
-private:
 
 };

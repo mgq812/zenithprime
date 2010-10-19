@@ -1,3 +1,8 @@
+# EXE FILES
+bin$(SLASH)SpaceCombat$(EXE) : $(VIEW_OBJ) $(DEVICE_OBJ)
+	@gcc $(COMP_FLAGS) -o bin$(SLASH)SpaceCombat$(EXE) $(DRIVER_SRC)$(SLASH)SpaceCombat.cpp $(VIEW_OBJ) $(DEVICE_OBJ) $(ALL_INC)
+	@echo Space Combat Program Built
+	
 # VIEW OBJECT FILES
 obj$(SLASH)BattleBoard.o : $(VIEW_INC)$(SLASH)BattleBoard.h $(VIEW_SRC)$(SLASH)BattleBoard.cpp
 	@gcc $(COMP_FLAGS) -c -o obj$(SLASH)BattleBoard.o $(VIEW_SRC)$(SLASH)BattleBoard.cpp $(ALL_INC)
