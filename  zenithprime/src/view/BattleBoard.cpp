@@ -68,6 +68,7 @@ BattleBoardView::~BattleBoardView(){
 void BattleBoardView::DrawGrid(){
 	glBegin(GL_LINES);
 	glColor3f(0.0, 1.0, 0.0);
+
 	//Draw Verticle Lines
 	float grid_width = model->width/x_div;
 
