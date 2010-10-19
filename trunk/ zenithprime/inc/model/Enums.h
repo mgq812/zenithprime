@@ -20,7 +20,17 @@ class Enums
 public:
 
 //! Enumeration of Engines
-enum Type {basictest};
+enum Type {fission, pulse, fusion, anti-matter, phase};
+
+enum Cell {standard, hydrogen, deuterium, anti-hydrogen, mini black hole};
+
+enum Beam {laser, pulsed laser, fusion, ion cannon};
+
+enum Missile {nuclear, mercolite, pulson, zeon};
+
+enum Bomb {fission, fusion, anti-matter, bioPulse, toxic};
+
+enum Special{};
 
 
 };

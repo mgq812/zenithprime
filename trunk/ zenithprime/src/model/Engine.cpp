@@ -13,7 +13,7 @@
 
 Engine::Engine()
 {
-	tacSpeed = 1.0;
+	combatThrust = 1.0;
 	galSpeed = 10.0;
 	status = 100.0;	//1?
 }
@@ -28,15 +28,46 @@ Engine::Engine(Enums::Type make)
 
 void Engine::initEngine(Enums::type make)
 {
-	float GALMUL = 10.0;		// Galactic multiplier---make global final
+
 	switch (make)
 	{
-		case(Enums::basicTest):
+		case(Enums::fission):
 			type = make;
 			mass = 1;
-			tacSpeed = 10.0;
-			galSpeed = tacSpeed*GALMUL;
-			fuelCellCount = 2;
+			combatThrust = 10.0;
+			hyperThrust = tacSpeed*GALMUL;
+			status = 100.0;
+			break;
+
+		case(Enums::pulse):
+			type = make;
+			mass = 2;
+			combatThrust = 15.0;
+			hyperThrust = tacSpeed*GALMUL;
+			status = 100.0;
+			break;
+
+		case(Enums::fusion):
+			type = make;
+			mass = 3;
+			combatThrust = 20.0;
+			hyperThrust = tacSpeed*GALMUL;
+			status = 100.0;
+			break;
+			
+		case(Enums::anti-matter):
+			type = make;
+			mass = 5;
+			combatThrust = 40.0;
+			hyperThrust = tacSpeed*GALMUL;
+			status = 100.0;
+			break;
+
+		case(Enums::phase):	// acceleration from this drive not affected by mass?
+			type = make;
+			mass = 9;
+			combatThrust = 80.0;
+			hyperThrust = tacSpeed*GALMUL;
 			status = 100.0;
 			break;
 
@@ -50,8 +81,8 @@ void Engine::initEngine(Enums::type make)
  */
 Engine::Engine (const Engine &other)
 {
-	tacSpeed = other.tacSpeed;
-	galSpeed = other.galSpeed;
+	combatThrust = other.tacSpeed;
+	hyperThrust = other.galSpeed;
 	fuelCellCount = other.fuelCellCount;
 	status = other.status;
 }
@@ -70,8 +101,8 @@ Engine& Engine::operator = (const Engine &other)
 {
 	if (this !=&other)
 	{
-		tacSpeed = other.tacSpeed;
-		galSpeed = other.galSpeed;
+		combatThrust = other.tacSpeed;
+		hyperThrust = other.galSpeed;
 		fuelCellCount = other.fuelCellCount;
 		status = other.status;
 	}
@@ -81,29 +112,29 @@ Engine& Engine::operator = (const Engine &other)
 /*******************************************
 	Set Speeds
 ********************************************/
-void Engine::setTacSpeed (float adjustSpeed)
+void Engine::setCombatThrust (float adjustSpeed)
 {
-	tacSpeed = adjustSpeed;
+	combatThrust = adjustSpeed;
 }
 
 
-void Engine::setGalSpeed(float adjustSpeed)
+void Engine::setHyperThrust()
 {
-	galSpeed = adjustSpeed;
+	hyperThrust = combatThrust*GALMUL;
 }
 
 /*******************************************
 	Get Speeds
 ********************************************/
-float Engine::getTacSpeed()
+float Engine::getCombatThrust()
 {
-	return tacSpeed;
+	return combatThrust;
 }
 
 
-float Engine::getGalSpeed()
+float Engine::getHyperThrust()
 {
-	return galSpeed;
+	return hyperThrust;
 }
 
 /*******************************************

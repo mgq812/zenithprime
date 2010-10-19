@@ -72,7 +72,7 @@ public:
 	 * Returns:
 	 * void
 	 */
-	void setTacSpeed (float adjustSpeed);
+	void setCombatThrust (float adjustSpeed);
 
 	/*
 	 * Sets the Galactic travel speed
@@ -83,7 +83,7 @@ public:
 	 * Returns:
 	 * void
 	 */
-	void setGalSpeed(float adjustSpeed);
+	void setHyperThrust();
 
 	/*
 	 * Gets the tactical speed
@@ -94,7 +94,7 @@ public:
 	 * Returns:
 	 * float tacSpeed
 	 */
-	float getTacSpeed();
+	float getCombatThrust();
 
 	/*
 	 * Gets the Galactic travel speed\par
@@ -105,7 +105,7 @@ public:
 	 * Returns:
 	 * float galSpeed
 	*/
-	float getGalSpeed();
+	float getHyperThrust();
 
 /*******************************************
 		Fuel
@@ -262,13 +262,15 @@ public:
 
 
 private:
-	Enums type;		// Engine make and model
-	float mass;		// engine mass
-	float tacSpeed;		// tactical combat speed
-	float galSpeed;		// Galactic travel speed
-	float status;		// health/effeciency of engine
-	FuelCell cellType;	// Type of cells loaded into engine
-	int fuelCellCount;	// Number of cells determines range on galactic map
+	Enums type;						// Engine make and model
+	float mass;						// engine mass
+	float combatThrust;				// tactical combat speed
+	float hyperThrust;				// Galactic travel speed
+	float status;					// health/effeciency of engine
+	FuelCell cellType;				// Type of cells loaded into engine
+	int fuelCellCount;				// Number of cells determines range on galactic map
+
+	const float GALMUL = .1;		// Galactic thrust multiplier---make global final
 
 };
 
