@@ -12,8 +12,8 @@ BattleBoardView::BattleBoardView(BattleBoardModel* model){
   zoom = 10;
   updateCamera();
   
-  x_div = model->width/2;
-  y_div = model->hieght/2;
+  x_div = (int)model->width/2;
+  y_div = (int)model->hieght/2;
   
   showGrid = true;
   showBoundry = false;
@@ -27,8 +27,9 @@ BattleBoardView::BattleBoardView(BattleBoardModel* model){
 
 void BattleBoardView::updateCamera(){
 	Matrix cam =	Matrix::CreateTranslation(Vector3(X,0,Y)) * 
-					Matrix::CreateRotationY(rotateY* 3.14159265358/180) *
-					Matrix::CreateRotationX(rotateX* 3.14159265358/180);
+					/* maybe make a const for pi */
+					Matrix::CreateRotationY(rotateY* (float)3.14159265358/180) *
+					Matrix::CreateRotationX(rotateX* (float)3.14159265358/180);
 
 	Vector3 forward = Vector3::Transform(Vector3(0,0,-zoom),  cam); 
 	camera[0] = forward.x;

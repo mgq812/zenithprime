@@ -21,6 +21,7 @@ HINSTANCE	hInstance;		// Holds The Instance Of The Application
 bool	active=TRUE;		// Window Active Flag Set To TRUE By Default
 bool	fullscreen=TRUE;	// Fullscreen Flag Set To Fullscreen Mode By Default
 
+/* This needs a default constructor to be declared here*/
 SpaceCombatViewport scView;
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 
@@ -329,8 +330,9 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 
 		default:
 			{
-				Mouse::getCurrentMouse().WindProc(hwnd, message, wParam, lParam);
-				Keyboard::getCurrentKeyboard().WindProc(hwnd, message, wParam, lParam);
+				/* message is undefined guessing uMsg */
+				Mouse::getCurrentMouse()->WindProc(hWnd, uMsg, wParam, lParam);
+				Keyboard::getCurrentKeyboard()->WindProc(hWnd, uMsg, wParam, lParam);
 			}
 	}
 
@@ -369,7 +371,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 			}
 		}
 		else										// If There Are No Messages
-		{
+		{	
 			// Draw The Scene.  Watch For ESC Key And Quit Messages From DrawGLScene()
 			if ((active && !DrawGLScene()))	// Active?  Was There A Quit Received?
 			{
@@ -379,8 +381,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 			{
 				SwapBuffers(hDC);					// Swap Buffers (Double Buffering)
 			}
-
-			scView.Update()
+			scView.Update();
 		}
 	}
 
