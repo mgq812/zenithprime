@@ -1,6 +1,8 @@
 #include "SpaceCombatViewport.h"
 
-SpaceCombatViewport::SpaceCombatViewport(int width, int height, int x =0; int y=0): Width(width), Height(height), offsetX(x), offsetY(y){
+SpaceCombatViewport::SpaceCombatViewport(int width, int height, int x, int y)
+	:Width(width), Height(height), offsetX(x), offsetY(y)
+{
 	BattleBoardModel* battleBoardModel = new BattleBoardModel();
 	battleBoardView = new BattleBoardView(battleBoardModel);
 }
@@ -11,7 +13,7 @@ SpaceCombatViewport::~SpaceCombatViewport(){
 int SpaceCombatViewport::Draw(){
 	glPushMatrix();
 	glLoadIdentity();
-	gluPerspective(45.0f,(GLfloat)width/(GLfloat)height),0.1f,10000.0f);
+	gluPerspective(45.0f, (GLfloat)Width/(GLfloat)Height, 0.1f, 10000.0f);
 	glViewport(offsetX,offsetY,Width,Height);
 	battleBoardView->Draw();
 	glFlush();

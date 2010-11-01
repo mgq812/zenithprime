@@ -135,7 +135,7 @@ void mainMenu()
 		}
 	}
 }
-
+/*
 int main()
 {
 	while (true)
@@ -153,13 +153,12 @@ int main()
 		getline(cin, temp);
 	}
 
-	/*
 	string enter;
 	
 	intro();
 	getline(cin, enter);
 
 	mainMenu();
-	*/
 	return 0;
 }
+*/

@@ -17,4 +17,9 @@ public:
 	BattleBoardView* battleBoardView; 
 	BattleBoardController* battleBoardController;
 
+private:
+	int Width;
+	int Height;
+	int offsetX;
+	int offsetY;
 };

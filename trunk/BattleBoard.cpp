@@ -6,14 +6,14 @@ BattleBoardView::BattleBoardView(BattleBoardModel* model){
   this->model = model;
   
   X = model->width/2;
-  Y = model->hieght/2;
+  Y = model->height/2;
   rotateX = 45;
   rotateY = 0;
   zoom = 10;
   updateCamera();
   
-  x_div = model->width/2;
-  y_div = model->height/2;
+  x_div = (int)(model->width/2.0);
+  y_div = (int)(model->height/2.0);
   
   showGrid = false;
   showBoundry = false;
@@ -30,10 +30,10 @@ void BattleBoardView::updateCamera(){
 }
 
 void BattleBoardView::Draw(){
-  
-  gluLookAt(camera[0], camera[1], camera[2], /* look from camera XYZ */ 
-	    X, Y, 0, /* look at the origin */ 
-	    0, 1, 0); /* positive Y up vector */
+  /* MATT this is Taylor gluLookAt is not found in this scope yet */
+  //gluLookAt(camera[0], camera[1], camera[2], /* look from camera XYZ */ 
+	 //   X, Y, 0, /* look at the origin */ 
+	 //   0, 1, 0); /* positive Y up vector */
   
       if(showGrid)
 	DrawGrid();
