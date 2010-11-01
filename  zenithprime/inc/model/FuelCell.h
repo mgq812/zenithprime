@@ -105,7 +105,7 @@ public:
 	 * Returns:
 	 * Enums Cell: cell
 	 */
-	Enums::Cell getCellType();
+	Enums getCellType();
 
 
 	/*
@@ -162,6 +162,9 @@ public:
 	string getCellSpecs();
 
 
+	/* This was edited by me Taylor */
+	/* missing initCell ? */
+	void initCell(Enums::Cell cell);
 
 
 /*******************************************
@@ -182,7 +185,7 @@ public:
 	 * Setting and getting of ranges
 	 *
 	 */
-	static bool Test(ostream & os);
+	bool Test(ostream & os);
 
 
 private:

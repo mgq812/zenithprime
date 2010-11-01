@@ -35,7 +35,7 @@ struct ParticlePlacement
   float y;
   float z;
   ParticleID particle;
-}
+};
 
 class BattleBoardModel
 {
@@ -46,7 +46,7 @@ class BattleBoardModel
     std::vector<ParticlePlacement> particles;
     
     float width;
-    float hieght;
+    float height;
 };
 
 class BattleBoardView
@@ -87,7 +87,7 @@ class BattleBoardView
     BattleBoardModel* model;
     
     float camera[3];
-}
+};
 
 class BattleBoardController{
   public:
@@ -96,5 +96,5 @@ class BattleBoardController{
       ShipPlacement* currentShip;
       
       
-}
+};
 

@@ -28,6 +28,9 @@ public:
 	 */
 	Engine();
 
+	/* did not yet include this constructor */
+	Engine(Enums::Type make);
+
 	/*
 	 * Constructor
 	 *
@@ -41,7 +44,7 @@ public:
 	/*
 	 * Sets Engine parameters based on engine type
 	 */
-	void initEngine(Enums::type make);
+	void initEngine(Enums::Type make);
 
 	/*
 	 * Copy constructor
@@ -262,7 +265,7 @@ public:
 
 
 private:
-	Enums type;						// Engine make and model
+	Enums::Type type;				// Engine make and model
 	float mass;						// engine mass
 	float combatThrust;				// tactical combat speed
 	float hyperThrust;				// Galactic travel speed
@@ -270,7 +273,10 @@ private:
 	FuelCell cellType;				// Type of cells loaded into engine
 	int fuelCellCount;				// Number of cells determines range on galactic map
 
-	const float GALMUL = .1;		// Galactic thrust multiplier---make global final
+	const float GALMUL;			// Galactic thrust multiplier---make global final
+	/* cannot init non-static members in a class definition */
+	/* you should do this in the constructor */
+	/* with :GALMUL(-1), other vars */
 
 };
 

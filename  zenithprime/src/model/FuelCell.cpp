@@ -14,7 +14,7 @@
 /*
  * Default constructor\par
  */
-FuelCell::FuelCell();
+FuelCell::FuelCell()
 {
 }
 
@@ -36,31 +36,31 @@ void FuelCell::initCell(Enums::Cell cell)
 		case(Enums::standard):
 			cell = Enums::standard;
 			mass = 2.0;		// cell mass
-			parsecs 10.0;		// range
+			parsecs = 10.0;		// range
 			break;
 
 		case(Enums::hydrogen):
 			cell = Enums::hydrogen;
 			mass = 3.0;		// cell mass
-			parsecs 15.0;		// range
+			parsecs = 15.0;		// range
 			break;
 
 		case(Enums::deuterium):
 			cell = Enums::deuterium;
 			mass = 5.0;		// cell mass
-			parsecs 30.0;		// range
+			parsecs = 30.0;		// range
 			break;
 
-		case(Enums::anti-hydrogen):
-			cell = Enums::anti-hydrogen;
+		case(Enums::anti_matter):
+			cell = Enums::anti_hydrogen;
 			mass = 9.0;		// cell mass
-			parsecs 60.0;		// range
+			parsecs = 60.0;		// range
 			break;
 
-		case(Enums::mini black hole):
-			cell = Enums::mini black hole;
+		case(Enums::mini_black_hole):
+			cell = Enums::mini_black_hole;
 			mass = 28.0;		// cell mass
-			parsecs 140.0;		// range
+			parsecs = 140.0;		// range
 			break;
 
 		default:
@@ -127,8 +127,12 @@ void FuelCell::setCellType (Enums::Cell cell)
 	cell = cell;
 }
 
-
-Enums::Cel FuellCell::getCellType()
+/* spelled Enums::Cel FuellCell supposed to be Enums FuelCell? */
+//Enums::Cel FuellCell::getCellType()
+//{
+//	return cell;
+//}
+Enums FuelCell::getCellType()
 {
 	return cell;
 }
@@ -157,7 +161,7 @@ float FuelCell::getCellMass()
 string FuelCell::typeToString()
 {
 	string type = "Cell make/model";
-	reuturn type;
+	return type;
 }
 
 
@@ -209,7 +213,7 @@ string FuelCell::getCellSpecs()
  * Setting and getting of ranges
  *
  */
-static bool FuelCell::Test(ostream & os)
+bool FuelCell::Test(ostream & os)
 {
 	bool success = true;
 
