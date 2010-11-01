@@ -6,6 +6,7 @@ class SpaceCombatViewport
 {
 public:
 	SpaceCombatViewport(int width, int height, int offsetX =0, int offsetY=0);
+	SpaceCombatViewport();
 	~SpaceCombatViewport();
 
 	virtual int Draw();

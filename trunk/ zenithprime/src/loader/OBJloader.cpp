@@ -87,9 +87,9 @@ OBJModel* OBJloader::loadModel(string objData){
 		else if(tokens[0].compare("v")==0){
 			Vector3 temp;
 
-			temp.x = strtod(tokens[1].c_str(),NULL);
-			temp.y = strtod(tokens[2].c_str(),NULL);
-			temp.z = strtod(tokens[3].c_str(),NULL);
+			temp.x = (float)strtod(tokens[1].c_str(),NULL);
+			temp.y = (float)strtod(tokens[2].c_str(),NULL);
+			temp.z = (float)strtod(tokens[3].c_str(),NULL);
 
 			currentModel->vertexXYZ.push_back(temp);
 		}
@@ -100,8 +100,8 @@ OBJModel* OBJloader::loadModel(string objData){
 			Vector2 temp;
 			//stringstream ss;
 			//ss << tokens[1].c_str();
-			temp.x = atof(tokens[1].c_str());
-			temp.y = atof(tokens[2].c_str());
+			temp.x = (float)atof(tokens[1].c_str());
+			temp.y = (float)atof(tokens[2].c_str());
 			//cout<<"ENTRY: "<<temp.x<<","<<temp.y<<" : "<< tokens[1]<< "," << tokens[2]<<endl;
 			currentModel->textureUV.push_back(temp);
 		}
@@ -110,9 +110,9 @@ OBJModel* OBJloader::loadModel(string objData){
 		{
 			Vector3 temp;
 
-			temp.x = strtod(tokens[1].c_str(),NULL);
-			temp.y = strtod(tokens[2].c_str(),NULL);
-			temp.z = strtod(tokens[3].c_str(),NULL);
+			temp.x = (float)strtod(tokens[1].c_str(),NULL);
+			temp.y = (float)strtod(tokens[2].c_str(),NULL);
+			temp.z = (float)strtod(tokens[3].c_str(),NULL);
 
 			currentModel->normal.push_back(temp);
 		}

@@ -1,5 +1,8 @@
 #include "SpaceCombatViewport.h"
 
+SpaceCombatViewport::SpaceCombatViewport()
+{}
+
 SpaceCombatViewport::SpaceCombatViewport(int width, int height, int x, int y)
 	:Width(width), Height(height), offsetX(x), offsetY(y)
 {
@@ -13,7 +16,7 @@ SpaceCombatViewport::~SpaceCombatViewport(){
 int SpaceCombatViewport::Draw(){
 	glPushMatrix();
 	glLoadIdentity();
-	gluPerspective(45.0f, (GLfloat)Width/(GLfloat)Height, 0.1f, 10000.0f);
+	//gluPerspective(45.0f, (GLfloat)Width/(GLfloat)Height, 0.1f, 10000.0f);
 	glViewport(offsetX,offsetY,Width,Height);
 	battleBoardView->Draw();
 	glFlush();
