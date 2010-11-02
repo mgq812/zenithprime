@@ -13,7 +13,8 @@ SpaceCombatViewport::~SpaceCombatViewport(){
 
 }
 
-int SpaceCombatViewport::Draw(){
+int SpaceCombatViewport::Draw()
+{
 	glPushMatrix();
 	glLoadIdentity();
 	//gluPerspective(45.0f, (GLfloat)Width/(GLfloat)Height, 0.1f, 10000.0f);
