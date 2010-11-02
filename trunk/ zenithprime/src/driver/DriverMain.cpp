@@ -9,6 +9,7 @@
 #include <windows.h>		// Header File For Windows
 #include <gl\gl.h>			// Header File For The OpenGL32 Library
 #include <gl\glu.h>			// Header File For The GLu32 Library
+
 #include "InputDevice.h"
 #include "SpaceCombatViewport.h"
 #include <math.h>
@@ -24,6 +25,7 @@ bool	fullscreen=TRUE;	// Fullscreen Flag Set To Fullscreen Mode By Default
 /* This needs a default constructor to be declared here*/
 SpaceCombatViewport scView;
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
+
 
 GLvoid ReSizeGLScene(GLsizei width, GLsizei height)		// Resize And Initialize The GL Window
 {
@@ -65,6 +67,13 @@ int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
 	glLoadIdentity();									// Reset The Current Modelview Matrix
+
+	glTranslatef(-1.5f,0.0f,-6.0f);					// Move Left 1.5 Units And Into The Screen 6.0
+	glBegin(GL_TRIANGLES);							// Drawing Using Triangles
+		glVertex3f( 0.0f, 1.0f, 0.0f);				// Top
+		glVertex3f(-1.0f,-1.0f, 0.0f);				// Bottom Left
+		glVertex3f( 1.0f,-1.0f, 0.0f);				// Bottom Right
+	glEnd();
 
 	scView.Draw();
 	
@@ -349,7 +358,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 	BOOL	done=FALSE;								// Bool Variable To Exit Loop
 
 	// Ask The User Which Screen Mode They Prefer
-		fullscreen=FALSE;							// Windowed Mode
+		fullscreen=true;							// Windowed Mode
 	// Create Our OpenGL Window
 	if (!CreateGLWindow("Lab 2, Crayontastic",640,480,16,fullscreen))
 	{
@@ -360,7 +369,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 	{
 		if (PeekMessage(&msg,NULL,0,0,PM_REMOVE))	// Is There A Message Waiting?
 		{
-			if (msg.message==WM_QUIT)				// Have We Received A Quit Message?
+			if (msg.message==WM_QUIT || msg.message == WM_RBUTTONUP || Keyboard::getCurrentKeyboard()->Keys[VK_ESCAPE])				// Have We Received A Quit Message?
 			{
 				done=TRUE;							// If So done=TRUE
 			}

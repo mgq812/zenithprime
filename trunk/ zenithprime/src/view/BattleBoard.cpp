@@ -37,28 +37,30 @@ void BattleBoardView::updateCamera(){
 	camera[2] = forward.z;
 }
 
-void BattleBoardView::Draw(){
+void BattleBoardView::Draw()
+{
+  /*
+  gluLookAt(camera[0], camera[1], camera[2], // look from camera XYZ  
+	    X, 0, Y, // look at the origin 
+	    0, 1, 0); // positive Y up vector 
   
-  gluLookAt(camera[0], camera[1], camera[2], /* look from camera XYZ */ 
-	    X, 0, Y, /* look at the origin */ 
-	    0, 1, 0); /* positive Y up vector */
-  
-      if(showGrid)
-	DrawGrid();
-      if(showBoundry)
-	DrawBoundry();
-      if(showBackground)
-	DrawBackground();
-      if(showShips)
-	DrawShips();
-      if(showMissles)
-	DrawMissles();
-      if(showSpecials)
-	DrawMissles();
-      if(showParticles)
-	DrawParticles();
-      if(showForeground)
-	DrawForeground();
+	 if(showGrid)
+		DrawGrid();
+     if(showBoundry)
+		DrawBoundry();
+     if(showBackground)
+		DrawBackground();
+     if(showShips)
+		DrawShips();
+     if(showMissles)
+		DrawMissles();
+     if(showSpecials)
+		DrawMissles();
+     if(showParticles)
+		DrawParticles();
+     if(showForeground)
+		DrawForeground();
+	*/
 }
     
 BattleBoardView::~BattleBoardView(){
