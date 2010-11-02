@@ -23,16 +23,16 @@ public:
 
 	/* comments by J. Taylor Grimes */
 	/* usually enum variables are in all caps.  That would be nice here! */
-enum Type {FISSION_TYPE, pulse, FUSION_TYPE, /* sorry alan no - is allowed anti-matter that means anti minus matter */ anti_matter, phase};
+enum Type {FISSION_TYPE, PULSE, FUSION_TYPE, /* sorry alan no - is allowed anti-matter that means anti minus matter */ ANTI_MATTER, PHASE};
 
-enum Cell {standard, hydrogen, deuterium, anti_hydrogen, mini_black_hole};
+enum Cell {STANDARD, HYDROGEN, DEUTERIUM, ANTI_HYDROGEN, MINI_BLACK_HOLE};
 
 	/* cannont enum one var twice with the same name */
-enum Beam {laser, pulsed_laser, FUSION_BEAM, ion_cannon};
+enum Beam {LASER, PULSED_LASER, MASS_DRIVER, FUSION_BEAM, ION_CANNON, MAULER};
 
-enum Missile {nuclear, mercolite, pulson, zeon};
+enum Missile {NUCLEAR, MERCOLITE, PULSON, ZEON};
 
-enum Bomb {FISSION_BOMB, fusion_BOMB, anti_matter_BOMB, bioPulse, toxic};
+enum Bomb {FISSION_BOMB, FUSION_BOMB, ANTI_MATTER_BOMB, BIOPULSE, TOXIC};
 
 enum Special{};
 
