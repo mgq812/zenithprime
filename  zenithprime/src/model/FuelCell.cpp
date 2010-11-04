@@ -34,31 +34,31 @@ void FuelCell::initCell(Enums::Cell cell)
 	switch (cell)
 	{
 		case(Enums::STANDARD):
-			cell = Enums::standard;
+			cell = Enums::STANDARD;
 			mass = 2.0;		// cell mass
 			parsecs = 10.0;		// range
 			break;
 
 		case(Enums::HYDROGEN):
-			cell = Enums::hydrogen;
+			cell = Enums::HYDROGEN;
 			mass = 3.0;		// cell mass
 			parsecs = 15.0;		// range
 			break;
 
 		case(Enums::DEUTERIUM):
-			cell = Enums::deuterium;
+			cell = Enums::DEUTERIUM;
 			mass = 5.0;		// cell mass
 			parsecs = 30.0;		// range
 			break;
 
 		case(Enums::ANTI_HYDROGEN):
-			cell = Enums::anti_hydrogen;
+			cell = Enums::ANTI_HYDROGEN;
 			mass = 9.0;		// cell mass
 			parsecs = 60.0;		// range
 			break;
 
 		case(Enums::MINI_BLACK_HOLE):
-			cell = Enums::mini_black_hole;
+			cell = Enums::MINI_BLACK_HOLE;
 			mass = 28.0;		// cell mass
 			parsecs = 140.0;		// range
 			break;

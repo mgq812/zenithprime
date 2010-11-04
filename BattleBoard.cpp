@@ -30,10 +30,9 @@ void BattleBoardView::updateCamera(){
 }
 
 void BattleBoardView::Draw(){
-  /* MATT this is Taylor gluLookAt is not found in this scope yet */
-  //gluLookAt(camera[0], camera[1], camera[2], /* look from camera XYZ */ 
-	 //   X, Y, 0, /* look at the origin */ 
-	 //   0, 1, 0); /* positive Y up vector */
+  gluLookAt(camera[0], camera[1], camera[2], /* look from camera XYZ */ 
+	    X, Y, 0, /* look at the origin */ 
+	    0, 1, 0); /* positive Y up vector */
   
       if(showGrid)
 	DrawGrid();
