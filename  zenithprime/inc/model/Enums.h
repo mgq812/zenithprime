@@ -12,7 +12,7 @@
 #define ENUMS_H
 
 
-using namespace std;
+//using namespace std;
 
 class Enums
 {

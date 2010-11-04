@@ -1,12 +1,12 @@
 #pragma once
 #include "OpenGLViewport.h"
-#include "BattleBoard.h"
+#include "BattleBoardGUI.h"
 
-class SpaceCombatViewport
+class SpaceCombatViewport : OpenGLViewport
 {
 public:
-	SpaceCombatViewport(int width, int height, int offsetX =0, int offsetY=0);
-	SpaceCombatViewport();
+	SpaceCombatViewport(BattleBoardView* bbView, int offsetX, int offsetY, int width, int height);
+	SpaceCombatViewport(BattleBoardView* bbView);
 	~SpaceCombatViewport();
 
 	virtual int Draw();
@@ -16,7 +16,6 @@ public:
 
 	
 	BattleBoardView* battleBoardView; 
-	BattleBoardController* battleBoardController;
 
 private:
 	int Width;

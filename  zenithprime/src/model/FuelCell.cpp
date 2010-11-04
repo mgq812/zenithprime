@@ -31,6 +31,7 @@ FuelCell::FuelCell(Enums::Cell cell)
  */
 void FuelCell::initCell(Enums::Cell cell)
 {
+	/*
 	switch (cell)
 	{
 		case(Enums::STANDARD):
@@ -66,6 +67,7 @@ void FuelCell::initCell(Enums::Cell cell)
 		default:
 			break;
 	}
+	*/
 }
 
 /*

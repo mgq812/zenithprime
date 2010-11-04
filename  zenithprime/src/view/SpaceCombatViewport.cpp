@@ -1,13 +1,19 @@
 #include "SpaceCombatViewport.h"
 
-SpaceCombatViewport::SpaceCombatViewport()
-{}
+SpaceCombatViewport::SpaceCombatViewport(BattleBoardView* bbView)
+{
+	Width = 0;
+	Height = 0;
+	offsetX = 0;
+	offsetY = 0;
 
-SpaceCombatViewport::SpaceCombatViewport(int width, int height, int x, int y)
+	battleBoardView = bbView;
+}
+
+SpaceCombatViewport::SpaceCombatViewport(BattleBoardView* bbView, int width =0, int height=0, int x=0, int y=0)
 	:Width(width), Height(height), offsetX(x), offsetY(y)
 {
-	BattleBoardModel* battleBoardModel = new BattleBoardModel();
-	battleBoardView = new BattleBoardView(battleBoardModel);
+	battleBoardView = bbView;
 }
 SpaceCombatViewport::~SpaceCombatViewport(){
 
@@ -15,13 +21,18 @@ SpaceCombatViewport::~SpaceCombatViewport(){
 
 int SpaceCombatViewport::Draw()
 {
-	glPushMatrix();
-	glLoadIdentity();
-	//gluPerspective(45.0f, (GLfloat)Width/(GLfloat)Height, 0.1f, 10000.0f);
-	glViewport(offsetX,offsetY,Width,Height);
-	battleBoardView->Draw();
-	glFlush();
-	glPopMatrix();
+	if(Width>0){
+		glPushMatrix();
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		gluPerspective(60.0f, (GLfloat)Width/(GLfloat)Height, 0.1f, 10000000.0f);
+		glViewport(offsetX,offsetY,Width,Height);
+
+		glMatrixMode(GL_MODELVIEW);
+		battleBoardView->Draw();
+		glFlush();
+		glPopMatrix();
+	}
 	return true;
 }
 int SpaceCombatViewport::Update(){

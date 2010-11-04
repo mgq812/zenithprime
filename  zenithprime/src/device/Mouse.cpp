@@ -54,12 +54,16 @@ void Mouse::mouseDragged(int targetX, int targetY, int buttons){
 		mouseListeners[i]->mouseDragged(targetX, targetY,buttons);
 }
 void Mouse::mousePressed(int buttons){
+	buttonState = buttonState | buttons;
+
 	for(unsigned int i = 0 ; i < mouseListeners.size(); i++)
 		mouseListeners[i]->mousePressed(X, Y,buttons);
 }
 void Mouse::mouseReleased(int buttons){
+	buttonState = buttonState & !buttons;
+
 	for(unsigned int i = 0 ; i < mouseListeners.size(); i++)
-		mouseListeners[i]->mouseReleased(X, Y,buttons);
+		mouseListeners[i]->mouseReleased(X, Y,buttonState);
 }
 void Mouse::mouseClicked(int buttons){
 	for(unsigned int i = 0 ; i < mouseListeners.size(); i++)
@@ -96,7 +100,7 @@ void Mouse::WindProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam){
 			mouseReleased(MOUSE_MBUTTON);
 			break;
 		case WM_MOUSEMOVE:	
-			mouseMoved(HIWORD(lParam), LOWORD(lParam));
+			mouseMoved(LOWORD(lParam), HIWORD(lParam));
 			break;
 		case WM_MOUSEWHEEL:
 			mouseWheel(GET_WHEEL_DELTA_WPARAM(wParam));
