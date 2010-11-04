@@ -9,10 +9,10 @@ public:
 	//OpenGLViewport(int width, int height, int offsetX =0; int offsetY=0);
 	//~OpenGLViewport();
 
-	virtual int Draw();
-	virtual int Update();
-	virtual int Resize(int width, int height);
-	virtual int MoveTo(int offsetX, int offsetY);
+	virtual int Draw()=0;
+	virtual int Update()=0;
+	virtual int Resize(int width, int height)=0;
+	virtual int MoveTo(int offsetX, int offsetY)=0;
 
 protected:
 	int Width;

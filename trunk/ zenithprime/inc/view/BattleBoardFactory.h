@@ -1,4 +1,4 @@
-#include "BattleBoard.h"
+#include "BattleBoardGUI.h"
 
 class BattleBoardFactory
 {

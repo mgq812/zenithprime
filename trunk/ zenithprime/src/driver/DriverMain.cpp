@@ -12,7 +12,9 @@
 
 #include "InputDevice.h"
 #include "SpaceCombatViewport.h"
+#include "BattleBoardFactory.h"
 #include <math.h>
+#define GLvoid void
 
 HDC			hDC=NULL;		// Private GDI Device Context
 HGLRC		hRC=NULL;		// Permanent Rendering Context
@@ -23,7 +25,7 @@ bool	active=TRUE;		// Window Active Flag Set To TRUE By Default
 bool	fullscreen=TRUE;	// Fullscreen Flag Set To Fullscreen Mode By Default
 
 /* This needs a default constructor to be declared here*/
-SpaceCombatViewport scView;
+SpaceCombatViewport* scView;
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 
 
@@ -45,7 +47,7 @@ GLvoid ReSizeGLScene(GLsizei width, GLsizei height)		// Resize And Initialize Th
 	glMatrixMode(GL_MODELVIEW);							// Select The Modelview Matrix
 	glLoadIdentity();									// Reset The Modelview Matrix
 
-	scView.Resize(width, height);
+	scView->Resize(width, height);
 }
 
 int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
@@ -59,6 +61,8 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 
 	Mouse::setCurrentMouse(new Mouse());
 	Keyboard::setCurrentKeyboard(new Keyboard());
+	BattleBoardView* bbView = BattleBoardFactory::CreateBoard(400, 400);
+	scView = new SpaceCombatViewport(bbView);
 
 	return TRUE;										// Initialization Went OK
 }
@@ -68,14 +72,15 @@ int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
 	glLoadIdentity();									// Reset The Current Modelview Matrix
 
-	glTranslatef(-1.5f,0.0f,-6.0f);					// Move Left 1.5 Units And Into The Screen 6.0
+	/*glTranslatef(-1.5f,0.0f,-6.0f);					// Move Left 1.5 Units And Into The Screen 6.0
 	glBegin(GL_TRIANGLES);							// Drawing Using Triangles
 		glVertex3f( 0.0f, 1.0f, 0.0f);				// Top
 		glVertex3f(-1.0f,-1.0f, 0.0f);				// Bottom Left
 		glVertex3f( 1.0f,-1.0f, 0.0f);				// Bottom Right
-	glEnd();
+	glEnd();*/
 
-	scView.Draw();
+//	scView.Draw();
+	scView->Draw();
 	
 	return TRUE;										// Keep Going
 }
@@ -119,6 +124,8 @@ GLvoid KillGLWindow(GLvoid)								// Properly Kill The Window
 		MessageBox(NULL,"Could Not Unregister Class.","SHUTDOWN ERROR",MB_OK | MB_ICONINFORMATION);
 		hInstance=NULL;									// Set hInstance To NULL
 	}
+
+	//delete scView;
 }
 
 /*	This Code Creates Our OpenGL Window.  Parameters Are:					*
@@ -278,17 +285,19 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 		return FALSE;								// Return FALSE
 	}
 
-	ShowWindow(hWnd,SW_SHOW);						// Show The Window
-	SetForegroundWindow(hWnd);						// Slightly Higher Priority
-	SetFocus(hWnd);									// Sets Keyboard Focus To The Window
-	ReSizeGLScene(width, height);					// Set Up Our Perspective GL Screen
-
 	if (!InitGL())									// Initialize Our Newly Created GL Window
 	{
 		KillGLWindow();								// Reset The Display
 		MessageBox(NULL,"Initialization Failed.","ERROR",MB_OK|MB_ICONEXCLAMATION);
 		return FALSE;								// Return FALSE
 	}
+
+	ShowWindow(hWnd,SW_SHOW);						// Show The Window
+	SetForegroundWindow(hWnd);						// Slightly Higher Priority
+	SetFocus(hWnd);									// Sets Keyboard Focus To The Window
+	ReSizeGLScene(width, height);					// Set Up Our Perspective GL Screen
+
+	
 
 	return TRUE;									// Success
 }
@@ -359,8 +368,11 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 
 	// Ask The User Which Screen Mode They Prefer
 		fullscreen=true;							// Windowed Mode
+		char tit[80];
+		strcpy(tit,"Space Combat Viewport");
+		fullscreen = FALSE;
 	// Create Our OpenGL Window
-	if (!CreateGLWindow("Lab 2, Crayontastic",640,480,16,fullscreen))
+	if (!CreateGLWindow(tit,640,480,16,fullscreen))
 	{
 		return 0;									// Quit If Window Was Not Created
 	}
@@ -369,7 +381,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 	{
 		if (PeekMessage(&msg,NULL,0,0,PM_REMOVE))	// Is There A Message Waiting?
 		{
-			if (msg.message==WM_QUIT || msg.message == WM_RBUTTONUP || Keyboard::getCurrentKeyboard()->Keys[VK_ESCAPE])				// Have We Received A Quit Message?
+			if (msg.message==WM_QUIT || Keyboard::getCurrentKeyboard()->Keys[VK_ESCAPE])				// Have We Received A Quit Message?
 			{
 				done=TRUE;							// If So done=TRUE
 			}
@@ -390,7 +402,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 			{
 				SwapBuffers(hDC);					// Swap Buffers (Double Buffering)
 			}
-			scView.Update();
+			scView->Update();
 		}
 	}
 

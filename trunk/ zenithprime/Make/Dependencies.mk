@@ -1,6 +1,6 @@
 # EXE FILES
-bin$(SLASH)SpaceCombat$(EXE) : $(VIEW_OBJ) $(DEVICE_OBJ)
-	@gcc $(COMP_FLAGS) -o bin$(SLASH)SpaceCombat$(EXE) $(DRIVER_SRC)$(SLASH)SpaceCombat.cpp $(VIEW_OBJ) $(DEVICE_OBJ) $(ALL_INC)
+bin$(SLASH)SpaceCombat$(EXE) : $(VIEW_OBJ) $(DEVICE_OBJ) $(DRIVER_SRC)$(SLASH)DriverMain.cpp
+	gcc $(COMP_FLAGS) -o bin$(SLASH)SpaceCombat$(EXE) $(DRIVER_SRC)$(SLASH)DriverMain.cpp $(ALL_OBJ) $(ALL_INC) $(OPENGL_ENV) k
 	@echo Space Combat Program Built
 	
 # VIEW OBJECT FILES
