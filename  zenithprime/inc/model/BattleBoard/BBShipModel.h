@@ -6,6 +6,7 @@
 
 class BBShipModel
 {
+
 public:
 	BBShipModel();
 	BBShipModel(Position position1, float angle1, float scale1);
@@ -26,7 +27,7 @@ private:
 	//Bitmap texture;
 	//3DModel model;
 	Ship* ship;
-
+	
 };
 
 #endif

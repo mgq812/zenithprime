@@ -1,28 +1,33 @@
-//#include "BBPlayer.h"
+#ifndef BBMODEL_H
+#define BBMODEL_H
+
+#include "ZList.h"
+#include "BBPlayerModel.h"
 
 class BBModel
 {
 public:
 	// Constructors
 	BBModel();
-	BBModel(int width1, int height1 /*,Image background1, BBPlayer* players1*/);
+	BBModel(float width1, float height1, ZList<BBPlayerModel*> players1);
 
 	// Getters and setters
-	float getWidth(){return width;}
-	float getHeight(){return height;}
-	void setWidth(float width1){width = width1;}
-	void setHeight(float height1){height = height1;}
+	float getWidth();
+	float getHeight();
+	void setWidth(float width1);
+	void setHeight(float height1);
 
 	// other functions
-	void LMouseClick(int x, int y);
-	void RMouseClick(int x, int y);
-	void MouseHover(int x, int y);
-	void MouseDrag(int startX, int startY, int endX, int endY);
+	ZList<BBPlayerModel*> getPlayers();
+	void addPlayer(BBPlayerModel* player);
+	void removePlayer(BBPlayerModel* player);
 
 private:
 	float width;
 	float height;
 	//Image Background;
-	//BBPlayer* players;
-	//BBPlayer* curPlayer;
+	ZList<BBPlayerModel*> players;
+	BBPlayerModel* curPlayer;
 };
+
+#endif
