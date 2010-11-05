@@ -1,5 +1,4 @@
 #include "BBShipModel.h"
-#include "Position.h"
 
 BBShipModel::BBShipModel()
 	:angle(0), scale(0)
