@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <time.h>
+#include "BBControler.h"
 #include "BBModel.h"
 #include "BBPlayerModel.h"
 #include "BBShipModel.h"
@@ -14,12 +15,22 @@
 
 using namespace std;
 
-void disp(BBModel* model); // shows contents of a battle board
+
 BBModel* initBBModel();	// initializes the battle board
+BBControler* initBBControler(BBModel* battleBoard); // initializes the controler for the board
+void disp(BBModel* model); // shows contents of a battle board
 
 int main()
 {
-	BBModel* battleBoard = initBBModel();	
+	BBModel* battleBoard = initBBModel();
+
+	BBControler* bbControl = initBBControler(battleBoard);
+
+	disp(battleBoard);
+	system("pause");
+
+	bbControl->LeftMouseClick(0, 0);
+
 	disp(battleBoard);
 	system("pause");
 }
@@ -52,6 +63,11 @@ BBModel* initBBModel()
 	BBModel* battleBoard = new BBModel(500, 500, playerList1);
 
 	return battleBoard;
+}
+
+BBControler* initBBControler(BBModel* battleBoard)
+{
+	return new BBControler(battleBoard);
 }
 
 void disp(BBModel* model)
