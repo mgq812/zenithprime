@@ -78,6 +78,9 @@ class BattleBoardController : public MouseListener{
 
 	void enablePrespective();
 
+	void setMouseEnabled(bool enabled);
+	bool isMouseEnabled();
+
     virtual void mouseMoved(int targetX, int targetY);
 	virtual void mouseDragged(int targetX, int targetY, int buttons);
 	virtual void mousePressed(int targetX, int targetY, int buttons);
@@ -98,6 +101,8 @@ private:
 
 	float MAX_ZOOM;
 	float MIN_ZOOM;
+
+	bool mouse_flag;
 };
 
 class BattleBoardView

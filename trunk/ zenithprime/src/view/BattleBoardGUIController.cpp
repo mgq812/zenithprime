@@ -17,6 +17,7 @@ float toRadians(float angle){
 }
 
 BattleBoardController::BattleBoardController(BattleBoardModel* model){
+	this->model = model;
 	X = model->width/2;
 	Y = 0;
 	Z = model->hieght/2;
@@ -40,16 +41,26 @@ BattleBoardController::BattleBoardController(BattleBoardModel* model){
 	MIN_ZOOM = 20;
 	MAX_ZOOM = 500;
   Mouse::getCurrentMouse()->addMouseListener(this);
+  mouse_flag = true;
+}
+
+void BattleBoardController::setMouseEnabled(bool enabled){
+	mouse_flag = enabled;
+}
+bool BattleBoardController::isMouseEnabled(){
+	return mouse_flag;
 }
 
 void BattleBoardController::mouseMoved(int targetX, int targetY){
-
+	if(!mouse_flag)return;
 }
 
 
 int oldX =-1;
 int oldY =-1;
 void BattleBoardController::mouseDragged(int targetX, int targetY, int buttons){
+	if(!mouse_flag)return;
+
 	if(buttons == MOUSE_MBUTTON){
 	
 
@@ -60,7 +71,7 @@ void BattleBoardController::mouseDragged(int targetX, int targetY, int buttons){
 			int d_X = targetX-oldX;
 			int d_Y = targetY-oldY;
 
-			this->moveCamera(-d_X, -d_Y, 0);
+			this->moveCamera((float)-d_X, (float)-d_Y, 0);
 
 
 		}
@@ -74,7 +85,7 @@ void BattleBoardController::mouseDragged(int targetX, int targetY, int buttons){
 			int d_X = targetX-oldX;
 			int d_Y = targetY-oldY;
 
-			this->rotateCamera(d_Y, -d_X);
+			this->rotateCamera((float)d_Y, (float)-d_X);
 
 
 		}
@@ -83,8 +94,10 @@ void BattleBoardController::mouseDragged(int targetX, int targetY, int buttons){
 	}
 }
 void BattleBoardController::mousePressed(int targetX, int targetY, int buttons){
+	if(!mouse_flag)return;
 }
 void BattleBoardController::mouseReleased(int targetX, int targetY, int buttons){
+	if(!mouse_flag)return;
 	if((buttons & (MOUSE_RBUTTON | MOUSE_MBUTTON)) ==0)
 	{
 		oldX = -1;
@@ -92,25 +105,44 @@ void BattleBoardController::mouseReleased(int targetX, int targetY, int buttons)
 	}
 }
 void BattleBoardController::mouseClicked(int targetX, int targetY, int buttons){
+	if(!mouse_flag)return;
 }
 void BattleBoardController::mouseDoubleClicked(int targetX, int targetY, int buttons){
+	if(!mouse_flag)return;
 }
 void BattleBoardController::mouseWheel(int targetX, int targetY, int delta){
+	if(!mouse_flag)return;
 	zoomCamera(-delta*.1);
 }
 
 void BattleBoardController::setCamera(float sourceX, float sourceY, float sourceZ,float targetX, float targetY, float targetZ, float up_x , float up_y, float up_z){
+	setCameraTarget(targetX, targetY, targetZ);
+	setCameraSource(sourceX, sourceY, sourceZ);
+	setCameraUp(up_x , up_y, up_z);
 }
 void BattleBoardController::setCameraTarget(float targetX, float targetY, float targetZ){
+	X = targetX;
+	Y = targetY;
+	Z = targetZ;
 }
 void BattleBoardController::setCameraSource(float sourceX, float sourceY, float sourceZ){
+	srcX = sourceX;
+	srcY = sourceY;
+	srcZ = sourceZ;
 }
 void BattleBoardController::setCameraUp(float up_x , float up_y, float up_z){
+	upX = up_x;
+	upY = up_y;
+	upZ = up_z;
 }
 
 void BattleBoardController::moveCamera(float deltaX, float deltaY, float deltaZ){
 	float d_X = -deltaX;
 	float d_Y = -deltaY;
+
+	Y+= deltaZ;
+	srcY+= deltaZ;
+
 	if(rotateY!=0){
 	d_X = deltaX*cos(toRadians(-rotateY)) - deltaY*sin(toRadians(-rotateY));
 	d_Y = deltaX*sin(toRadians(-rotateY))+ deltaY*cos(toRadians(-rotateY));
@@ -120,12 +152,16 @@ void BattleBoardController::moveCamera(float deltaX, float deltaY, float deltaZ)
 
 	d_X*= (zoom+MIN_ZOOM)/MAX_ZOOM;
 	d_Y*= (zoom+MIN_ZOOM)/MAX_ZOOM;
+	if(X+d_X>model->width || X +d_X<0)
+		return;
 	X+= d_X;
-	Y+= deltaZ;
+	if(Z+d_Y>model->hieght || Z+d_Y<0)
+		return;
+
+
 	Z+= d_Y;
 
 	srcX+= d_X;
-	srcY+= deltaZ;
 	srcZ+= d_Y;
 }
 void BattleBoardController::zoomCamera(float zoom){
@@ -153,8 +189,17 @@ void BattleBoardController::zoomCamera(float zoom){
 	
 }
 void BattleBoardController::rotateCamera(float rotateX, float rotateY){
-	this->rotateX += rotateX;
+
 	this->rotateY += rotateY;
+	if(this->rotateY>360 || this->rotateY<0){
+		if(rotateY<0)
+			this->rotateY = 360 + this->rotateY;
+		else
+			this->rotateY = this->rotateY - 360;
+	}
+
+	if(abs(rotateX + this->rotateX)<90)
+		this->rotateX += rotateX;
 
 
 	Vector3 offset = Vector3::Transform(Vector3(0,0,zoom), Matrix::CreateRotationX(-toRadians(this->rotateX)));
