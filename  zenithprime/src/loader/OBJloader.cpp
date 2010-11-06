@@ -263,4 +263,81 @@ void OBJloader::PrintModel(OBJModel& model){
 		cout<< (*it4).T4.x<<"/"<<(*it4).T4.y<<"/"<<(*it4).T4.z<<" ";
 		cout<<endl;
 	}
+
+	
+}
+
+
+GLuint OBJloader::CacheOBJModel(OBJModel& model){
+	GLuint cacheModel = glGenLists(1);
+
+	glNewList(cacheModel,GL_COMPILE);
+
+	glBegin(GL_TRIANGLES);
+	for(unsigned int i = 0; i< model.Triangles.size(); i++)
+	{
+
+		Vector2 tempUV = model.textureUV[model.Triangles[i].T1.y -1];
+		glTexCoord2f(tempUV.x, tempUV.y);
+		Vector3 tempVert = model.vertexXYZ[model.Triangles[i].T1.x-1];
+		glVertex3f( tempVert.x, tempVert.y, tempVert.z);
+
+		tempUV = model.textureUV[model.Triangles[i].T2.y -1];
+		glTexCoord2f(tempUV.x, tempUV.y);
+		tempVert = model.vertexXYZ[model.Triangles[i].T2.x-1];
+		glVertex3f( tempVert.x, tempVert.y, tempVert.z);
+
+		tempUV = model.textureUV[model.Triangles[i].T3.y -1];
+		glTexCoord2f(tempUV.x, tempUV.y);
+		tempVert = model.vertexXYZ[model.Triangles[i].T3.x-1];
+		glVertex3f( tempVert.x, tempVert.y, tempVert.z);
+
+		
+	}
+	glEnd();
+
+	//Draw Quads
+	glBegin(GL_QUADS);
+	for(unsigned int i = 0; i< model.Quads.size(); i++)
+	{
+		
+		Vector2 tempUV = model.textureUV[model.Quads[i].T1.y -1];
+		glTexCoord2f(tempUV.x, tempUV.y);
+		Vector3 tempVert = model.vertexXYZ[model.Quads[i].T1.x-1];
+		glVertex3f( tempVert.x, tempVert.y, tempVert.z);
+
+		tempUV = model.textureUV[model.Quads[i].T2.y -1];
+		glTexCoord2f(tempUV.x, tempUV.y);
+		tempVert = model.vertexXYZ[model.Quads[i].T2.x-1];
+		glVertex3f( tempVert.x, tempVert.y, tempVert.z);
+
+		tempUV = model.textureUV[model.Quads[i].T3.y -1];
+		glTexCoord2f(tempUV.x, tempUV.y);
+		tempVert = model.vertexXYZ[model.Quads[i].T3.x-1];
+		glVertex3f( tempVert.x, tempVert.y, tempVert.z);
+
+		tempUV = model.textureUV[model.Quads[i].T4.y -1];
+		glTexCoord2f(tempUV.x, tempUV.y);
+		tempVert = model.vertexXYZ[model.Quads[i].T4.x-1];
+		glVertex3f( tempVert.x, tempVert.y, tempVert.z);
+	}
+	glEnd();
+
+	for(unsigned int i = 0 ; i < model.Polygons.size(); i++)
+	{
+		PolygonFace face = model.Polygons[i];	
+		glBegin(GL_POLYGON);
+		for(unsigned int j = 0; j < face.T.size(); j++)
+		{
+			Vector2 tempUV = model.textureUV[face.T[j].y -1];
+			glTexCoord2f(tempUV.x, tempUV.y);
+			Vector3 tempVert = model.vertexXYZ[face.T[j].x-1];
+			glVertex3f( tempVert.x, tempVert.y, tempVert.z);
+		}
+		glEnd();
+	}
+
+	glEndList();
+
+	return cacheModel;
 }
