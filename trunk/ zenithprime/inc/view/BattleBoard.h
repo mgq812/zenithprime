@@ -3,61 +3,14 @@
 #include <gl\gl.h>			// Header File For The OpenGL32 Library
 #include <gl\glu.h>			// Header File For The GLu32 Library
 #include <vector>
+#include "BBModel.h"
 #include "Matrix.h"
-
-#define ShipID int*
-#define MissleID int*
-#define SpecialID int*
-#define ParticleID int*
-
-struct ShipPlacement
-{
-  float x;
-  float y;
-  ShipID ship;
-};
-
-struct MisslePlacement
-{
-  float x;
-  float y;
-  float z;
-  MissleID missle;
-};
-
-struct SpecialPlacement
-{
-  float x;
-  float y;
-  float z;
-  SpecialID special;
-};
-
-struct ParticlePlacement
-{
-  float x;
-  float y;
-  float z;
-  ParticleID particle;
-};
-
-class BattleBoardModel
-{
-  public:
-    std::vector<ShipPlacement> ships;
-    std::vector<MisslePlacement> missles;
-    std::vector<SpecialPlacement> special;
-    std::vector<ParticlePlacement> particles;
-    
-    float width;
-    float hieght;
-};
 
 class BattleBoardView
 {
   public:
     
-    BattleBoardView(BattleBoardModel* model);
+    BattleBoardView(BBModel* model);
     ~BattleBoardView();
     
     float X, Y;
@@ -88,7 +41,7 @@ class BattleBoardView
     
     void DrawWireframeShip(const ShipPlacement& ship, int R, int G, int B);
   private:
-    BattleBoardModel* model;
+    BBModel* model;
     
     float camera[3];
 };
@@ -96,7 +49,7 @@ class BattleBoardView
 class BattleBoardController{
   public:
       BattleBoardView* view;
-      BattleBoardModel* model;
+      BBModel* model;
       ShipPlacement* currentShip;
       
       

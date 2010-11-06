@@ -3,19 +3,19 @@
 #include <gl\gl.h>			// Header File For The OpenGL32 Library
 #include <gl\glu.h>			// Header File For The GLu32 Library
 #include <vector>
-#include "BBModel.h"
 #include "Matrix.h"
 #include "Mouse.h"
+#include "DrawableModel.h"
 
 
-class BattleBoardView;
+class ShipView;
 
-class BattleBoardController : public MouseListener{
+class ShipGUIController : public MouseListener{
   public:
       //BattleBoardView* view;
-      BBModel* model;
+     DrawableModel* model;
 
-      BattleBoardController(BBModel* model);
+     ShipGUIController(DrawableModel* model);
    
 
     void updateCamera();
@@ -25,7 +25,6 @@ class BattleBoardController : public MouseListener{
 	void setCameraSource(float sourceX, float sourceY, float sourceZ);
 	void setCameraUp(float up_x , float up_y, float up_z);
 
-	void moveCamera(float deltaX, float deltaY, float deltaZ);
 	void zoomCamera(float zoom);
 	void rotateCamera(float rotateX, float rotateY);
 
@@ -58,41 +57,19 @@ private:
 	bool mouse_flag;
 };
 
-class BattleBoardView
+class ShipView
 {
-	friend class BattleBoardController;
+	friend class ShipGUIController;
+public:
+
   public:
     
-    BattleBoardView(BBModel* model, BattleBoardController* controller);
-    ~BattleBoardView();
-  
-    void Draw();
-    void DrawGrid();
-    void DrawBoundry();
-    void DrawBackground();
-    void DrawForeground();
-    void DrawShips();
-    void DrawMissles();
-    void DrawSpecials();
-    void DrawParticles();
-//    void DrawShip(const ShipPlacement& ship);
-//    void DrawWireframeShip(const ShipPlacement& ship, int R, int G, int B);
+    ShipView(DrawableModel* model, ShipGUIController* controller);
+    ~ShipView();
 
-	void setGridDivision(int x, int y);
+	void Draw();
+private:
 
-  private:
-    BBModel* model;
-	BattleBoardController* controller;
-
-	bool showGrid;
-    bool showBoundry;
-    bool showBackground;
-    bool showForeground;
-    bool showShips;
-    bool showMissles;
-    bool showSpecials;
-    bool showParticles;
-
-	int x_div, y_div;
+    DrawableModel* model;
+	ShipGUIController* controller;
 };
-

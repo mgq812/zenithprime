@@ -15,4 +15,5 @@ public:
 	static Vector3 Transform(Vector3 point, std::vector<Matrix> matrix);
 	static Vector3 One();
 	static Vector3 Zero();
+
 };
