@@ -2,6 +2,7 @@
 #define BBCONTROLER_H
 
 #include "BBModel.h"
+#include "BBState.h"
 
 class BBControler
 {
@@ -13,7 +14,12 @@ public:
 	void LeftMouseDrag(int xStart, int yStart, int xEnd, int yEnd);
 
 private:
+	BBShipModel* curPlayerShipAt(int x, int y);
+	BBShipModel* otherPlayerShipAt(int x, int y, BBPlayerModel* &foundPlayer);
+
 	BBModel* battleBoard;
+	BBPlayerModel* curPlayer;
+	BBState* state;
 };
 
 #endif
