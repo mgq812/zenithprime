@@ -3,8 +3,8 @@
 
 using namespace std;
 
-DrawableModel::DrawableModel(){
-	cacheModel = -1;
+DrawableModel::DrawableModel(int cache){
+	cacheModel = cache;
 }
 DrawableModel::~DrawableModel(){
 }

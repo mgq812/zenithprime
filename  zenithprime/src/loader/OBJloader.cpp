@@ -47,7 +47,11 @@ OBJModel* OBJloader::loadModelFromFile(string fileName)
 
 	std::string objData = "";
 	while(!readFile.eof()){
-		readFile>>objData;
+		char temp[256];
+		readFile.getline(temp, 256);
+		
+		objData+= temp;
+		objData+="\n";
 	}
 
 	readFile.close();

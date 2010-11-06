@@ -26,8 +26,8 @@ ShipGUIController::ShipGUIController(DrawableModel* model){
 
 	//updateCamera();
   
-	MIN_ZOOM = 2;
-	MAX_ZOOM = 10;
+	MIN_ZOOM = 20;
+	MAX_ZOOM = 500;
   Mouse::getCurrentMouse()->addMouseListener(this);
   mouse_flag = true;
 }
@@ -81,7 +81,7 @@ void ShipGUIController::mouseDoubleClicked(int targetX, int targetY, int buttons
 }
 void ShipGUIController::mouseWheel(int targetX, int targetY, int delta){
 	if(!mouse_flag)return;
-	zoomCamera(-delta*.1);
+	zoomCamera((float)-delta*.1);
 }
 
 void ShipGUIController::setCamera(float sourceX, float sourceY, float sourceZ,float targetX, float targetY, float targetZ, float up_x , float up_y, float up_z){
