@@ -369,7 +369,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 	// Ask The User Which Screen Mode They Prefer
 		fullscreen=true;							// Windowed Mode
 		char tit[80];
-		strcpy(tit,"Space Combat Viewport");
+		strcpy_s(tit,"Space Combat Viewport");
 		fullscreen = FALSE;
 	// Create Our OpenGL Window
 	if (!CreateGLWindow(tit,640,480,16,fullscreen))

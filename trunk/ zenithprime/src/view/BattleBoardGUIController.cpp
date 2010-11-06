@@ -113,7 +113,7 @@ void BattleBoardController::mouseDoubleClicked(int targetX, int targetY, int but
 }
 void BattleBoardController::mouseWheel(int targetX, int targetY, int delta){
 	if(!mouse_flag)return;
-	zoomCamera(-delta*.1);
+	zoomCamera((float)-delta*.1);
 }
 
 void BattleBoardController::setCamera(float sourceX, float sourceY, float sourceZ,float targetX, float targetY, float targetZ, float up_x , float up_y, float up_z){

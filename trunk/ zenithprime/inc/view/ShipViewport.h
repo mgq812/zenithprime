@@ -1,5 +1,6 @@
 #pragma once
 #include "OpenGLViewport.h"
+#include "ShipGUI.h"
 
 class ShipViewport : OpenGLViewport
 {

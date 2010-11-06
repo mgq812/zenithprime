@@ -5,10 +5,11 @@
 #include <hash_map>
 
 class DrawableModel{
-	DrawableModel();
+public:
+	DrawableModel(int cacheModel);
 	~DrawableModel();
 
 	int cacheModel;
-	
+	int cacheTexture;
 	//hash_map<const char*, int> textures;
 };
