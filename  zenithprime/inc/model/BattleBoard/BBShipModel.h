@@ -9,10 +9,12 @@ class BBShipModel
 
 public:
 	BBShipModel();
-	BBShipModel(Position position1, float angle1, float scale1);
-	BBShipModel(int x, int y, float angle, float scale);
-	Position getPosition();
-	void setPosition(Position position);
+	BBShipModel(float angle1, float scale1);
+	BBShipModel(int x1, int y1, float angle, float scale);
+	int getX();
+	void setX(int x1);
+	int getY();
+	void setY(int y1);
 	float getAngle();
 	void setAngle(float angle);
 	float getScale();
@@ -21,7 +23,8 @@ public:
 	void setShip(Ship* ship);
 
 private:
-	Position position;
+	int x;
+	int y;
 	float angle;
 	float scale;
 	//Bitmap texture;

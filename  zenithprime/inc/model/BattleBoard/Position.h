@@ -12,9 +12,8 @@ public:
 	Position(int x1, int y1)
 		:x(x1), y(y1)
 	{}
-	Position(Position& p)
-		:x(p.x), y(p.y)
-	{}
+
+private:
 };
 
 #endif

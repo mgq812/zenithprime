@@ -4,23 +4,32 @@ BBShipModel::BBShipModel()
 	:angle(0), scale(0)
 {}
 
-BBShipModel::BBShipModel(Position position1, float angle1, float scale1)
-	:position(position1), angle(angle1), scale(scale1)
+BBShipModel::BBShipModel(float angle1, float scale1)
+	:x(0), y(0), angle(angle1), scale(scale1)
 {}
 
-BBShipModel::BBShipModel(int x, int y, float angle1, float scale1)
-	:position(x, y), angle(angle1), scale(scale1)
+BBShipModel::BBShipModel(int x1, int y1, float angle1, float scale1)
+	:x(x1), y(y1), angle(angle1), scale(scale1)
 {}
 
-Position BBShipModel::getPosition()
+int BBShipModel::getX()
 {
-	return position;
+	return x;
 }
 
-void BBShipModel::setPosition(Position position1)
+int BBShipModel::getY()
 {
-	position.x = position1.x;
-	position.y = position1.y;
+	return y;
+}
+
+void BBShipModel::setX(int x1)
+{
+	x = x1;
+}
+
+void BBShipModel::setY(int y1)
+{
+	y = y1;
 }
 
 float BBShipModel::getAngle()
