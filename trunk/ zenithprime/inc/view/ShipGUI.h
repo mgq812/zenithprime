@@ -11,6 +11,8 @@
 class ShipView;
 
 class ShipGUIController : public MouseListener{
+	
+	friend class ShipView;
   public:
       //BattleBoardView* view;
      DrawableModel* model;
