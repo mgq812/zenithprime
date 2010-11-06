@@ -1,4 +1,5 @@
 #include "BattleBoardGUI.h"
+#include "VectorMath.h"
 #include <Math.h>
 
 using namespace std;
@@ -16,18 +17,18 @@ float toRadians(float angle){
 	return angle * (float)3.14159265358/180;
 }
 
-BattleBoardController::BattleBoardController(BattleBoardModel* model){
+BattleBoardController::BattleBoardController(BBModel* model){
 	this->model = model;
-	X = model->width/2;
+	X = model->getWidth()/2;
 	Y = 0;
-	Z = model->hieght/2;
+	Z = model->getHeight()/2;
   
 	rotateX = 45;
 	rotateY = 0;
 
 	srcX = X;
 	srcY = Y+50;
-	srcZ = Z-50;
+	srcZ = Z+50;
 
 	float dumb = distance(srcX, srcY, srcZ, X, Y, Z);
 	zoom = dumb;
@@ -137,25 +138,16 @@ void BattleBoardController::setCameraUp(float up_x , float up_y, float up_z){
 }
 
 void BattleBoardController::moveCamera(float deltaX, float deltaY, float deltaZ){
-	float d_X = -deltaX;
-	float d_Y = -deltaY;
 
-	Y+= deltaZ;
-	srcY+= deltaZ;
-
-	if(rotateY!=0){
-	d_X = deltaX*cos(toRadians(-rotateY)) - deltaY*sin(toRadians(-rotateY));
-	d_Y = deltaX*sin(toRadians(-rotateY))+ deltaY*cos(toRadians(-rotateY));
-	}
-		
-		
+	float d_X = deltaX*cos(toRadians(-rotateY)) - deltaY*sin(toRadians(-rotateY));
+	float d_Y = deltaX*sin(toRadians(-rotateY))+ deltaY*cos(toRadians(-rotateY));		
 
 	d_X*= (zoom+MIN_ZOOM)/MAX_ZOOM;
 	d_Y*= (zoom+MIN_ZOOM)/MAX_ZOOM;
-	if(X+d_X>model->width || X +d_X<0)
+	if(X+d_X>model->getWidth() || X +d_X<0)
 		return;
 	X+= d_X;
-	if(Z+d_Y>model->hieght || Z+d_Y<0)
+	if(Z+d_Y>model->getHeight() || Z+d_Y<0)
 		return;
 
 

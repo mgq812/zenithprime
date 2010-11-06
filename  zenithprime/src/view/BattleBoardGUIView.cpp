@@ -3,7 +3,7 @@
 
 using namespace std;
 
-BattleBoardView::BattleBoardView(BattleBoardModel* model, BattleBoardController* controller){
+BattleBoardView::BattleBoardView(BBModel* model, BattleBoardController* controller){
   this->model = model;
   this->controller = controller;
   
@@ -16,8 +16,8 @@ BattleBoardView::BattleBoardView(BattleBoardModel* model, BattleBoardController*
   showSpecials = false;
   showParticles =false;
 
-  x_div = (int)model->width/10;
-  y_div = (int)model->hieght/10;
+  x_div = (int)model->getWidth()/10;
+  y_div = (int)model->getHeight()/10;
 
 }
 
@@ -56,23 +56,23 @@ void BattleBoardView::DrawGrid(){
 	glEnable(GL_BLEND);
 
 	glBegin(GL_LINES);
-	glColor4f(0.0, .5, .7, 0.2);
+	glColor4f(0.0f, .5f, .7f, 0.2f);
 
 	//Draw Verticle Lines
-	float grid_width = model->width/x_div;
+	float grid_width = model->getWidth()/x_div;
 
 	for(int i = 0; i<=x_div; i++)
 	{
 		glVertex3f(i*grid_width,0,0);
-		glVertex3f(i*grid_width,0,model->hieght);
+		glVertex3f(i*grid_width,0,model->getHeight());
 	}
 
 	// Draw Horizontal Lines
-	float grid_height = model->hieght/y_div;
+	float grid_height = model->getHeight()/y_div;
 	for(int j = 0; j<=y_div; j++)
 	{
 		glVertex3f(0,0,grid_height*j);
-		glVertex3f(model->width,0,grid_height*j);
+		glVertex3f(model->getWidth(),0,grid_height*j);
 	}
 
 	glEnd();
@@ -95,8 +95,8 @@ void BattleBoardView::DrawSpecials(){
 void BattleBoardView::DrawParticles(){
 }
     
-void BattleBoardView::DrawWireframeShip(const ShipPlacement& ship, int R, int G, int B){
-}
+//void BattleBoardView::DrawWireframeShip(const ShipPlacement& ship, int R, int G, int B){
+//}
 
 
 void BattleBoardView::setGridDivision(int x, int y){

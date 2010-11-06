@@ -22,6 +22,7 @@ public:
 	static Matrix CreateRotationZ(float beta);
 	static Matrix Identity(); 
 
+
 private:
 	static float multiplyCell(int col, int row, const Matrix& primary, const Matrix& secondary);
 	static bool multiplyValid( const Matrix& primary, const Matrix& secondary, int* outRows, int* outColunms);

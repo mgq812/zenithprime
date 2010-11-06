@@ -4,9 +4,9 @@ using namespace std;
 
 BattleBoardView* BattleBoardFactory::CreateBoard(float width, float height){
 
-	BattleBoardModel* model = new BattleBoardModel();
-	model->hieght = height;
-	model->width = width;
+	BBModel* model = new BBModel();
+	model->setHeight(height);
+	model->setWidth(width);
 
 	BattleBoardController* controller = new BattleBoardController(model);
 

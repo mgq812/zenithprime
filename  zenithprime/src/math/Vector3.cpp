@@ -34,3 +34,6 @@ Vector3 Vector3::Transform(Vector3 point, std::vector<Matrix> matrix){
 
 	return Vector3(temp.Get(0,0), temp.Get(1,0), temp.Get(2,0));
 }
+
+
+

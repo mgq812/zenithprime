@@ -171,3 +171,4 @@ void Matrix::loadMatrix(Matrix* matrix, int width, int height, float values[]){
 		matrix->values.push_back(values[i]);
 	}
 }
+
