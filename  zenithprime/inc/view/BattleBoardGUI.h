@@ -9,8 +9,11 @@
 
 
 class BattleBoardView;
+class BattleBoardGUIFacade;
 
 class BattleBoardController : public MouseListener{
+	
+	friend class BattleBoardView;
   public:
       //BattleBoardView* view;
       BBModel* model;
@@ -18,7 +21,7 @@ class BattleBoardController : public MouseListener{
       BattleBoardController(BBModel* model);
    
 
-    void updateCamera();
+    void Update();
 
 	void setCamera(float sourceX, float sourceY, float sourceZ,float targetX, float targetY, float targetZ, float up_x , float up_y, float up_z);
 	void setCameraTarget(float targetX, float targetY, float targetZ);
@@ -42,6 +45,9 @@ class BattleBoardController : public MouseListener{
 	virtual void mouseDoubleClicked(int targetX, int targetY, int buttons);
 	virtual void mouseWheel(int targetX, int targetY, int delta);
 
+	void setViewport(int x, int y, int width, int height, float angle);
+	void setFacade(BattleBoardGUIFacade* facade);
+
 private:
 	
 	float X, Y, Z;
@@ -56,6 +62,28 @@ private:
 	float MIN_ZOOM;
 
 	bool mouse_flag;
+
+	struct BattleViewport{
+	int x;
+	int y;
+	int width;
+	int height;
+	float angle;
+	};
+
+	BattleViewport BBInfo;
+
+	BattleBoardGUIFacade* facade;
+
+	static const int M_MOVED = 0;
+	static const int M_DRAGGED = 1;
+	static const int M_PRESSED = 2;
+	static const int M_RELEASED = 3;
+	static const int M_CLICKED = 4;
+	static const int M_DCLICKED = 5;
+
+	void callFacade(int targetX, int targetY, int buttons, int protocal);
+	void callPan(int targetX, int targetY);
 };
 
 class BattleBoardView
@@ -67,19 +95,13 @@ class BattleBoardView
     ~BattleBoardView();
   
     void Draw();
-    void DrawGrid();
-    void DrawBoundry();
-    void DrawBackground();
-    void DrawForeground();
-    void DrawShips();
-    void DrawMissles();
-    void DrawSpecials();
-    void DrawParticles();
+
 //    void DrawShip(const ShipPlacement& ship);
 //    void DrawWireframeShip(const ShipPlacement& ship, int R, int G, int B);
 
 	void setGridDivision(int x, int y);
-
+	void setViewport(int x, int y, int width, int height, float angle);
+	void Update();
   private:
     BBModel* model;
 	BattleBoardController* controller;
@@ -92,7 +114,36 @@ class BattleBoardView
     bool showMissles;
     bool showSpecials;
     bool showParticles;
+	bool showSelected;
+	bool showCursor;
+	bool showGhosts;
+	bool showAnchor;
+
+	void DrawGrid();
+    void DrawBoundry();
+    void DrawBackground();
+    void DrawForeground();
+    void DrawShips();
+    void DrawMissles();
+    void DrawSpecials();
+    void DrawParticles();
+	void DrawSelected();
+	void DrawCursor();
+	void DrawGhosts();
+	void DrawAnchor();
 
 	int x_div, y_div;
+};
+
+class BattleBoardGUIFacade
+{
+public:
+	virtual void mouseMoved(float originX, float originY, float originZ, float directionX, float directionY, float directionZ)=0;
+	virtual void mouseDragged(float originX, float originY, float originZ, float directionX, float directionY, float directionZ, int buttons)=0;
+	virtual void mousePressed(float originX, float originY, float originZ, float directionX, float directionY, float directionZ, int buttons)=0;
+	virtual void mouseReleased(float originX, float originY, float originZ, float directionX, float directionY, float directionZ, int buttons)=0;
+	virtual void mouseClicked(float originX, float originY, float originZ, float directionX, float directionY, float directionZ, int button)=0;
+	virtual void mouseDoubleClicked(float originX, float originY, float originZ, float directionX, float directionY, float directionZ, int button)=0;
+	virtual void Update()=0;
 };
 

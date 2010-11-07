@@ -48,6 +48,7 @@ bool BattleBoardController::isMouseEnabled(){
 void BattleBoardController::mouseMoved(int targetX, int targetY){
 	if(!mouse_flag)return;
 	callFacade(targetX, targetY, 0, M_MOVED);
+	callPan(targetX, targetY);
 }
 
 
@@ -67,7 +68,7 @@ void BattleBoardController::mouseDragged(int targetX, int targetY, int buttons){
 			int d_Y = targetY-oldY;
 
 			this->moveCamera((float)-d_X, (float)-d_Y, 0);
-
+			
 
 		}
 		oldX = targetX;
@@ -88,6 +89,7 @@ void BattleBoardController::mouseDragged(int targetX, int targetY, int buttons){
 		oldY = targetY;
 	}
 		callFacade(targetX, targetY, buttons, M_DRAGGED);
+
 }
 void BattleBoardController::mousePressed(int targetX, int targetY, int buttons){
 	if(!mouse_flag)return;
@@ -209,8 +211,22 @@ void BattleBoardController::enablePrespective(){
 	gluLookAt(srcX, srcY, srcZ, X, Y, Z, upX, upY, upZ);
 }
 
-void BattleBoardController::updateCamera(){
-	
+void BattleBoardController::Update(){
+
+	static DWORD oldtime = 0;
+	//60 fps updating
+	if(oldtime==0)
+		oldtime = GetTickCount();
+	else{
+		DWORD currentTime = GetTickCount();
+		if((currentTime - oldtime)/(1000.0/30.0) > 1){ 
+			callPan(Mouse::getCurrentMouse()->X, Mouse::getCurrentMouse()->Y);
+			oldtime = currentTime;
+		}
+	}
+
+	if(facade==NULL) return;
+	facade->Update();
 }
 
 void BattleBoardController::setViewport(int x, int y, int width, int height, float viewAngle)
@@ -269,4 +285,34 @@ void BattleBoardController::callFacade(int targetX, int targetY, int buttons, in
 	}
 
   
+}
+
+void BattleBoardController::callPan(int targetX, int targetY){
+	if(BBInfo.x<0) return;
+
+	static int border = 37;
+	float d_X = 0;
+	float d_Y =0;
+
+	float c =0;
+	if(targetX<border){
+		c = (border - targetX);
+		d_X -= c*c*.01;
+	}
+	else if (targetX>BBInfo.width -border){
+		c = (targetX - BBInfo.width + border);
+		d_X +=c*c*.01;
+	}
+
+	if(targetY<border)
+	{
+		c = (border-targetY);
+		d_Y-=c*c*.01;
+	}
+	else if(targetY>BBInfo.height -border){
+		c = (targetY - BBInfo.height + border);
+		d_Y+= c*c*.01;
+	}
+	this->moveCamera(d_X, d_Y, 0);
+
 }
