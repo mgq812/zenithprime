@@ -35,5 +35,64 @@ Vector3 Vector3::Transform(Vector3 point, std::vector<Matrix> matrix){
 	return Vector3(temp.Get(0,0), temp.Get(1,0), temp.Get(2,0));
 }
 
+double Vector3::getMagnitude()
+{
+        double magnitude = sqrt(x*x+y*y+z*z);
+        return magnitude;
+}
+
+Vector3 Vector3::normalize()
+{
+        double length = this->getMagnitude();
+        Vector3 temp;
+
+        temp.x = this->x/length;
+        temp.y = (this->y/length);
+        temp.y = (this->z/length);
+
+        return temp;
+} 
 
 
+Vector3 Vector3::Cross(const Vector3& first, const Vector3& second){
+	Vector3 ret;
+	ret.x = first.y*second.z - first.z*second.y;
+	ret.y = first.z*second.x - first.x*second.z;
+	ret.z = first.x*second.y - first.y*second.x;
+	return ret;
+}
+
+
+Vector3 Vector3::operator-(const Vector3& other){
+	Vector3 ret;
+	ret.x = x - other.x;
+	ret.y = y - other.y;
+	ret.z = z - other.z;
+	return ret;
+}
+Vector3 Vector3::operator+(const Vector3& other){
+	Vector3 ret;
+	ret.x = x + other.x;
+	ret.y = y + other.y;
+	ret.z = z + other.z;
+	return ret;
+}
+
+Vector3& Vector3::operator=(const Vector3& other){
+	if(this!=&other)
+	{
+		this->x = other.x;
+		this->y = other.y;
+		this->z = other.z;
+	}
+
+	return *this;
+}
+
+Vector3 Vector3::Multiply(const Vector3& vec, float mul){
+	Vector3 ret;
+	ret.x =vec.x*mul;
+	ret.y =vec.y*mul;
+	ret.z =vec.z*mul;
+	return ret;
+}

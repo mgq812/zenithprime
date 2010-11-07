@@ -4,18 +4,7 @@
 
 using namespace std;
 
-float distance(float x1, float y1, float z1, float x2, float y2, float z2){
-	float dx = x2- x1;
-	float dy = y2-y1;
-	float dz = z2-z1;
 
-	float dist = sqrt(dx*dx+dy*dy+dz*dz);
-	return dist;
-}
-
-float toRadians(float angle){
-	return angle * (float)3.14159265358/180;
-}
 
 BattleBoardController::BattleBoardController(BBModel* model){
 	this->model = model;
@@ -30,7 +19,7 @@ BattleBoardController::BattleBoardController(BBModel* model){
 	srcY = Y+50;
 	srcZ = Z+50;
 
-	float dumb = distance(srcX, srcY, srcZ, X, Y, Z);
+	float dumb = MathLib::distance(srcX, srcY, srcZ, X, Y, Z);
 	zoom = dumb;
 
 	upX = 0;
@@ -39,6 +28,10 @@ BattleBoardController::BattleBoardController(BBModel* model){
 
 	//updateCamera();
   
+	BBInfo.x = -1;
+
+	facade = NULL;
+
 	MIN_ZOOM = 20;
 	MAX_ZOOM = 500;
   Mouse::getCurrentMouse()->addMouseListener(this);
@@ -54,6 +47,7 @@ bool BattleBoardController::isMouseEnabled(){
 
 void BattleBoardController::mouseMoved(int targetX, int targetY){
 	if(!mouse_flag)return;
+	callFacade(targetX, targetY, 0, M_MOVED);
 }
 
 
@@ -93,9 +87,12 @@ void BattleBoardController::mouseDragged(int targetX, int targetY, int buttons){
 		oldX = targetX;
 		oldY = targetY;
 	}
+		callFacade(targetX, targetY, buttons, M_DRAGGED);
 }
 void BattleBoardController::mousePressed(int targetX, int targetY, int buttons){
 	if(!mouse_flag)return;
+	
+	callFacade(targetX, targetY, buttons, M_PRESSED);
 }
 void BattleBoardController::mouseReleased(int targetX, int targetY, int buttons){
 	if(!mouse_flag)return;
@@ -104,12 +101,19 @@ void BattleBoardController::mouseReleased(int targetX, int targetY, int buttons)
 		oldX = -1;
 		oldY = -1;
 	}
+
+	
+	callFacade(targetX, targetY, buttons, M_RELEASED);
 }
 void BattleBoardController::mouseClicked(int targetX, int targetY, int buttons){
 	if(!mouse_flag)return;
+	
+	callFacade(targetX, targetY, buttons, M_CLICKED);
 }
 void BattleBoardController::mouseDoubleClicked(int targetX, int targetY, int buttons){
 	if(!mouse_flag)return;
+
+	callFacade(targetX, targetY, buttons, M_DCLICKED);
 }
 void BattleBoardController::mouseWheel(int targetX, int targetY, int delta){
 	if(!mouse_flag)return;
@@ -139,8 +143,8 @@ void BattleBoardController::setCameraUp(float up_x , float up_y, float up_z){
 
 void BattleBoardController::moveCamera(float deltaX, float deltaY, float deltaZ){
 
-	float d_X = deltaX*cos(toRadians(-rotateY)) - deltaY*sin(toRadians(-rotateY));
-	float d_Y = deltaX*sin(toRadians(-rotateY))+ deltaY*cos(toRadians(-rotateY));		
+	float d_X = deltaX*cos( MathLib::toRadians(-rotateY)) - deltaY*sin( MathLib::toRadians(-rotateY));
+	float d_Y = deltaX*sin( MathLib::toRadians(-rotateY))+ deltaY*cos( MathLib::toRadians(-rotateY));		
 
 	d_X*= (zoom+MIN_ZOOM)/MAX_ZOOM;
 	d_Y*= (zoom+MIN_ZOOM)/MAX_ZOOM;
@@ -157,7 +161,7 @@ void BattleBoardController::moveCamera(float deltaX, float deltaY, float deltaZ)
 	srcZ+= d_Y;
 }
 void BattleBoardController::zoomCamera(float zoom){
-	float oldDist = distance(srcX, srcY, srcZ, X, Y, Z);
+	float oldDist = MathLib::distance(srcX, srcY, srcZ, X, Y, Z);
 	float ratio = (this->zoom+zoom)/oldDist;
 	if(oldDist<MIN_ZOOM && ratio<1 || (oldDist>MAX_ZOOM && ratio>1))
 		return;
@@ -177,7 +181,7 @@ void BattleBoardController::zoomCamera(float zoom){
 	//srcX*= ratio;// * srcX/total;
 	//srcY*= ratio;//* srcY/total;
 	//srcZ*= ratio;//* srcZ/total;
-	this->zoom = distance(srcX, srcY, srcZ, X, Y, Z);
+	this->zoom =  MathLib::distance(srcX, srcY, srcZ, X, Y, Z);
 	
 }
 void BattleBoardController::rotateCamera(float rotateX, float rotateY){
@@ -194,8 +198,8 @@ void BattleBoardController::rotateCamera(float rotateX, float rotateY){
 		this->rotateX += rotateX;
 
 
-	Vector3 offset = Vector3::Transform(Vector3(0,0,zoom), Matrix::CreateRotationX(-toRadians(this->rotateX)));
-	offset = Vector3::Transform(offset,  Matrix::CreateRotationY(toRadians(this->rotateY)));
+	Vector3 offset = Vector3::Transform(Vector3(0,0,zoom), Matrix::CreateRotationX(- MathLib::toRadians(this->rotateX)));
+	offset = Vector3::Transform(offset,  Matrix::CreateRotationY( MathLib::toRadians(this->rotateY)));
 	srcX = offset.x+X;
 	srcY = offset.y+Y;
 	srcZ = offset.z+Z;
@@ -207,4 +211,62 @@ void BattleBoardController::enablePrespective(){
 
 void BattleBoardController::updateCamera(){
 	
+}
+
+void BattleBoardController::setViewport(int x, int y, int width, int height, float viewAngle)
+{
+	BBInfo.x = x;
+	BBInfo.y = y;
+	BBInfo.width = width;
+	BBInfo.height = height;
+	BBInfo.angle = viewAngle;
+}
+void BattleBoardController::setFacade(BattleBoardGUIFacade* facade){
+	this->facade = facade;
+}
+
+void BattleBoardController::callFacade(int targetX, int targetY, int buttons, int protocal){
+	if(BBInfo.x<0 || this->facade ==NULL) return;
+
+	float originX = srcX;
+	float originY = srcY;
+	float originZ = srcZ;
+
+    Vector3 w = Vector3(srcX-X, srcY-Y, srcZ-Z).normalize();
+	Vector3 u = (Vector3::Cross(Vector3(upX,upY,upZ), w)).normalize();
+	Vector3 v = Vector3::Cross(w, u);
+
+	double angConst = tan(BBInfo.angle/180* 3.141592);
+
+    double dist = 1 / angConst;
+
+    double aspect = (double)BBInfo.width / (double)BBInfo.height;
+	double dx = ((targetX / (double)(BBInfo.width / 2) - 1))*aspect;
+	double dy = (1.0 - targetY / (double)(BBInfo.height / 2)) ;
+
+	Vector3 delta = Vector3(X,Y,Z) + Vector3::Multiply(u, (float)dx) + Vector3::Multiply(v, (float)dy) + Vector3::Multiply(w, -(float)dist);
+    delta = delta.normalize();
+
+	switch(protocal){
+		case M_MOVED:
+			facade->mouseMoved(originX, originY, originZ, delta.x, delta.y, delta.z);
+			break;
+		case M_DRAGGED:
+			facade->mouseDragged(originX, originY, originZ, delta.x, delta.y, delta.z, buttons);
+			break;
+		case M_PRESSED:
+			facade->mousePressed(originX, originY, originZ, delta.x, delta.y, delta.z, buttons);
+			break;
+		case M_RELEASED:
+			facade->mouseReleased(originX, originY, originZ, delta.x, delta.y, delta.z, buttons);
+			break;
+		case M_CLICKED:
+			facade->mouseClicked(originX, originY, originZ, delta.x, delta.y, delta.z, buttons);
+			break;
+		case M_DCLICKED:
+			facade->mouseDoubleClicked(originX, originY, originZ, delta.x, delta.y, delta.z, buttons);
+			break;
+	}
+
+  
 }

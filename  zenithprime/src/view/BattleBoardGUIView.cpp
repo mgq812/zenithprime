@@ -15,6 +15,10 @@ BattleBoardView::BattleBoardView(BBModel* model, BattleBoardController* controll
   showMissles = false;
   showSpecials = false;
   showParticles =false;
+  showSelected = false;
+	showCursor = false;
+	showGhosts = false;
+	showAnchor = true;
 
   x_div = (int)model->getWidth()/10;
   y_div = (int)model->getHeight()/10;
@@ -41,8 +45,17 @@ void BattleBoardView::Draw()
 		DrawMissles();
      if(showParticles)
 		DrawParticles();
+	 if(showSelected)
+		 DrawSelected();
+	 if(showAnchor)
+		 DrawAnchor();
+	 if(showGhosts)
+		 DrawGhosts();
+	 if(showCursor)
+		 DrawCursor();
      if(showForeground)
 		DrawForeground();
+
 	
 }
     
@@ -93,6 +106,28 @@ void BattleBoardView::DrawMissles(){
 void BattleBoardView::DrawSpecials(){
 }
 void BattleBoardView::DrawParticles(){
+}
+void BattleBoardView::DrawSelected(){
+}
+
+void BattleBoardView::DrawCursor(){
+}
+void BattleBoardView::DrawGhosts(){
+}
+void BattleBoardView::DrawAnchor(){
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+
+	GLUquadricObj* quadratic=gluNewQuadric();			// Create A Pointer To The Quadric Object ( NEW )
+	gluQuadricNormals(quadratic, GLU_SMOOTH);	// Create Smooth Normals ( NEW )
+
+	glColor4f(0.0f, .5f, .7f, 0.2f);
+	glTranslatef(controller->X, controller->Y, controller->Z);
+	gluSphere(quadratic, 5, 12, 12);
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glDisable(GL_BLEND);
 }
     
 //void BattleBoardView::DrawWireframeShip(const ShipPlacement& ship, int R, int G, int B){
