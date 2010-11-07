@@ -132,6 +132,13 @@ class BattleBoardView
 	void DrawGhosts();
 	void DrawAnchor();
 
+	void DrawShip(BBShipModel* shipModel);
+	void DrawWireframeShip(BBShipModel* shipModel);
+	void DrawSelectedShip(BBShipModel* shipModel);
+	void DrawHighlightedShip(BBShipModel* shipModel);
+
+	void setTransforms(BBShipModel* shipModel);
+	void clearTransforms();
 	int x_div, y_div;
 };
 

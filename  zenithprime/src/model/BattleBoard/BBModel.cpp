@@ -7,7 +7,8 @@ BBModel::BBModel()
 
 BBModel::BBModel(float width1, float height1 /*,Image background1*/, ZList<BBPlayerModel*> players1)
 	:players(players1), width(width1), height(height1)
-{}
+{
+}
 
 float BBModel::getWidth()
 {
@@ -42,4 +43,13 @@ void BBModel::addPlayer(BBPlayerModel* player)
 void BBModel::removePlayer(BBPlayerModel* player)
 {
 	players.remove(player);
+}
+
+
+void BBModel::getAllShips(vector<BBShipModel*>& list){
+
+}
+void BBModel::getAllGhostShips(vector<BBShipModel*>& list){
+}
+void BBModel::getSelectedShips(vector<BBShipModel*>& list){
 }

@@ -2,6 +2,7 @@
 #define BBSHIP_MODEL_H
 
 #include "Position.h"
+#include "DrawableModel.h"
 #include "Ship.h"
 
 class BBShipModel
@@ -21,6 +22,7 @@ public:
 	void setScale(float scale);
 	Ship* getShip();
 	void setShip(Ship* ship);
+	DrawableModel* getDrawModel();
 
 private:
 	int x;
@@ -28,7 +30,7 @@ private:
 	float angle;
 	float scale;
 	//Bitmap texture;
-	//3DModel model;
+	DrawableModel* drawModel;
 	Ship* ship;
 	
 };
