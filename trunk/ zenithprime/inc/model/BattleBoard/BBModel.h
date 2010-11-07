@@ -2,6 +2,7 @@
 #define BBMODEL_H
 
 #include "ZList.h"
+#include <vector>
 #include "BBPlayerModel.h"
 
 class BBModel
@@ -21,6 +22,10 @@ public:
 	ZList<BBPlayerModel*> getPlayers();
 	void addPlayer(BBPlayerModel* player);
 	void removePlayer(BBPlayerModel* player);
+
+	void getAllShips(vector<BBShipModel*>& list);
+	void getAllGhostShips(vector<BBShipModel*>& list);
+	void getSelectedShips(vector<BBShipModel*>& list);
 
 private:
 	float width;

@@ -101,7 +101,14 @@ void BattleBoardView::DrawBackground(){
 void BattleBoardView::DrawForeground(){
 }
 void BattleBoardView::DrawShips(){
+	vector<BBShipModel*> list;
+	model->getAllShips(list);
+
+	for(unsigned int i = 0; i < list.size() ; i++){
+		DrawShip(list[i]);
+	}
 }
+
 void BattleBoardView::DrawMissles(){
 }
 void BattleBoardView::DrawSpecials(){
@@ -109,11 +116,24 @@ void BattleBoardView::DrawSpecials(){
 void BattleBoardView::DrawParticles(){
 }
 void BattleBoardView::DrawSelected(){
+	vector<BBShipModel*> list;
+	model->getSelectedShips(list);
+
+	for(unsigned int i = 0; i < list.size() ; i++){
+		DrawSelectedShip(list[i]);
+	}
 }
 
 void BattleBoardView::DrawCursor(){
 }
 void BattleBoardView::DrawGhosts(){
+
+	vector<BBShipModel*> list;
+	model->getAllGhostShips(list);
+
+	for(unsigned int i = 0; i < list.size() ; i++){
+		DrawWireframeShip(list[i]);
+	}
 }
 void BattleBoardView::DrawAnchor(){
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -124,7 +144,7 @@ void BattleBoardView::DrawAnchor(){
 
 	glColor4f(0.0f, .5f, .7f, 0.2f);
 	glTranslatef(controller->X, controller->Y, controller->Z);
-	gluSphere(quadratic, 5, 12, 12);
+	glCallList(DrawableModel::NULLDrawableModel()->cacheModel);
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glDisable(GL_BLEND);
@@ -145,4 +165,84 @@ void BattleBoardView::setViewport(int x, int y, int width, int height, float ang
 
 void BattleBoardView::Update(){
 	controller->Update();
+}
+
+
+void BattleBoardView::setTransforms(BBShipModel* shipModel){
+	glPushMatrix();
+	glScalef(shipModel->getScale(), shipModel->getScale(), shipModel->getScale());
+	glTranslatef(shipModel->getX(), 0, shipModel->getY());
+	glRotatef(shipModel->getAngle(), 0, 1, 0);
+}
+void BattleBoardView::clearTransforms(){
+	glPopMatrix();
+}
+
+void BattleBoardView::DrawShip(BBShipModel* shipModel){
+	
+	setTransforms(shipModel);
+	if(shipModel->getDrawModel()->cacheTexture>0)
+	{
+		glBindTexture(GL_TEXTURE_2D, shipModel->getDrawModel()->cacheTexture);
+	}
+
+	glCallList(shipModel->getDrawModel()->cacheModel);
+
+	glDisable(GL_TEXTURE_2D);
+	clearTransforms();
+}
+void BattleBoardView::DrawWireframeShip(BBShipModel* shipModel){
+	setTransforms(shipModel);
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+
+	
+
+	glColor4f(0.0f, .5f, .7f, 0.2f);
+
+	glCallList(shipModel->getDrawModel()->cacheModel);
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glDisable(GL_BLEND);
+
+	clearTransforms();
+}
+void BattleBoardView::DrawSelectedShip(BBShipModel* shipModel){
+	setTransforms(shipModel);
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+
+	
+
+	glColor4f(0.2f, .5f, .2f, 0.2f);
+
+	glCallList(shipModel->getDrawModel()->cacheModel);
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glDisable(GL_BLEND);
+
+	clearTransforms();
+}
+
+void BattleBoardView::DrawHighlightedShip(BBShipModel* shipModel){
+	setTransforms(shipModel);
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+
+	
+
+	glColor4f(0.5f, .5f, 0.0f, 0.2f);
+
+	glCallList(shipModel->getDrawModel()->cacheModel);
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glDisable(GL_BLEND);
+
+	clearTransforms();
 }
