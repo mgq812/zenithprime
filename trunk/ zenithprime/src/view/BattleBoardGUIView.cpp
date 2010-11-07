@@ -2,7 +2,8 @@
 #include <iostream>
 
 using namespace std;
-
+GLUquadricObj* quadratic=gluNewQuadric();			// Create A Pointer To The Quadric Object ( NEW )
+	
 BattleBoardView::BattleBoardView(BBModel* model, BattleBoardController* controller){
   this->model = model;
   this->controller = controller;
@@ -22,7 +23,7 @@ BattleBoardView::BattleBoardView(BBModel* model, BattleBoardController* controll
 
   x_div = (int)model->getWidth()/10;
   y_div = (int)model->getHeight()/10;
-
+	gluQuadricNormals(quadratic, GLU_SMOOTH);	// Create Smooth Normals ( NEW )
 }
 
 void BattleBoardView::Draw()
@@ -119,8 +120,7 @@ void BattleBoardView::DrawAnchor(){
 	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 
-	GLUquadricObj* quadratic=gluNewQuadric();			// Create A Pointer To The Quadric Object ( NEW )
-	gluQuadricNormals(quadratic, GLU_SMOOTH);	// Create Smooth Normals ( NEW )
+	
 
 	glColor4f(0.0f, .5f, .7f, 0.2f);
 	glTranslatef(controller->X, controller->Y, controller->Z);
@@ -137,4 +137,12 @@ void BattleBoardView::DrawAnchor(){
 void BattleBoardView::setGridDivision(int x, int y){
 	x_div = x;
 	y_div = y;
+}
+
+void BattleBoardView::setViewport(int x, int y, int width, int height, float angle){
+	controller->setViewport(x,y, width, height, angle);
+}
+
+void BattleBoardView::Update(){
+	controller->Update();
 }

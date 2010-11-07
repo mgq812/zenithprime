@@ -404,6 +404,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 			}
 			scView->Update();
 		}
+		//Sleep(10);
 	}
 
 	// Shutdown
