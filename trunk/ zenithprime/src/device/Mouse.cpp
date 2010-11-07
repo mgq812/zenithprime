@@ -1,8 +1,10 @@
 #include "Mouse.h"
 
+int clicks;
 Mouse::Mouse(void)
 {
 	buttonState = 0;
+	clicks = 0;
 }
 
 Mouse::~Mouse(void)
@@ -46,6 +48,7 @@ void Mouse::mouseMoved(int targetX, int targetY){
 	X = targetX;
 	Y = targetY;
 
+	clicks = 0;
 	if(buttonState>0)
 		mouseDragged(targetX,targetY, buttonState);
 }
@@ -56,6 +59,7 @@ void Mouse::mouseDragged(int targetX, int targetY, int buttons){
 void Mouse::mousePressed(int buttons){
 	buttonState = buttonState | buttons;
 
+	clicks++;
 	for(unsigned int i = 0 ; i < mouseListeners.size(); i++)
 		mouseListeners[i]->mousePressed(X, Y,buttons);
 }
@@ -64,14 +68,20 @@ void Mouse::mouseReleased(int buttons){
 
 	for(unsigned int i = 0 ; i < mouseListeners.size(); i++)
 		mouseListeners[i]->mouseReleased(X, Y,buttonState);
+	if(clicks>0)
+		mouseClicked(buttons);
 }
 void Mouse::mouseClicked(int buttons){
 	for(unsigned int i = 0 ; i < mouseListeners.size(); i++)
 		mouseListeners[i]->mouseClicked(X, Y,buttons);
+	if(clicks>1)
+		mouseDoubleClicked(buttons);
+	clicks++;
 }
 void Mouse::mouseDoubleClicked(int buttons){
 	for(unsigned int i = 0 ; i < mouseListeners.size(); i++)
 		mouseListeners[i]->mouseDoubleClicked(X, Y,buttons);
+	clicks = 0;
 }
 void Mouse::mouseWheel(int delta){
 	for(unsigned int i = 0 ; i < mouseListeners.size(); i++)
