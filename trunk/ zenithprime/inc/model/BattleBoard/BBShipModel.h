@@ -12,6 +12,7 @@ public:
 	BBShipModel();
 	BBShipModel(float angle1, float scale1);
 	BBShipModel(int x1, int y1, float angle, float scale);
+	BBShipModel(int x1, int y1, float angle, float scale, DrawableModel* drawModel1);
 	int getX();
 	void setX(int x1);
 	int getY();
@@ -24,7 +25,6 @@ public:
 	void setShip(Ship* ship);
 	DrawableModel* getDrawModel();
 	
-	DrawableModel* drawModel;
 
 private:
 	int x;
@@ -32,8 +32,8 @@ private:
 	float angle;
 	float scale;
 	//Bitmap texture;
-	Ship* ship;
-	
+	DrawableModel* drawModel;
+	Ship* ship;	
 };
 
 #endif

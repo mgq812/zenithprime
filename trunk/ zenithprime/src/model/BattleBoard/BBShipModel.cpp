@@ -12,6 +12,10 @@ BBShipModel::BBShipModel(float angle1, float scale1)
 	drawModel = DrawableModel::NULLDrawableModel();
 }
 
+BBShipModel::BBShipModel(int x1, int y1, float angle1, float scale1, DrawableModel* drawModel1)
+	:x(x1), y(y1), angle(angle1), scale(scale1), drawModel(drawModel1)
+{}
+
 BBShipModel::BBShipModel(int x1, int y1, float angle1, float scale1)
 	:x(x1), y(y1), angle(angle1), scale(scale1)
 {
