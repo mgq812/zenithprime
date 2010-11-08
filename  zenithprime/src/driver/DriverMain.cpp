@@ -14,6 +14,7 @@
 #include "SpaceCombatViewport.h"
 #include "BattleBoardFactory.h"
 #include <math.h>
+#include <time.h>
 #define GLvoid void
 
 HDC			hDC=NULL;		// Private GDI Device Context
@@ -80,6 +81,7 @@ int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
 	glEnd();*/
 
 //	scView.Draw();
+
 	scView->Draw();
 	
 	return TRUE;										// Keep Going
