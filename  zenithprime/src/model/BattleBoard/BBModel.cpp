@@ -1,3 +1,4 @@
+#include "BBShipModel.h"
 #include "BBPlayerModel.h"
 #include "BBModel.h"
 
@@ -46,8 +47,25 @@ void BBModel::removePlayer(BBPlayerModel* player)
 }
 
 
-void BBModel::getAllShips(vector<BBShipModel*>& list){
+void BBModel::getAllShips(vector<BBShipModel*>& list)
+{
+	ZList<BBPlayerModel*> players = getPlayers();
+	ZListNode<BBPlayerModel*>* playerNode = players.getHead();
 
+	while (playerNode != NULL)
+	{
+		ZList<BBShipModel*> ships = playerNode->getData()->getShips();
+		ZListNode<BBShipModel*>* shipNode = ships.getHead();
+
+		while (shipNode != NULL)
+		{
+			list.push_back(shipNode->getData());
+
+			shipNode = shipNode->getNext();
+		}
+
+		playerNode = playerNode->getNext();
+	}
 }
 void BBModel::getAllGhostShips(vector<BBShipModel*>& list){
 }

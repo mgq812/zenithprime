@@ -12,7 +12,7 @@ BattleBoardView::BattleBoardView(BBModel* model, BattleBoardController* controll
   showBoundry = false;
   showBackground = false;
   showForeground = false;
-  showShips = false;
+  showShips = true;
   showMissles = false;
   showSpecials = false;
   showParticles =false;
@@ -103,6 +103,7 @@ void BattleBoardView::DrawForeground(){
 void BattleBoardView::DrawShips(){
 	vector<BBShipModel*> list;
 	model->getAllShips(list);
+	list.push_back(new BBShipModel(100, 100, 10, 15));
 
 	for(unsigned int i = 0; i < list.size() ; i++){
 		DrawShip(list[i]);
@@ -143,8 +144,10 @@ void BattleBoardView::DrawAnchor(){
 	
 
 	glColor4f(0.0f, .5f, .7f, 0.2f);
+	glPushMatrix();
 	glTranslatef(controller->X, controller->Y, controller->Z);
 	glCallList(DrawableModel::NULLDrawableModel()->cacheModel);
+	glPopMatrix();
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glDisable(GL_BLEND);
@@ -170,9 +173,9 @@ void BattleBoardView::Update(){
 
 void BattleBoardView::setTransforms(BBShipModel* shipModel){
 	glPushMatrix();
-	glScalef(shipModel->getScale(), shipModel->getScale(), shipModel->getScale());
-	glTranslatef(shipModel->getX(), 0, shipModel->getY());
 	glRotatef(shipModel->getAngle(), 0, 1, 0);
+	glTranslatef(shipModel->getX(), 0, shipModel->getY());
+	glScalef(shipModel->getScale(), shipModel->getScale(), shipModel->getScale());
 }
 void BattleBoardView::clearTransforms(){
 	glPopMatrix();
@@ -184,6 +187,10 @@ void BattleBoardView::DrawShip(BBShipModel* shipModel){
 	if(shipModel->getDrawModel()->cacheTexture>0)
 	{
 		glBindTexture(GL_TEXTURE_2D, shipModel->getDrawModel()->cacheTexture);
+	}
+	else
+	{
+		glColor3f(1, 0, 0);
 	}
 
 	glCallList(shipModel->getDrawModel()->cacheModel);

@@ -51,7 +51,7 @@ BBModel* initBBModel()
 	ZList<BBShipModel*> shipList1;
 	
 	// create a bunch of ships
-/*	int numShips = rand() % 10 + 1;
+	int numShips = rand() % 10 + 1;
 	for (int i = 0; i < numShips; i++)
 	{
 		BBShipModel* ship = new BBShipModel((float)(rand() % 500), 
@@ -60,7 +60,6 @@ BBModel* initBBModel()
 											(float)(rand() % 10 + 1));
 		shipList1.insert(ship);
 	}
-	*/
 	shipList1.insert(new BBShipModel(0, 0, 0, 0));
 
 	// create a list of players
