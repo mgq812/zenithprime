@@ -1,5 +1,6 @@
 #include <time.h>
 #include "BattleBoardFactory.h"
+#include "DrawableModelLoader.h"
 
 using namespace std;
 
@@ -18,6 +19,7 @@ BattleBoardView* BattleBoardFactory::CreateBoard(float width, float height){
 											(float)(rand() % 800), 
 											(float)(rand() % 360), 
 											(float)(rand() % 10 + 1));
+		ship->drawModel = DrawableModelLoader::LoadOBJModel("content/Cryslis1.dat");
 		shipList1.insert(ship);
 	}
 

@@ -23,6 +23,8 @@ public:
 	Ship* getShip();
 	void setShip(Ship* ship);
 	DrawableModel* getDrawModel();
+	
+	DrawableModel* drawModel;
 
 private:
 	int x;
@@ -30,7 +32,6 @@ private:
 	float angle;
 	float scale;
 	//Bitmap texture;
-	DrawableModel* drawModel;
 	Ship* ship;
 	
 };
