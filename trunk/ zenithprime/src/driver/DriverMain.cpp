@@ -183,7 +183,7 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 			// If The Mode Fails, Offer Two Options.  Quit Or Use Windowed Mode.
 			if (MessageBox(NULL,"The Requested Fullscreen Mode Is Not Supported By\nYour Video Card. Use Windowed Mode Instead?","NeHe GL",MB_YESNO|MB_ICONEXCLAMATION)==IDYES)
 			{
-				fullscreen=FALSE;		// Windowed Mode Selected.  Fullscreen = FALSE
+				fullscreen=true;		// Windowed Mode Selected.  Fullscreen = FALSE
 			}
 			else
 			{
@@ -370,9 +370,11 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 		fullscreen=true;							// Windowed Mode
 		char tit[80];
 		strcpy_s(tit,"Space Combat Viewport");
-		fullscreen = FALSE;
+		fullscreen = true;
 	// Create Our OpenGL Window
-	if (!CreateGLWindow(tit,640,480,16,fullscreen))
+	
+	
+	if (!CreateGLWindow(tit,GetSystemMetrics(SM_CXSCREEN),GetSystemMetrics(SM_CYSCREEN),16,fullscreen))
 	{
 		return 0;									// Quit If Window Was Not Created
 	}
