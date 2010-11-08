@@ -61,7 +61,7 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 
 	Mouse::setCurrentMouse(new Mouse());
 	Keyboard::setCurrentKeyboard(new Keyboard());
-	BattleBoardView* bbView = BattleBoardFactory::CreateBoard(400, 800);
+	BattleBoardView* bbView = BattleBoardFactory::CreateBoard(2000, 2000);
 	scView = new SpaceCombatViewport(bbView);
 
 	return TRUE;										// Initialization Went OK

@@ -12,16 +12,19 @@ BattleBoardView* BattleBoardFactory::CreateBoard(float width, float height){
 	ZList<BBShipModel*> shipList1;
 	
 	// create a bunch of ships
-	int numShips = rand() % 10 + 1;
+	int numShips = rand() % 100 + 1;
 	for (int i = 0; i < numShips; i++)
 	{
-		BBShipModel* ship = new BBShipModel((float)(rand() % 400), 
-											(float)(rand() % 800), 
+		BBShipModel* ship = new BBShipModel((float)(rand() % (int)width), 
+											(float)(rand() % (int)height), 
 											(float)(rand() % 360), 
-											(float)(rand() % 10 + 1));
-		ship->drawModel = DrawableModelLoader::LoadOBJModel("content/Cryslis1.dat");
+											(float)(rand() % 3 + 1),
+											DrawableModelLoader::LoadOBJModel("content/Cryslis1.dat"));
 		shipList1.insert(ship);
 	}
+
+	BBShipModel* planet = new BBShipModel(500, 100, 0, 500);
+	shipList1.insert(planet);
 
 	// create a list of players
 	ZList<BBPlayerModel*> playerList1;
@@ -30,7 +33,7 @@ BattleBoardView* BattleBoardFactory::CreateBoard(float width, float height){
 	BBPlayerModel* player1 = new BBPlayerModel(shipList1);
 	playerList1.insert(player1);
 
-	BBModel* model = new BBModel(400, 800, playerList1);
+	BBModel* model = new BBModel(width, height, playerList1);
 
 	BattleBoardController* controller = new BattleBoardController(model);
 

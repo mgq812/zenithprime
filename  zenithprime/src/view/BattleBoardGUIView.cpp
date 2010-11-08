@@ -190,7 +190,7 @@ void BattleBoardView::DrawShip(BBShipModel* shipModel){
 	}
 	else
 	{
-		glColor3f(1, 0, 0);
+		glColor3f(.5, .5, .5);
 	}
 
 	glCallList(shipModel->getDrawModel()->cacheModel);
