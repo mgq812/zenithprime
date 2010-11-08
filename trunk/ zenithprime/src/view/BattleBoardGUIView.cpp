@@ -173,8 +173,8 @@ void BattleBoardView::Update(){
 
 void BattleBoardView::setTransforms(BBShipModel* shipModel){
 	glPushMatrix();
-	glRotatef(shipModel->getAngle(), 0, 1, 0);
 	glTranslatef(shipModel->getX(), 0, shipModel->getY());
+	glRotatef(shipModel->getAngle(), 0, 1, 0);
 	glScalef(shipModel->getScale(), shipModel->getScale(), shipModel->getScale());
 }
 void BattleBoardView::clearTransforms(){
