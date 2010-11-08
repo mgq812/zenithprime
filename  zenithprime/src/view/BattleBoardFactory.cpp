@@ -13,17 +13,17 @@ BattleBoardView* BattleBoardFactory::CreateBoard(float width, float height){
 	ZList<BBShipModel*> shipList1;
 	
 	// create a bunch of ships
-	
+	DrawableModel* ship3dModel = DrawableModelLoader::LoadOBJModel("content/Cryslis1.dat");
+	Texture::LoadBitmap("content/Cryslis1.bmp", ship3dModel->cacheTexture);
 	int numShips = rand() % 20 + 1;
-	for (int i = 0; i < numShips; i++)
+	for (int i = 0; i < 1000; i++)
 	{
 		BBShipModel* ship = new BBShipModel((float)(rand() % (int)width), 
 											(float)(rand() % (int)height), 
 											(float)(rand() % 360), 
 											(float)(rand() % 5 + 1),
-											
-					DrawableModelLoader::LoadOBJModel("content/Cryslis1.dat"));
-		Texture::LoadBitmap("content/Cryslis1.bmp",ship->getDrawModel()->cacheTexture);
+											ship3dModel);
+		
 		shipList1.insert(ship);
 	}
 	
