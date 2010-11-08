@@ -1,6 +1,7 @@
 #include <time.h>
 #include "BattleBoardFactory.h"
 #include "DrawableModelLoader.h"
+#include "TextureLoader.h"
 
 using namespace std;
 
@@ -19,7 +20,9 @@ BattleBoardView* BattleBoardFactory::CreateBoard(float width, float height){
 											(float)(rand() % (int)height), 
 											(float)(rand() % 360), 
 											(float)(rand() % 3 + 1),
-											DrawableModelLoader::LoadOBJModel("content/Cryslis1.dat"));
+											
+					DrawableModelLoader::LoadOBJModel("content/Cryslis1.dat"));
+		Texture::LoadBitmap("content/Cryslis1.bmp",ship->getDrawModel()->cacheTexture);
 		shipList1.insert(ship);
 	}
 

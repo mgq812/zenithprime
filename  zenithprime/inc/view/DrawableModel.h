@@ -9,7 +9,7 @@ public:
 	~DrawableModel();
 
 	int cacheModel;
-	int cacheTexture;
+	GLuint cacheTexture;
 
 	static DrawableModel* NULLDrawableModel();
 };

@@ -187,6 +187,7 @@ void BattleBoardView::DrawShip(BBShipModel* shipModel){
 	if(shipModel->getDrawModel()->cacheTexture>0)
 	{
 		glBindTexture(GL_TEXTURE_2D, shipModel->getDrawModel()->cacheTexture);
+			glEnable(GL_TEXTURE_2D);
 	}
 	else
 	{

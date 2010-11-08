@@ -5,5 +5,6 @@
 
 class Texture
 {
+public:
 	static bool LoadBitmap(LPTSTR szFileName, GLuint &texid);
 };
