@@ -34,6 +34,7 @@ int ShipViewport::Draw()
 		shipView->Draw();
 		glFlush();
 		glPopMatrix();
+		glFlush();
 	}
 	return true;
 }

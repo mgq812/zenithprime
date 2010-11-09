@@ -42,5 +42,6 @@ BattleBoardView* BattleBoardFactory::CreateBoard(float width, float height){
 	BattleBoardController* controller = new BattleBoardController(model);
 
 	BattleBoardView* view = new BattleBoardView(model, controller);
+	view->setGridDivision(100,100);
 	return view;
 }
