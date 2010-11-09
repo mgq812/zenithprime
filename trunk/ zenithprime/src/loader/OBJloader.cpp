@@ -276,7 +276,7 @@ GLuint OBJloader::CacheOBJModel(OBJModel& model){
 	GLuint cacheModel = glGenLists(1);
 
 	glNewList(cacheModel,GL_COMPILE);
-	glColor3f(1, .7, 0);
+	glColor3f(1,1,1);
 	glBegin(GL_TRIANGLES);
 	for(unsigned int i = 0; i< model.Triangles.size(); i++)
 	{
