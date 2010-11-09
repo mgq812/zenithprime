@@ -80,10 +80,10 @@ int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
 		glVertex3f( 1.0f,-1.0f, 0.0f);				// Bottom Right
 	glEnd();*/
 
-//	scView.Draw();
 
 	scView->Draw();
 	
+	SwapBuffers(hDC);				// Swap Buffers (Double Buffering)
 	return TRUE;										// Keep Going
 }
 
@@ -404,7 +404,6 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 			}
 			else									// Not Time To Quit, Update Screen
 			{
-				SwapBuffers(hDC);					// Swap Buffers (Double Buffering)
 			}
 			scView->Update();
 		}
