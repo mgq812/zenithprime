@@ -27,7 +27,7 @@ BattleBoardView* BattleBoardFactory::CreateBoard(float width, float height){
 		shipList1.insert(ship);
 	}
 	
-	BBShipModel* planet = new BBShipModel(500, 100, 0, 500);
+	BBShipModel* planet = new BBShipModel(200, 100, 0, 500);
 	shipList1.insert(planet);
 
 	// create a list of players
@@ -37,7 +37,12 @@ BattleBoardView* BattleBoardFactory::CreateBoard(float width, float height){
 	BBPlayerModel* player1 = new BBPlayerModel(shipList1);
 	playerList1.insert(player1);
 
-	BBModel* model = new BBModel(width, height, playerList1);
+	// create background
+	DrawableModel* backgroundModel = DrawableModelLoader::LoadOBJModel("content/backgrounds/starrybackground.dat");
+	Texture::LoadBitmap("content/backgrounds/the-bubble-nebula.bmp", backgroundModel->cacheTexture);
+	BBShipModel* background = new BBShipModel(width/2,height/2,0,2000, backgroundModel);
+
+	BBModel* model = new BBModel(width, height, playerList1, background);
 
 	BattleBoardController* controller = new BattleBoardController(model);
 

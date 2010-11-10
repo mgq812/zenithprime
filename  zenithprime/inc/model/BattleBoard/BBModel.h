@@ -11,6 +11,7 @@ public:
 	// Constructors
 	BBModel();
 	BBModel(float width1, float height1, ZList<BBPlayerModel*> players1);
+	BBModel(float width1, float height1, ZList<BBPlayerModel*> players1, BBShipModel* background);
 
 	// Getters and setters
 	float getWidth();
@@ -26,6 +27,7 @@ public:
 	void getAllShips(vector<BBShipModel*>& list);
 	void getAllGhostShips(vector<BBShipModel*>& list);
 	void getSelectedShips(vector<BBShipModel*>& list);
+	BBShipModel* getBackground();
 
 private:
 	float width;
@@ -33,6 +35,7 @@ private:
 	//Image Background;
 	ZList<BBPlayerModel*> players;
 	BBPlayerModel* curPlayer;
+	BBShipModel* background;
 };
 
 #endif
