@@ -485,11 +485,31 @@
 				>
 			</File>
 			<File
-				RelativePath=".\content\backgrounds\starry-night.bmp"
+				RelativePath=".\content\backgrounds\not as good backgrounds\gcenter.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\content\backgrounds\lotsofstars.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\content\backgrounds\not as good backgrounds\Space_Nebula.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\content\backgrounds\not as good backgrounds\starry-night.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\content\backgrounds\not as good backgrounds\starsingalaxy.bmp"
 				>
 			</File>
 			<File
 				RelativePath=".\content\backgrounds\the-bubble-nebula.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\content\backgrounds\youngstars.bmp"
 				>
 			</File>
 		</Filter>
