@@ -26,7 +26,7 @@ bool	active=TRUE;		// Window Active Flag Set To TRUE By Default
 bool	fullscreen=TRUE;	// Fullscreen Flag Set To Fullscreen Mode By Default
 
 /* This needs a default constructor to be declared here*/
-SpaceCombatViewport* scView;
+SpaceCombatViewport* scView = NULL;
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 
 
@@ -48,7 +48,8 @@ GLvoid ReSizeGLScene(GLsizei width, GLsizei height)		// Resize And Initialize Th
 	glMatrixMode(GL_MODELVIEW);							// Select The Modelview Matrix
 	glLoadIdentity();									// Reset The Modelview Matrix
 
-	scView->Resize(width, height);
+	if (scView != NULL)
+		scView->Resize(width, height);
 }
 
 int InitGL(GLvoid)										// All Setup For OpenGL Goes Here

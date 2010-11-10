@@ -11,6 +11,12 @@ BBModel::BBModel(float width1, float height1 /*,Image background1*/, ZList<BBPla
 {
 }
 
+BBModel::BBModel(float width1, float height1, ZList<BBPlayerModel*> players1, BBShipModel* background)
+:players(players1), width(width1), height(height1), background(background)
+{
+}
+
+
 float BBModel::getWidth()
 {
 	return width;
@@ -70,4 +76,9 @@ void BBModel::getAllShips(vector<BBShipModel*>& list)
 void BBModel::getAllGhostShips(vector<BBShipModel*>& list){
 }
 void BBModel::getSelectedShips(vector<BBShipModel*>& list){
+}
+
+BBShipModel* BBModel::getBackground()
+{
+	return background;
 }

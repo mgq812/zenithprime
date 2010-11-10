@@ -10,7 +10,7 @@ BattleBoardView::BattleBoardView(BBModel* model, BattleBoardController* controll
   
   showGrid = true;
   showBoundry = false;
-  showBackground = false;
+  showBackground = true;
   showForeground = false;
   showShips = true;
   showMissles = false;
@@ -96,8 +96,22 @@ void BattleBoardView::DrawGrid(){
 
 void BattleBoardView::DrawBoundry(){
 }
-void BattleBoardView::DrawBackground(){
+
+void BattleBoardView::DrawBackground()
+{
+	BBShipModel* background = model->getBackground();
+
+	setTransforms(background);
+	
+	glBindTexture(GL_TEXTURE_2D, background->getDrawModel()->cacheTexture);
+		glEnable(GL_TEXTURE_2D);
+
+	glCallList(background->getDrawModel()->cacheModel);
+
+	glDisable(GL_TEXTURE_2D);
+	clearTransforms();
 }
+
 void BattleBoardView::DrawForeground(){
 }
 void BattleBoardView::DrawShips(){
