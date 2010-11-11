@@ -16,7 +16,7 @@ BattleBoardView* BattleBoardFactory::CreateBoard(float width, float height){
 	DrawableModel* ship3dModel = DrawableModelLoader::LoadOBJModel("content/Cryslis1.dat");
 	Texture::LoadBitmap("content/Cryslis1.bmp", ship3dModel->cacheTexture);
 	int numShips = rand() % 20 + 1;
-	for (int i = 0; i < 1000; i++)
+	for (int i = 0; i < 100; i++)
 	{
 		BBShipModel* ship = new BBShipModel((float)(rand() % (int)width), 
 											(float)(rand() % (int)height), 
@@ -39,7 +39,7 @@ BattleBoardView* BattleBoardFactory::CreateBoard(float width, float height){
 
 	// create background
 	DrawableModel* backgroundModel = DrawableModelLoader::LoadOBJModel("content/backgrounds/starrybackground.dat");
-	Texture::LoadBitmap("content/backgrounds/the-bubble-nebula.bmp", backgroundModel->cacheTexture);
+	Texture::LoadBitmap("content/backgrounds/clouds.bmp", backgroundModel->cacheTexture);
 	BBShipModel* background = new BBShipModel(width/2,height/2,0,2000, backgroundModel);
 
 	BBModel* model = new BBModel(width, height, playerList1, background);
