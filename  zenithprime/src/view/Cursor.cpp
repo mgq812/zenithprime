@@ -38,7 +38,7 @@ void NullCursor::Draw(int X, int Y){
    
    //Draw the cursor at the current mouse pos
    glBegin(GL_TRIANGLES);
-     glColor4f(0,0,.5,.75);
+     glColor4f(1,1,1,1);
      glVertex2f(X,Y);
      glVertex2f(X+20.0f,Y+20.0f);
      glVertex2f(X,Y+20.0f);
