@@ -17,6 +17,8 @@ public:
 	int buttonState;
 	int X;
 	int Y;
+	int maxX;
+	int maxY;
 
 	static void setCurrentMouse(Mouse* mouse);
 	static Mouse* getCurrentMouse();

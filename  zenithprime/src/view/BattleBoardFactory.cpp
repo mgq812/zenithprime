@@ -39,8 +39,8 @@ BattleBoardView* BattleBoardFactory::CreateBoard(float width, float height){
 
 	// create background
 	DrawableModel* backgroundModel = DrawableModelLoader::LoadOBJModel("content/backgrounds/starrybackground.dat");
-	Texture::LoadBitmap("content/backgrounds/clouds.bmp", backgroundModel->cacheTexture);
-	BBShipModel* background = new BBShipModel(width/2,height/2,0,2000, backgroundModel);
+	Texture::LoadBitmap("content/backgrounds/darkSky.bmp", backgroundModel->cacheTexture);
+	BBShipModel* background = new BBShipModel(width/2,height/2,0,100000000, backgroundModel);
 
 	BBModel* model = new BBModel(width, height, playerList1, background);
 

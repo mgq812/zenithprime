@@ -17,7 +17,7 @@ BattleBoardView::BattleBoardView(BBModel* model, BattleBoardController* controll
   showSpecials = false;
   showParticles =false;
   showSelected = false;
-	showCursor = false;
+	showCursor = true;
 	showGhosts = false;
 	showAnchor = true;
 
@@ -140,6 +140,7 @@ void BattleBoardView::DrawSelected(){
 }
 
 void BattleBoardView::DrawCursor(){
+	Cursor::Draw();
 }
 void BattleBoardView::DrawGhosts(){
 

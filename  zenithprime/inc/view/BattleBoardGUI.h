@@ -6,6 +6,7 @@
 #include "BBModel.h"
 #include "Matrix.h"
 #include "Mouse.h"
+#include "Cursor.h"
 
 
 class BattleBoardView;

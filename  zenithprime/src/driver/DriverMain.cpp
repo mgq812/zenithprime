@@ -50,6 +50,8 @@ GLvoid ReSizeGLScene(GLsizei width, GLsizei height)		// Resize And Initialize Th
 
 	if (scView != NULL)
 		scView->Resize(width, height);
+	Mouse::getCurrentMouse()->maxX = width;
+	Mouse::getCurrentMouse()->maxY = height;
 }
 
 int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
@@ -82,7 +84,8 @@ int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
 	glEnd();*/
 
 
-	scView->Draw();
+	if(scView!=NULL)
+		scView->Draw();
 	
 	SwapBuffers(hDC);				// Swap Buffers (Double Buffering)
 	return TRUE;										// Keep Going
@@ -373,7 +376,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 		fullscreen=true;							// Windowed Mode
 		char tit[80];
 		strcpy_s(tit,"Space Combat Viewport");
-		fullscreen = true;
+		//fullscreen = false;
 	// Create Our OpenGL Window
 	
 	

@@ -5,6 +5,8 @@ Mouse::Mouse(void)
 {
 	buttonState = 0;
 	clicks = 0;
+	maxX = -1;
+	maxY = -1;
 }
 
 Mouse::~Mouse(void)

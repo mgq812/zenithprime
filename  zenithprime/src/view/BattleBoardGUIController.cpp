@@ -150,13 +150,14 @@ void BattleBoardController::moveCamera(float deltaX, float deltaY, float deltaZ)
 
 	d_X*= (zoom+MIN_ZOOM)/MAX_ZOOM;
 	d_Y*= (zoom+MIN_ZOOM)/MAX_ZOOM;
+	
 	if(X+d_X>model->getWidth() || X +d_X<0)
 		return;
-	X+= d_X;
+
 	if(Z+d_Y>model->getHeight() || Z+d_Y<0)
 		return;
 
-
+	X+= d_X;
 	Z+= d_Y;
 
 	srcX+= d_X;
