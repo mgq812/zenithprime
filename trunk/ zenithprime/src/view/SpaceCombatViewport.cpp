@@ -32,6 +32,8 @@ int SpaceCombatViewport::Draw()
 
 		glMatrixMode(GL_MODELVIEW);
 		battleBoardView->Draw();
+
+
 		glFlush();
 		glPopMatrix();
 	}
