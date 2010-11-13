@@ -13,19 +13,26 @@ BattleBoardView* BattleBoardFactory::CreateBoard(float width, float height){
 	ZList<BBShipModel*> shipList1;
 	
 	// create a bunch of ships
-	DrawableModel* ship3dModel = DrawableModelLoader::LoadOBJModel("content/Cryslis1.dat");
-	Texture::LoadBitmap("content/Cryslis1.bmp", ship3dModel->cacheTexture);
-	DrawableModel* ship3dModel = DrawableModelLoader::LoadOBJModel("content/ShipModels/tay4.obj");
-	//Texture::LoadBitmap("content/Cryslis1.bmp", ship3dModel->cacheTexture);
+	DrawableModel* models[4];
+	models[0] = DrawableModelLoader::LoadOBJModel("content/ShipModels/tayShip2.obj");
+	models[1] = DrawableModelLoader::LoadOBJModel("content/ShipModels/TayHouse.obj");
+	models[2] = DrawableModelLoader::LoadOBJModel("content/ShipModels/tay4.obj");
+	models[3] = DrawableModelLoader::LoadOBJModel("content/Cryslis1.dat");
+	Texture::LoadBitmap("content/ShipModels/tayShip2.bmp", models[0]->cacheTexture);
+	Texture::LoadBitmap("content/ShipModels/TayHouse.bmp", models[1]->cacheTexture);
+	Texture::LoadBitmap("content/Cryslis2.bmp", models[3]->cacheTexture);
+
+	DrawableModel* ship3dModel = DrawableModelLoader::LoadOBJModel("content/ShipModels/tayShip2.obj");
+	Texture::LoadBitmap("content/ShipModels/tayShip2.bmp", ship3dModel->cacheTexture);
+
 	int numShips = rand() % 20 + 1;
 	for (int i = 0; i < 100; i++)
 	{
 		BBShipModel* ship = new BBShipModel((float)(rand() % (int)width), 
 											(float)(rand() % (int)height), 
 											(float)(rand() % 360), 
-											(float)(rand() % 5 + 1),
 											(float)(rand() % 2 + 5),
-											ship3dModel);
+											models[rand() % 4]);
 		
 		shipList1.insert(ship);
 	}
@@ -42,10 +49,8 @@ BattleBoardView* BattleBoardFactory::CreateBoard(float width, float height){
 
 	// create background
 	DrawableModel* backgroundModel = DrawableModelLoader::LoadOBJModel("content/backgrounds/starrybackground.dat");
-	Texture::LoadBitmap("content/backgrounds/clouds.bmp", backgroundModel->cacheTexture);
-	BBShipModel* background = new BBShipModel(width/2,height/2,0,2000, backgroundModel);
-	Texture::LoadBitmap("content/backgrounds/the-bubble-nebula.bmp", backgroundModel->cacheTexture);
-	BBShipModel* background = new BBShipModel(width/2,height/2,0,2000, backgroundModel);
+	Texture::LoadBitmap("content/backgrounds/TayCustom1.bmp", backgroundModel->cacheTexture);
+	BBShipModel* background = new BBShipModel(width/2,height/2,0,100000000, backgroundModel);
 
 	BBModel* model = new BBModel(width, height, playerList1, background);
 
