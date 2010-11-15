@@ -1,6 +1,7 @@
 #include "BBShipModel.h"
 #include "BBPlayerModel.h"
 #include "BBModel.h"
+#include <time.h>
 
 BBModel::BBModel()
 	:width(0), height(0)
@@ -65,7 +66,42 @@ void BBModel::getAllShips(vector<BBShipModel*>& list)
 
 		while (shipNode != NULL)
 		{
-			list.push_back(shipNode->getData());
+			/* this if for fun */
+			BBShipModel* singleShip = shipNode->getData();
+			float curX = singleShip->getX();
+			float curY = singleShip->getY();
+
+			if (curX >= 2000)
+			{
+				singleShip->xGoingMin = true;
+				singleShip->xGoingMax = false;
+			}
+			if (curX <= 0)
+			{
+				singleShip->xGoingMax = true;
+				singleShip->xGoingMin = false;
+			}
+			if (curY >= 2000)
+			{
+				singleShip->yGoingMin = true;
+				singleShip->yGoingMax = false;
+			}
+			if (curY <= 0)
+			{
+				singleShip->yGoingMax = true;
+				singleShip->yGoingMin = false;
+			}
+			
+			if (singleShip->xGoingMax)
+				singleShip->setX(curX += .5);
+			if (singleShip->yGoingMax)
+				singleShip->setY(curY += .5);
+			if (singleShip->xGoingMin)
+				singleShip->setX(curX -= .5);
+			if (singleShip->yGoingMin)
+				singleShip->setY(curY -= .5);
+			
+			list.push_back(singleShip);
 
 			shipNode = shipNode->getNext();
 		}

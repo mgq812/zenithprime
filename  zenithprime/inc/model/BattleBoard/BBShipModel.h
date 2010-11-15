@@ -11,12 +11,12 @@ class BBShipModel
 public:
 	BBShipModel();
 	BBShipModel(float angle1, float scale1);
-	BBShipModel(int x1, int y1, float angle, float scale);
-	BBShipModel(int x1, int y1, float angle, float scale, DrawableModel* drawModel1);
-	int getX();
-	void setX(int x1);
-	int getY();
-	void setY(int y1);
+	BBShipModel(float x1, float y1, float angle, float scale);
+	BBShipModel(float x1, float y1, float angle, float scale, DrawableModel* drawModel1);
+	float getX();
+	void setX(float x1);
+	float getY();
+	void setY(float y1);
 	float getAngle();
 	void setAngle(float angle);
 	float getScale();
@@ -25,12 +25,18 @@ public:
 	void setShip(Ship* ship);
 	DrawableModel* getDrawModel();
 	
+	/* this is for fun */
+	bool xGoingMax;
+	bool xGoingMin;
+	bool yGoingMax;
+	bool yGoingMin;
 
 private:
-	int x;
-	int y;
+	float x;
+	float y;
 	float angle;
 	float scale;
+
 	//Bitmap texture;
 	DrawableModel* drawModel;
 	Ship* ship;	
