@@ -22,9 +22,6 @@ BattleBoardView* BattleBoardFactory::CreateBoard(float width, float height){
 	Texture::LoadBitmap("content/ShipModels/TayHouse.bmp", models[1]->cacheTexture);
 	Texture::LoadBitmap("content/Cryslis2.bmp", models[3]->cacheTexture);
 
-	DrawableModel* ship3dModel = DrawableModelLoader::LoadOBJModel("content/ShipModels/tayShip2.obj");
-	Texture::LoadBitmap("content/ShipModels/tayShip2.bmp", ship3dModel->cacheTexture);
-
 	int numShips = rand() % 20 + 1;
 	for (int i = 0; i < 100; i++)
 	{
@@ -37,7 +34,9 @@ BattleBoardView* BattleBoardFactory::CreateBoard(float width, float height){
 		shipList1.insert(ship);
 	}
 	
-	BBShipModel* planet = new BBShipModel(200, 100, 0, 500);
+	DrawableModel* planetModel = DrawableModelLoader::LoadOBJModel("content/ShipModels/Planet1.obj");
+	Texture::LoadBitmap("content/ShipModels/finalGlobe1.bmp", planetModel->cacheTexture);
+	BBShipModel* planet = new BBShipModel(200, 100, 0, 80, planetModel);
 	shipList1.insert(planet);
 
 	// create a list of players
