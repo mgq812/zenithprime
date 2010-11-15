@@ -34,9 +34,9 @@ BattleBoardView* BattleBoardFactory::CreateBoard(float width, float height){
 		shipList1.insert(ship);
 	}
 	
-	DrawableModel* planetModel = DrawableModelLoader::LoadOBJModel("content/ShipModels/Planet1.obj");
-	Texture::LoadBitmap("content/ShipModels/finalGlobe1.bmp", planetModel->cacheTexture);
-	BBShipModel* planet = new BBShipModel(200, 100, 0, 80, planetModel);
+	DrawableModel* planetModel = DrawableModelLoader::LoadOBJModel("content/ShipModels/betterPlanetTop.obj");
+	Texture::LoadBitmap("content/ShipModels/BetterPlanet.bmp", planetModel->cacheTexture);
+	BBShipModel* planet = new BBShipModel(200, 100, 0, 50, planetModel);
 	shipList1.insert(planet);
 
 	// create a list of players
