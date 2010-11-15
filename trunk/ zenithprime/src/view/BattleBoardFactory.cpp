@@ -13,29 +13,31 @@ BattleBoardView* BattleBoardFactory::CreateBoard(float width, float height){
 	ZList<BBShipModel*> shipList1;
 	
 	// create a bunch of ships
-	DrawableModel* models[4];
+	const int numShips = 5;
+	DrawableModel* models[numShips];
 	models[0] = DrawableModelLoader::LoadOBJModel("content/ShipModels/tayShip2.obj");
 	models[1] = DrawableModelLoader::LoadOBJModel("content/ShipModels/TayHouse.obj");
 	models[2] = DrawableModelLoader::LoadOBJModel("content/ShipModels/tay4.obj");
 	models[3] = DrawableModelLoader::LoadOBJModel("content/Cryslis1.dat");
+	models[4] = DrawableModelLoader::LoadOBJModel("content/ShipModels/ship5.obj");
 	Texture::LoadBitmap("content/ShipModels/tayShip2.bmp", models[0]->cacheTexture);
 	Texture::LoadBitmap("content/ShipModels/TayHouse.bmp", models[1]->cacheTexture);
 	Texture::LoadBitmap("content/Cryslis2.bmp", models[3]->cacheTexture);
+	Texture::LoadBitmap("content/ShipModels/Ship5.bmp", models[4]->cacheTexture);
 
-	int numShips = rand() % 20 + 1;
 	for (int i = 0; i < 100; i++)
 	{
 		BBShipModel* ship = new BBShipModel((float)(rand() % (int)width), 
 											(float)(rand() % (int)height), 
 											(float)(rand() % 360), 
 											(float)(rand() % 2 + 5),
-											models[rand() % 4]);
+											models[rand() % numShips]);
 		
 		shipList1.insert(ship);
 	}
 	
-	DrawableModel* planetModel = DrawableModelLoader::LoadOBJModel("content/ShipModels/betterPlanetTop.obj");
-	Texture::LoadBitmap("content/ShipModels/BetterPlanet.bmp", planetModel->cacheTexture);
+	DrawableModel* planetModel = DrawableModelLoader::LoadOBJModel("content/ShipModels/betterPlanetSide.obj");
+	Texture::LoadBitmap("content/ShipModels/Mars.bmp", planetModel->cacheTexture);
 	BBShipModel* planet = new BBShipModel(200, 100, 0, 50, planetModel);
 	shipList1.insert(planet);
 
