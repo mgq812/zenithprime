@@ -40,6 +40,8 @@ void Mouse::setCurrentMouse(Mouse* mouse){
 }
 
 Mouse* Mouse::getCurrentMouse(){
+	if(currentMouse==NULL)
+		currentMouse = new Mouse();
 	return currentMouse;
 }
 

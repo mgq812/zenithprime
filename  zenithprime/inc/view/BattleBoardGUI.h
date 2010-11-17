@@ -1,4 +1,5 @@
 #pragma once
+#define NOMINMAX
 #include <windows.h> // this is required for it to work on visual studio 2010
 #include <gl\gl.h>			// Header File For The OpenGL32 Library
 #include <gl\glu.h>			// Header File For The GLu32 Library
@@ -141,6 +142,8 @@ class BattleBoardView
 	void setTransforms(BBShipModel* shipModel);
 	void clearTransforms();
 	int x_div, y_div;
+
+	int gridCache;
 };
 
 class BattleBoardGUIFacade

@@ -24,6 +24,7 @@ BattleBoardView::BattleBoardView(BBModel* model, BattleBoardController* controll
   x_div = (int)model->getWidth()/10;
   y_div = (int)model->getHeight()/10;
 	gluQuadricNormals(quadratic, GLU_SMOOTH);	// Create Smooth Normals ( NEW )
+	gridCache = -1;
 }
 
 void BattleBoardView::Draw()
@@ -175,6 +176,10 @@ void BattleBoardView::DrawAnchor(){
 void BattleBoardView::setGridDivision(int x, int y){
 	x_div = x;
 	y_div = y;
+	
+	if(gridCache>=0)
+
+	gridCache = -1;
 }
 
 void BattleBoardView::setViewport(int x, int y, int width, int height, float angle){

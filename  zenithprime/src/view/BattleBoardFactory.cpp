@@ -37,9 +37,14 @@ BattleBoardView* BattleBoardFactory::CreateBoard(float width, float height){
 	}
 	
 	DrawableModel* planetModel = DrawableModelLoader::LoadOBJModel("content/ShipModels/betterPlanetSide.obj");
-	Texture::LoadBitmap("content/ShipModels/Mars.bmp", planetModel->cacheTexture);
+	Texture::LoadBitmap("content/ShipModels/Earth.bmp", planetModel->cacheTexture);
 	BBShipModel* planet = new BBShipModel(200, 100, 0, 50, planetModel);
 	shipList1.insert(planet);
+
+	DrawableModel* planetModel1 = DrawableModelLoader::LoadOBJModel("content/ShipModels/betterPlanetSide.obj");
+	Texture::LoadBitmap("content/ShipModels/Mars.bmp", planetModel1->cacheTexture);
+	BBShipModel* planet1 = new BBShipModel(width, height, 0, 10, planetModel1);
+	shipList1.insert(planet1);
 
 	// create a list of players
 	ZList<BBPlayerModel*> playerList1;
@@ -59,5 +64,7 @@ BattleBoardView* BattleBoardFactory::CreateBoard(float width, float height){
 
 	BattleBoardView* view = new BattleBoardView(model, controller);
 	view->setGridDivision(100,100);
+
+	model->physicalWorld = new BBPhysics();
 	return view;
 }

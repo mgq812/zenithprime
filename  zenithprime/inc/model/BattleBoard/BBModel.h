@@ -1,6 +1,7 @@
 #ifndef BBMODEL_H
 #define BBMODEL_H
 
+#include "BBPhysics.h"
 #include "ZList.h"
 #include <vector>
 #include "BBPlayerModel.h"
@@ -12,6 +13,7 @@ public:
 	BBModel();
 	BBModel(float width1, float height1, ZList<BBPlayerModel*> players1);
 	BBModel(float width1, float height1, ZList<BBPlayerModel*> players1, BBShipModel* background);
+	~BBModel();
 
 	// Getters and setters
 	float getWidth();
@@ -29,6 +31,8 @@ public:
 	void getSelectedShips(vector<BBShipModel*>& list);
 	BBShipModel* getBackground();
 
+	
+	BBPhysics* physicalWorld;
 private:
 	float width;
 	float height;
