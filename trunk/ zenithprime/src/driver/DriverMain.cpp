@@ -5,7 +5,7 @@
  *		If You've Found This Code Useful, Please Let Me Know.
  *		Visit My Site At nehe.gamedev.net
  */
-
+#define NOMINMAX
 #include <windows.h>		// Header File For Windows
 #include <gl\gl.h>			// Header File For The OpenGL32 Library
 #include <gl\glu.h>			// Header File For The GLu32 Library
@@ -63,9 +63,9 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 	glDepthFunc(GL_LEQUAL);								// The Type Of Depth Testing To Do
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);	// Really Nice Perspective Calculations
 
-	Mouse::setCurrentMouse(new Mouse());
+	//Mouse::setCurrentMouse(new Mouse());
 	Keyboard::setCurrentKeyboard(new Keyboard());
-	BattleBoardView* bbView = BattleBoardFactory::CreateBoard(2000, 2000);
+	BattleBoardView* bbView = BattleBoardFactory::CreateBoard(1000, 2000);
 	scView = new SpaceCombatViewport(bbView);
 
 	return TRUE;										// Initialization Went OK
@@ -376,7 +376,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 		fullscreen=true;							// Windowed Mode
 		char tit[80];
 		strcpy_s(tit,"Space Combat Viewport");
-		//fullscreen = false;
+		fullscreen = false;
 	// Create Our OpenGL Window
 	
 	

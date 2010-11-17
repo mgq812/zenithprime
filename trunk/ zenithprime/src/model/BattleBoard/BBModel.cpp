@@ -71,7 +71,7 @@ void BBModel::getAllShips(vector<BBShipModel*>& list)
 			float curX = singleShip->getX();
 			float curY = singleShip->getY();
 
-			if (curX >= 2000)
+			if (curX >= 1000)
 			{
 				singleShip->xGoingMin = true;
 				singleShip->xGoingMax = false;
@@ -93,13 +93,15 @@ void BBModel::getAllShips(vector<BBShipModel*>& list)
 			}
 			
 			if (singleShip->xGoingMax)
-				singleShip->setX(curX += .5);
+				singleShip->setX(curX += 2);
 			if (singleShip->yGoingMax)
-				singleShip->setY(curY += .5);
+				singleShip->setY(curY += 2);
 			if (singleShip->xGoingMin)
-				singleShip->setX(curX -= .5);
+				singleShip->setX(curX -= 2);
 			if (singleShip->yGoingMin)
-				singleShip->setY(curY -= .5);
+				singleShip->setY(curY -= 2);
+			
+			singleShip->setAngle(singleShip->getAngle() + .1);
 			
 			list.push_back(singleShip);
 
