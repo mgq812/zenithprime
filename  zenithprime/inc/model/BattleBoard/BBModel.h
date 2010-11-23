@@ -31,7 +31,8 @@ public:
 	void getSelectedShips(vector<BBShipModel*>& list);
 	BBShipModel* getBackground();
 
-	
+	bool animate;
+	BBShipModel* mockShip;
 	BBPhysics* physicalWorld;
 private:
 	float width;

@@ -91,18 +91,18 @@ void BBModel::getAllShips(vector<BBShipModel*>& list)
 				singleShip->yGoingMax = true;
 				singleShip->yGoingMin = false;
 			}
-			
-			if (singleShip->xGoingMax)
-				singleShip->setX(curX += 2);
-			if (singleShip->yGoingMax)
-				singleShip->setY(curY += 2);
-			if (singleShip->xGoingMin)
-				singleShip->setX(curX -= 2);
-			if (singleShip->yGoingMin)
-				singleShip->setY(curY -= 2);
-			
-			singleShip->setAngle(singleShip->getAngle() + .1);
-			
+			if(animate){
+				if (singleShip->xGoingMax)
+					singleShip->setX(curX += 2);
+				if (singleShip->yGoingMax)
+					singleShip->setY(curY += 2);
+				if (singleShip->xGoingMin)
+					singleShip->setX(curX -= 2);
+				if (singleShip->yGoingMin)
+					singleShip->setY(curY -= 2);
+				
+				singleShip->setAngle(singleShip->getAngle() + .1);
+			}
 			list.push_back(singleShip);
 
 			shipNode = shipNode->getNext();

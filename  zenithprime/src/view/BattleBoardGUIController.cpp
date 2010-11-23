@@ -253,7 +253,7 @@ void BattleBoardController::callFacade(int targetX, int targetY, int buttons, in
 	Vector3 u = (Vector3::Cross(Vector3(upX,upY,upZ), w)).normalize();
 	Vector3 v = Vector3::Cross(w, u);
 
-	double angConst = tan(BBInfo.angle/180* 3.141592);
+	double angConst = tan(BBInfo.angle/360* 3.141592);
 
     double dist = 1 / angConst;
 
