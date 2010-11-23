@@ -48,7 +48,7 @@ Vector3 Vector3::normalize()
 
         temp.x = this->x/length;
         temp.y = (this->y/length);
-        temp.y = (this->z/length);
+        temp.z = (this->z/length);
 
         return temp;
 } 

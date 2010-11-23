@@ -1,6 +1,7 @@
 #include <time.h>
 #include "BattleBoardFactory.h"
 #include "DrawableModelLoader.h"
+#include "BBControllerInterface.h"
 #include "TextureLoader.h"
 
 using namespace std;
@@ -65,6 +66,9 @@ BattleBoardView* BattleBoardFactory::CreateBoard(float width, float height){
 	BattleBoardView* view = new BattleBoardView(model, controller);
 	view->setGridDivision(100,100);
 
+	BBControllerInterface* BBInter = new BBControllerInterface(model);
+
+	controller->setFacade(BBInter);
 	model->physicalWorld = new BBPhysics();
 	return view;
 }

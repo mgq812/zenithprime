@@ -31,6 +31,8 @@ public:
 	std::string objectName;
 	std::string mtllib;
 	
+	float minX, minY;
+	float maxX, maxY;
 };
 
 
