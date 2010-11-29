@@ -65,6 +65,9 @@ OBJModel* OBJloader::loadModel(string objData){
 	vector<string> tokenLines;
 
 	OBJModel* currentModel = new OBJModel();
+	currentModel->smallestX = 10,000;
+	currentModel->smallestY = 10,000;
+	currentModel->smallestZ = 10,000;
 
 	Tokenize(objData, tokenLines, "\n");
 	//cout<<tokenLines.size()<<endl;
@@ -94,6 +97,13 @@ OBJModel* OBJloader::loadModel(string objData){
 			temp.x = (float)strtod(tokens[1].c_str(),NULL);
 			temp.y = (float)strtod(tokens[2].c_str(),NULL);
 			temp.z = (float)strtod(tokens[3].c_str(),NULL);
+
+			if (temp.x < currentModel->smallestX)
+				currentModel->smallestX = temp.x;
+			if (temp.y < currentModel->smallestY)
+				currentModel->smallestY = temp.y;
+			if (temp.z < currentModel->smallestZ)
+				currentModel->smallestZ = temp.z;
 
 			currentModel->vertexXYZ.push_back(temp);
 		}
@@ -281,16 +291,22 @@ GLuint OBJloader::CacheOBJModel(OBJModel& model){
 	for(unsigned int i = 0; i< model.Triangles.size(); i++)
 	{
 
+		Vector3 tempNorm = model.normal[model.Triangles[i].T1.z -1];
+		glNormal3f(tempNorm.x, tempNorm.y, tempNorm.z);
 		Vector2 tempUV = model.textureUV[model.Triangles[i].T1.y -1];
 		glTexCoord2f(tempUV.x, tempUV.y);
 		Vector3 tempVert = model.vertexXYZ[model.Triangles[i].T1.x-1];
 		glVertex3f( tempVert.x, tempVert.y, tempVert.z);
 
+		tempNorm = model.normal[model.Triangles[i].T2.z -1];
+		glNormal3f(tempNorm.x, tempNorm.y, tempNorm.z);
 		tempUV = model.textureUV[model.Triangles[i].T2.y -1];
 		glTexCoord2f(tempUV.x, tempUV.y);
 		tempVert = model.vertexXYZ[model.Triangles[i].T2.x-1];
 		glVertex3f( tempVert.x, tempVert.y, tempVert.z);
 
+		tempNorm = model.normal[model.Triangles[i].T3.z -1];
+		glNormal3f(tempNorm.x, tempNorm.y, tempNorm.z);
 		tempUV = model.textureUV[model.Triangles[i].T3.y -1];
 		glTexCoord2f(tempUV.x, tempUV.y);
 		tempVert = model.vertexXYZ[model.Triangles[i].T3.x-1];
@@ -304,22 +320,29 @@ GLuint OBJloader::CacheOBJModel(OBJModel& model){
 	glBegin(GL_QUADS);
 	for(unsigned int i = 0; i< model.Quads.size(); i++)
 	{
-		
+		Vector3 tempNorm = model.normal[model.Quads[i].T1.z -1];
+		glNormal3f(tempNorm.x, tempNorm.y, tempNorm.z);
 		Vector2 tempUV = model.textureUV[model.Quads[i].T1.y -1];
 		glTexCoord2f(tempUV.x, tempUV.y);
 		Vector3 tempVert = model.vertexXYZ[model.Quads[i].T1.x-1];
 		glVertex3f( tempVert.x, tempVert.y, tempVert.z);
 
+		tempNorm = model.normal[model.Quads[i].T2.z -1];
+		glNormal3f(tempNorm.x, tempNorm.y, tempNorm.z);
 		tempUV = model.textureUV[model.Quads[i].T2.y -1];
 		glTexCoord2f(tempUV.x, tempUV.y);
 		tempVert = model.vertexXYZ[model.Quads[i].T2.x-1];
 		glVertex3f( tempVert.x, tempVert.y, tempVert.z);
 
+		tempNorm = model.normal[model.Quads[i].T3.z -1];
+		glNormal3f(tempNorm.x, tempNorm.y, tempNorm.z);
 		tempUV = model.textureUV[model.Quads[i].T3.y -1];
 		glTexCoord2f(tempUV.x, tempUV.y);
 		tempVert = model.vertexXYZ[model.Quads[i].T3.x-1];
 		glVertex3f( tempVert.x, tempVert.y, tempVert.z);
 
+		tempNorm = model.normal[model.Quads[i].T4.z -1];
+		glNormal3f(tempNorm.x, tempNorm.y, tempNorm.z);
 		tempUV = model.textureUV[model.Quads[i].T4.y -1];
 		glTexCoord2f(tempUV.x, tempUV.y);
 		tempVert = model.vertexXYZ[model.Quads[i].T4.x-1];
@@ -333,6 +356,8 @@ GLuint OBJloader::CacheOBJModel(OBJModel& model){
 		glBegin(GL_POLYGON);
 		for(unsigned int j = 0; j < face.T.size(); j++)
 		{
+			Vector3 tempNorm = model.normal[face.T[j].z -1];
+			glNormal3f(tempNorm.x, tempNorm.y, tempNorm.z);
 			Vector2 tempUV = model.textureUV[face.T[j].y -1];
 			glTexCoord2f(tempUV.x, tempUV.y);
 			Vector3 tempVert = model.vertexXYZ[face.T[j].x-1];
