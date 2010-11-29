@@ -34,6 +34,7 @@ public:
 	float minX, minY;
 	float maxX, maxY;
 	float smallestX, smallestY, smallestZ;
+	float largestX, largestY, largestZ;
 };
 
 
