@@ -13,7 +13,7 @@ Step 1: MORE INCLUDES
 
 Under the project Properties be sure to include the following folders
 
-lib/PhysicsSDKs/Foundation/include
+lib/PhysicsSDKs/Foundation/include <br>
 lib/PhysicsSDKs/Physics/include
 lib/PhysicsSDKs/PhysicsLoader/include
 
