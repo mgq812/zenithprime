@@ -1,0 +1,47 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+PhysX setup for Visual studios
+
+
+= Details =
+
+There are several steps to get PhysX to run properly
+
+Step 1: MORE INCLUDES
+
+Under the project Properties be sure to include the following folders
+
+lib/PhysicsSDKs/Foundation/include
+lib/PhysicsSDKs/Physics/include
+lib/PhysicsSDKs/PhysicsLoader/include
+
+
+Step 2: MORE DEPENDENCIES
+
+Append the following to the additional dependencies on the project
+
+PhysXLoader.lib
+PhysXCore.lib
+
+Step 3: NEW LIBRARY DIRECTORIES
+
+Under  Linker -> General there is a cell for Additional Library Directories, the following need to be added
+
+lib/win32
+lib/PhysicsSDKs/lib/Win32
+
+Step 4: A PREPROCESSER DEFINE
+
+Under c/c++ -> Preprocessor in the cell Prepocessor Defenitions include a WIN32 define
+
+WIN32
+
+Step 5: SYSTEM32 FILES
+
+If the program is not working at this point you need to copy a few dll files to the Windows/System32 folder, you need to copy the following
+
+lib/win32/PhysXCore.dll
+lib/win32/PhysXLoader.dll
+lib/win32/cudart32_30_9.dll
