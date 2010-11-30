@@ -44,4 +44,8 @@ If the program is not working at this point you need to copy a few dll files to 
 
 lib/win32/PhysXCore.dll<br>
 lib/win32/PhysXLoader.dll<br>
+lib/win32/PhysXDevice.dll<br>
 lib/win32/cudart32_30_9.dll<br>
+
+Step 0:
+http://us.download.nvidia.com/Windows/9.10.0513/PhysX_9.10.0513_SystemSoftware.exe
