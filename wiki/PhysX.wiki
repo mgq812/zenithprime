@@ -29,7 +29,6 @@ Step 3: NEW LIBRARY DIRECTORIES
 
 Under  Linker -> General there is a cell for Additional Library Directories, the following need to be added
 
-lib/win32<br>
 lib/PhysicsSDKs/lib/Win32<br>
 
 Step 4: A PREPROCESSER DEFINE
@@ -38,7 +37,7 @@ Under c/c++ -> Preprocessor in the cell Prepocessor Defenitions include a WIN32 
 
 WIN32
 
-Step 5: SYSTEM32 FILES
+Step 5: RUN FILES
 
 If the program is not working at this point you need to copy a few dll files to the Debug folder where the exe is being placed, you need to copy the following
 
