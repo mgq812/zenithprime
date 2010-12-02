@@ -5,7 +5,7 @@
 PhysX setup for Visual studios
 
 
-= Details =
+= Setup =
 
 There are several steps to get PhysX to run properly
 
@@ -45,3 +45,7 @@ lib/win32/PhysXCore.dll<br>
 lib/win32/PhysXLoader.dll<br>
 lib/win32/PhysXDevice.dll<br>
 lib/win32/cudart32_30_9.dll<br>
+
+= Tutorial =
+
+http://www.docstoc.com/docs/25617882/Ageia-PhysX---Tutorials
