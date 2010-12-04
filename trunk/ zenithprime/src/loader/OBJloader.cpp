@@ -68,6 +68,9 @@ OBJModel* OBJloader::loadModel(string objData){
 	currentModel->smallestX = 10,000;
 	currentModel->smallestY = 10,000;
 	currentModel->smallestZ = 10,000;
+	currentModel->largestX = -10,000;
+	currentModel->largestY = -10,000;
+	currentModel->largestZ = -10,000;
 
 	Tokenize(objData, tokenLines, "\n");
 	//cout<<tokenLines.size()<<endl;
@@ -104,6 +107,13 @@ OBJModel* OBJloader::loadModel(string objData){
 				currentModel->smallestY = temp.y;
 			if (temp.z < currentModel->smallestZ)
 				currentModel->smallestZ = temp.z;
+
+			if (temp.x > currentModel->largestX)
+				currentModel->largestX = temp.x;
+			if (temp.y > currentModel->largestY)
+				currentModel->largestY = temp.y;
+			if (temp.z > currentModel->largestZ)
+				currentModel->largestZ = temp.z;
 
 			currentModel->vertexXYZ.push_back(temp);
 		}
@@ -287,6 +297,12 @@ GLuint OBJloader::CacheOBJModel(OBJModel& model){
 
 	glNewList(cacheModel,GL_COMPILE);
 	glColor3f(1,1,1);
+	float diffReflection[] = { 0.8f, 0.8f, 0.8f, 1.0f };
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, diffReflection);
+	float specReflection[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	glMaterialfv(GL_FRONT, GL_SPECULAR, specReflection);
+	//GLfloat mShininess[] = {4}; //set the shininess of the material
+	//glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mShininess);
 	glBegin(GL_TRIANGLES);
 	for(unsigned int i = 0; i< model.Triangles.size(); i++)
 	{
