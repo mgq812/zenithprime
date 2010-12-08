@@ -34,6 +34,8 @@ public:
 	bool animate;
 	BBShipModel* mockShip;
 	BBPhysics* physicalWorld;
+
+	float cursX, cursY, cursZ;
 private:
 	float width;
 	float height;

@@ -11,11 +11,17 @@ void BBControllerInterface::mouseMoved(float originX, float originY, float origi
 		NxRaycastHit hit = model->physicalWorld->CastRay(originX, originY, originZ, directionX, directionY, directionZ);
 		if(hit.shape==NULL){
 			model->animate = true;
+			model->cursX = 0;
+			model->cursY = 0;
+			model->cursZ = 0;
 			return;
 		}
 		else{
 			bool act = hit.shape->isPlane();
 			model->animate = false;
+			model->cursX = hit.worldImpact.x;
+			model->cursY = hit.worldImpact.y;
+			model->cursZ = hit.worldImpact.z;
 			return;
 		}
 }

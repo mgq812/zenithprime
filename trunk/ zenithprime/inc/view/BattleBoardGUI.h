@@ -141,6 +141,8 @@ class BattleBoardView
 
 	void setTransforms(BBShipModel* shipModel);
 	void clearTransforms();
+	void enableLight();
+	void disableLight();
 	int x_div, y_div;
 
 	int gridCache;

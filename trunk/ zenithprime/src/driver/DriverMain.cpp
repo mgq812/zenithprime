@@ -63,24 +63,7 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 	glDepthFunc(GL_LEQUAL);								// The Type Of Depth Testing To Do
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);	// Really Nice Perspective Calculations
 
-	//buffering
-	glEnable(GL_LIGHTING);//enable lighting
-	glEnable(GL_LIGHT0); //enable the light source
-
-	GLfloat diffuse[] = {1.0f, 1.0f, 1.0f , 1.0f};
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse); //create a light source
-	GLfloat specular[] = {1.0f, 1.0f, 1.0f , 1.0f};
-	glLightfv(GL_LIGHT0, GL_SPECULAR, specular); //create a light source
-	GLfloat position[] = {0.0f, 1.0f, 0.0f , 0};
-	glLightfv(GL_LIGHT0, GL_POSITION, position);
 	
-	float global_ambient[] = {0.3f, 0.3f, 0.3f, 1.0f};
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);//set the 
-	//global lighting model
-	glEnable(GL_COLOR_MATERIAL);
-	glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
-	glShadeModel(GL_SMOOTH); 
-	glEnable(GL_NORMALIZE);
 
 	//Mouse::setCurrentMouse(new Mouse());
 	Keyboard::setCurrentKeyboard(new Keyboard());

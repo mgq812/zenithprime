@@ -115,14 +115,41 @@ void BattleBoardView::DrawBackground()
 
 void BattleBoardView::DrawForeground(){
 }
+void BattleBoardView::enableLight(){
+
+	//buffering
+	glEnable(GL_LIGHTING);//enable lighting
+	glEnable(GL_LIGHT0); //enable the light source
+
+	GLfloat diffuse[] = {1.0f, 1.0f, 1.0f , 1.0f};
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse); //create a light source
+	GLfloat specular[] = {1.0f, 1.0f, 1.0f , 1.0f};
+	glLightfv(GL_LIGHT0, GL_SPECULAR, specular); //create a light source
+	GLfloat position[] = {0.0f, 1.0f, 0.0f , 0};
+	glLightfv(GL_LIGHT0, GL_POSITION, position);
+	
+	float global_ambient[] = {0.3f, 0.3f, 0.3f, 1.0f};
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);//set the 
+	//global lighting model
+	glEnable(GL_COLOR_MATERIAL);
+	glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
+	glShadeModel(GL_SMOOTH); 
+	glEnable(GL_NORMALIZE);
+
+}
+void BattleBoardView::disableLight(){
+	glDisable(GL_LIGHTING);//enable lighting
+}
+
 void BattleBoardView::DrawShips(){
 	vector<BBShipModel*> list;
 	model->getAllShips(list);
-	list.push_back(new BBShipModel(100, 100, 10, 15));
 
+	enableLight();
 	for(unsigned int i = 0; i < list.size() ; i++){
 		DrawShip(list[i]);
 	}
+	disableLight();
 }
 
 void BattleBoardView::DrawMissles(){
@@ -141,6 +168,16 @@ void BattleBoardView::DrawSelected(){
 }
 
 void BattleBoardView::DrawCursor(){
+
+	if(!model->animate)
+	{
+		glColor4f(0.0f, .5f, .7f, 0.2f);
+		glPushMatrix();
+		glTranslatef(model->cursX, model->cursY, model->cursZ);
+		glCallList(DrawableModel::NULLDrawableModel()->cacheModel);
+		glPopMatrix();
+	}
+
 	Cursor::Draw();
 }
 void BattleBoardView::DrawGhosts(){
