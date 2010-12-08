@@ -261,7 +261,7 @@ void BattleBoardController::callFacade(int targetX, int targetY, int buttons, in
 	double dx = ((targetX / (double)(BBInfo.width / 2) - 1))*aspect;
 	double dy = (1.0 - targetY / (double)(BBInfo.height / 2)) ;
 
-	Vector3 delta = Vector3(X,Y,Z) + Vector3::Multiply(u, (float)dx) + Vector3::Multiply(v, (float)dy) + Vector3::Multiply(w, -(float)dist);
+	Vector3 delta = Vector3::Multiply(u, (float)dx) + Vector3::Multiply(v, (float)dy) + Vector3::Multiply(w, -(float)dist);
     delta = delta.normalize();
 
 	switch(protocal){
