@@ -27,6 +27,8 @@ public:
 	void addPlayer(BBPlayerModel* player);
 	void removePlayer(BBPlayerModel* player);
 
+	void Update();
+
 	void getAllShips(std::vector<BBShipModel*>& list);
 	void getAllGhostShips(std::vector<BBShipModel*>& list);
 	

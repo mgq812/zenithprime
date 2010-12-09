@@ -102,9 +102,6 @@ void BBModel::getAllShips(std::vector<BBShipModel*>& list)
 
 		playerNode = playerNode->getNext();
 	}
-	pScene->simulate(1/60.0f);      
-	pScene->flushStream();
-	pScene->fetchResults(NX_RIGID_BODY_FINISHED, true);//stop the simulation of this frame
 
 }
 void BBModel::getAllGhostShips(std::vector<BBShipModel*>& list){
@@ -146,6 +143,8 @@ void BBModel::setupPhysics(){
 	sceneDesc.gravity.set ( 0, 0, 0 );
 
 	pScene = pPhysicsSDK->createScene(sceneDesc);
+	pScene->setTiming( 1/ 60.0f / 4.0f, 4, NX_TIMESTEP_FIXED);
+
 
 	NxPlaneShapeDesc planeDesc;
 		// plane equation : ax + by + cz + d = 0
@@ -202,4 +201,12 @@ void BBModel::clearHighlightedShips(){
 
 bool  BBModel::isSelectedShip(){
 	return !selectedShips.empty();
+}
+
+void BBModel::Update(){
+	
+	pScene->simulate(1/60.0f);      
+	pScene->flushStream();
+	pScene->fetchResults(NX_RIGID_BODY_FINISHED, true);//stop the simulation of this frame
+
 }

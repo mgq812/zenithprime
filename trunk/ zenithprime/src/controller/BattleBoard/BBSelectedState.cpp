@@ -18,8 +18,12 @@ void BBSelectedState::LeftMouseClick(NxRaycastHit& hit, BBControler* control){
 			std::vector<BBShipModel*> list;
 			control->getModel()->getSelectedShips(list);
 
-			for(int i = 0; i < list.size(); i++)
-				list[i]->shipActor->moveGlobalPosition(hit.worldImpact);
+			for(int i = 0; i < list.size(); i++){
+				//list[i]->shipActor->moveGlobalPosition(hit.worldImpact);
+				float dirx = hit.worldImpact.x - list[i]->getX();
+				float diry = hit.worldImpact.z - list[i]->getY();
+				list[i]->shipActor->addTorque(NxVec3(dirx,0.0f,diry));
+			}
 
 	}
 	else

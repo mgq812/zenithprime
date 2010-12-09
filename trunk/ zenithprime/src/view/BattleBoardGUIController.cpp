@@ -222,6 +222,7 @@ void BattleBoardController::Update(){
 		DWORD currentTime = GetTickCount();
 		if((currentTime - oldtime)/(1000.0/30.0) > 1){ 
 			callPan(Mouse::getCurrentMouse()->X, Mouse::getCurrentMouse()->Y);
+			model->Update();
 			oldtime = currentTime;
 		}
 	}
