@@ -120,6 +120,7 @@ class BattleBoardView
 	bool showCursor;
 	bool showGhosts;
 	bool showAnchor;
+	bool showHighlights;
 
 	void DrawGrid();
     void DrawBoundry();
@@ -133,6 +134,7 @@ class BattleBoardView
 	void DrawCursor();
 	void DrawGhosts();
 	void DrawAnchor();
+	void DrawHighlights();
 
 	void DrawShip(BBShipModel* shipModel);
 	void DrawWireframeShip(BBShipModel* shipModel);
