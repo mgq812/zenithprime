@@ -4,6 +4,11 @@
 
 BBControler::BBControler(BBModel* battleBoard1){
 	battleBoard = battleBoard1;
+	currentState = BBNullState::getState();
+}
+void BBControler::setState(BBState* nextState)
+{
+	currentState = nextState;
 }
 void BBControler::LeftMouseClick(NxRaycastHit& hit){
 	currentState->LeftMouseClick(hit, this);

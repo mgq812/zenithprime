@@ -3,12 +3,15 @@
 
 using namespace std;
 
-DrawableModel* DrawableModelLoader::LoadOBJModel(std::string filename){
-	OBJModel* temp = OBJloader::loadModelFromFile(filename);
-	if(temp==NULL) return NULL;
+DrawableModel* DrawableModelLoader::LoadOBJModel(std::string filename)
+{
+	return LoadOBJModel(OBJloader::loadModelFromFile(filename));
+}
 
-	int id = OBJloader::CacheOBJModel(*temp);
+DrawableModel* DrawableModelLoader::LoadOBJModel(OBJModel* model){
+	if(model==NULL) return NULL;
 
-	delete temp;
+	int id = OBJloader::CacheOBJModel(*model);
+
 	return new DrawableModel(id);
 }

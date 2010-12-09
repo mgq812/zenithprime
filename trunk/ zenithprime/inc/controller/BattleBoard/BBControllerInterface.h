@@ -1,9 +1,10 @@
 #include "BattleBoardGUI.h"
+#include "BBControler.h"
 
 class BBControllerInterface : public BattleBoardGUIFacade
 {
 public:
-	BBControllerInterface(BBModel* model);
+	BBControllerInterface(BBModel* model, BBControler* control);
 	~BBControllerInterface();
 	virtual void mouseMoved(float originX, float originY, float originZ, float directionX, float directionY, float directionZ);
 	virtual void mouseDragged(float originX, float originY, float originZ, float directionX, float directionY, float directionZ, int buttons);
@@ -14,4 +15,5 @@ public:
 	virtual void Update();
 private:
 	BBModel* model;
+	BBControler* control;
 };

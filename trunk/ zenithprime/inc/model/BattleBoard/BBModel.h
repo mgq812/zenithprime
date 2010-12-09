@@ -1,18 +1,19 @@
 #ifndef BBMODEL_H
 #define BBMODEL_H
-
-#include "BBPhysics.h"
+#include "NxPhysics.h"
 #include "ZList.h"
 #include <vector>
 #include "BBPlayerModel.h"
+#include "DrawableModel.h"
+
+class BBPlayerModel;
+class BBShipModel;
 
 class BBModel
 {
 public:
 	// Constructors
-	BBModel();
-	BBModel(float width1, float height1, ZList<BBPlayerModel*> players1);
-	BBModel(float width1, float height1, ZList<BBPlayerModel*> players1, BBShipModel* background);
+	BBModel(float width1, float height1);
 	~BBModel();
 
 	// Getters and setters
@@ -26,14 +27,19 @@ public:
 	void addPlayer(BBPlayerModel* player);
 	void removePlayer(BBPlayerModel* player);
 
-	void getAllShips(vector<BBShipModel*>& list);
-	void getAllGhostShips(vector<BBShipModel*>& list);
-	void getSelectedShips(vector<BBShipModel*>& list);
-	BBShipModel* getBackground();
+	void getAllShips(std::vector<BBShipModel*>& list);
+	void getAllGhostShips(std::vector<BBShipModel*>& list);
+	void getSelectedShips(std::vector<BBShipModel*>& list);
+	void setBackground(DrawableModel* background);
+	DrawableModel* getBackground();
 
+	NxScene* getPScene();
+
+	NxRaycastHit CastRay(float x, float y, float z, float dx, float dy, float dz);
 	bool animate;
-	BBShipModel* mockShip;
-	BBPhysics* physicalWorld;
+	float cursorX;
+	float cursorY;
+
 
 	float cursX, cursY, cursZ;
 private:
@@ -42,7 +48,14 @@ private:
 	//Image Background;
 	ZList<BBPlayerModel*> players;
 	BBPlayerModel* curPlayer;
-	BBShipModel* background;
+	DrawableModel* background;
+
+	NxPhysicsSDK* pPhysicsSDK;
+	NxScene* pScene;
+	NxActor* boardActor;
+
+	void setupPhysics();
+	void setupNeutralPlayer();
 };
 
 #endif

@@ -19,12 +19,14 @@ BBPhysics::BBPhysics()
 		// plane equation : ax + by + cz + d = 0
 		planeDesc.normal = NxVec3 ( 0, 1, 0 );
 		planeDesc.d = 0.0f;
+		//planeDesc.userData = "BOARD";
 		// actor descriptor with collection of shapes
 		NxActorDesc actorDesc;
 		actorDesc.shapes.pushBack( &planeDesc );
+		actorDesc.userData = "BOARD";
 		// NxScene creates actor and returns a pointer.
 		pActor = pScene->createActor( actorDesc );
-		//pActor->userData = NULL;
+		//pActor->userData = "BOARD";
 }
 
 BBPhysics::~BBPhysics(){
@@ -39,6 +41,6 @@ NxRaycastHit BBPhysics::CastRay(float x, float y, float z, float dx, float dy, f
 	worldRay.dir.normalize(); //Important!!
 
 	NxRaycastHit hit;
-	pScene->raycastClosestBounds(worldRay,NX_ALL_SHAPES, hit);
+	pScene->raycastClosestShape(worldRay,NX_ALL_SHAPES, hit);
 	return hit;
 }

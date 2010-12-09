@@ -23,6 +23,7 @@ void BBNullState::LeftMouseClick(NxRaycastHit& hit, BBControler* control){
 	else
 	{
 		control->getModel();
+		
 	}
 }
 void BBNullState::RightMouseClick(NxRaycastHit& hit, BBControler* control){

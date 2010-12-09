@@ -3,20 +3,12 @@
 #include "BBModel.h"
 #include <time.h>
 
-BBModel::BBModel()
-	:width(0), height(0)
-{}
-
-BBModel::BBModel(float width1, float height1 /*,Image background1*/, ZList<BBPlayerModel*> players1)
-	:players(players1), width(width1), height(height1)
+BBModel::BBModel(float width1, float height1)
+	:width(width1), height(height1)
 {
+	setupNeutralPlayer();
+	setupPhysics();
 }
-
-BBModel::BBModel(float width1, float height1, ZList<BBPlayerModel*> players1, BBShipModel* background)
-:players(players1), width(width1), height(height1), background(background)
-{
-}
-
 
 float BBModel::getWidth()
 {
@@ -54,7 +46,7 @@ void BBModel::removePlayer(BBPlayerModel* player)
 }
 
 
-void BBModel::getAllShips(vector<BBShipModel*>& list)
+void BBModel::getAllShips(std::vector<BBShipModel*>& list)
 {
 	ZList<BBPlayerModel*> players = getPlayers();
 	ZListNode<BBPlayerModel*>* playerNode = players.getHead();
@@ -111,12 +103,68 @@ void BBModel::getAllShips(vector<BBShipModel*>& list)
 		playerNode = playerNode->getNext();
 	}
 }
-void BBModel::getAllGhostShips(vector<BBShipModel*>& list){
+void BBModel::getAllGhostShips(std::vector<BBShipModel*>& list){
 }
-void BBModel::getSelectedShips(vector<BBShipModel*>& list){
+void BBModel::getSelectedShips(std::vector<BBShipModel*>& list){
 }
 
-BBShipModel* BBModel::getBackground()
+void BBModel::setBackground(DrawableModel* back){
+	background = back;
+}
+DrawableModel* BBModel::getBackground()
 {
 	return background;
+}
+
+NxRaycastHit BBModel::CastRay(float x, float y, float z, float dx, float dy, float dz){
+	NxRay worldRay; 
+	worldRay.orig = NxVec3(x,y,z);
+	worldRay.dir = NxVec3(dx,dy,dz);
+	worldRay.dir.normalize(); //Important!!
+
+	NxRaycastHit hit;
+	pScene->raycastClosestShape(worldRay,NX_ALL_SHAPES, hit);
+	return hit;
+}
+
+void BBModel::setupPhysics(){
+	pPhysicsSDK = NxCreatePhysicsSDK(NX_PHYSICS_SDK_VERSION);
+
+	if ( pPhysicsSDK != NULL ){
+		pPhysicsSDK->getFoundationSDK().getRemoteDebugger()->connect ("localhost", 5425);
+	}
+	else
+		return;
+
+	NxSceneDesc sceneDesc;
+	sceneDesc.gravity.set ( 0, 0, 0 );
+
+	pScene = pPhysicsSDK->createScene(sceneDesc);
+
+	NxPlaneShapeDesc planeDesc;
+		// plane equation : ax + by + cz + d = 0
+	planeDesc.normal = NxVec3 ( 0, 1, 0 );
+	planeDesc.d = 0.0f;
+	planeDesc.userData = "BOARD";
+		// actor descriptor with collection of shapes
+	NxActorDesc actorDesc;
+	actorDesc.shapes.pushBack( &planeDesc );
+
+	NxPlaneShapeDesc planeDesc2;
+	planeDesc2.normal = NxVec3 ( 0, -1, 0 );
+	planeDesc2.d = 0.0f;
+	actorDesc.shapes.pushBack( &planeDesc2 );
+
+	actorDesc.userData = "ACTOR";
+		// NxScene creates actor and returns a pointer.
+	boardActor = pScene->createActor( actorDesc );
+	//boardActor->userData = "BLANK";
+}
+
+void BBModel::setupNeutralPlayer(){
+	players.insert(new BBPlayerModel(this));
+}
+
+NxScene* BBModel::getPScene(){
+	return pScene;
 }

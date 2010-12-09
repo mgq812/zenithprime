@@ -100,17 +100,16 @@ void BattleBoardView::DrawBoundry(){
 
 void BattleBoardView::DrawBackground()
 {
-	BBShipModel* background = model->getBackground();
-
-	setTransforms(background);
+	glPushMatrix();
 	
-	glBindTexture(GL_TEXTURE_2D, background->getDrawModel()->cacheTexture);
+	glScalef(1000000,1000000,1000000);
+	glBindTexture(GL_TEXTURE_2D,model->getBackground()->cacheTexture);
 		glEnable(GL_TEXTURE_2D);
 
-	glCallList(background->getDrawModel()->cacheModel);
+	glCallList(model->getBackground()->cacheModel);
 
 	glDisable(GL_TEXTURE_2D);
-	clearTransforms();
+	glPopMatrix();
 }
 
 void BattleBoardView::DrawForeground(){
@@ -145,6 +144,7 @@ void BattleBoardView::disableLight(){
 void BattleBoardView::DrawShips(){
 	vector<BBShipModel*> list;
 	model->getAllShips(list);
+	//list.push_back(new BBShipModel(100, 100, 10, 15, NULL));
 
 	enableLight();
 	for(unsigned int i = 0; i < list.size() ; i++){
