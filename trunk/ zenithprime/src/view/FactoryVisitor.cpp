@@ -49,18 +49,20 @@ void FactoryVisitor::AddShips(BBPlayerModel* playerModel, BBModel* model){
 	Texture::LoadBitmap("content/ships/AWHuVen.bmp", models[4]->cacheTexture);
 	Texture::LoadBitmap("content/ships/NAVE.bmp", models[5]->cacheTexture);
 
-	for (int i = 0; i < 100; i++)
-	{
-		int ch = rand() % numShips;
-		BBShipModel* ship = new BBShipModel((float)(rand() % (int)model->getWidth()), 
-											(float)(rand() % (int)model->getHeight()), 
-											(float)(rand() % 360), 
-											(float)(rand() % 2 + 5),
-											models[ch], playerModel, objs[ch]);
+	for(int i = 0; i < 10; i++)
+		for(int j = 0; j<3; j++){
+			BBShipModel* ship = new BBShipModel(i*10,j*20+200, 0, 1, models[j+3], playerModel, objs[j+3]);
 
-		playerModel->addShip(ship);
+			playerModel->addShip(ship);
+		}
 
-	}
+	for(int i = 0; i < 10; i++)
+		for(int j = 0; j<3; j++){
+			BBShipModel* ship = new BBShipModel(i*10,model->getHeight()-200- j*20, 180, 1, models[2-j+3], playerModel, objs[2-j+3]);
+
+			playerModel->addShip(ship);
+		}
+
 
 	/*OBJModel* planetOBJ = OBJloader::loadModelFromFile("content/ShipModels/betterPlanetSide.obj");
 	DrawableModel* planetModel = DrawableModelLoader::LoadOBJModel(planetOBJ);

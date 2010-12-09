@@ -33,10 +33,10 @@ public:
 	NxActor* shipActor;
 
 	/* this is for fun */
-	bool xGoingMax;
+	/*bool xGoingMax;
 	bool xGoingMin;
 	bool yGoingMax;
-	bool yGoingMin;
+	bool yGoingMin;*/
 
 private:
 

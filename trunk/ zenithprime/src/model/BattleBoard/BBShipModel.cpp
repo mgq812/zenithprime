@@ -1,28 +1,32 @@
 #include "BBShipModel.h"
 
 BBShipModel::BBShipModel(BBPlayerModel* parent,  OBJModel* bounds)
-	:angle(0), scale(0)
+	: scale(0)
 {
 	drawModel = DrawableModel::NULLDrawableModel();
 	parentPlayer = parent;
 	setupPhysics(bounds);
 	setX(0);
 	setY(0);
+	
+	setAngle(0);
 }
 
 BBShipModel::BBShipModel(float angle1, float scale1, BBPlayerModel* parent,  OBJModel* bounds)
-	:x(0), y(0), angle(angle1), scale(scale1)
+	: scale(scale1)
 {
 	drawModel = DrawableModel::NULLDrawableModel();
 	parentPlayer = parent;
 	setupPhysics(bounds, scale1);
 	setX(0);
 	setY(0);
+	setAngle(angle1);
 }
 
 BBShipModel::BBShipModel(float x1, float y1, float angle1, float scale1, DrawableModel* drawModel1, BBPlayerModel* parent,  OBJModel* bounds)
-	:x(x1), y(y1), angle(angle1), scale(scale1), drawModel(drawModel1)
+	:scale(scale1), drawModel(drawModel1)
 {
+	/*
 	srand(x1);
 	int temp = rand() % 2;
 	if (temp == 1)
@@ -47,21 +51,23 @@ BBShipModel::BBShipModel(float x1, float y1, float angle1, float scale1, Drawabl
 		yGoingMax = false;
 		yGoingMin = true;
 	}
-
+*/
 	parentPlayer = parent;
 	setupPhysics(bounds, scale1);
 	setX(x1);
 	setY(y1);
+	setAngle(angle1);
 }
 
 BBShipModel::BBShipModel(float x1, float y1, float angle1, float scale1, BBPlayerModel* parent, OBJModel* bounds)
-	: angle(angle1), scale(scale1)
+	: scale(scale1)
 {
 	parentPlayer = parent;
 	drawModel = DrawableModel::NULLDrawableModel();
 	setupPhysics(bounds, scale1);
 	setX(x1);
 	setY(y1);
+	setAngle(angle1);
 }
 
 float BBShipModel::getX()
@@ -95,12 +101,24 @@ void BBShipModel::setY(float y1)
 
 float BBShipModel::getAngle()
 {
+	if(shipActor!=NULL){
+		NxMat33 temp = shipActor->getGlobalOrientation();
+		NxVec3 temp2 =  temp.getColumn(2);
+		angle = asin( temp.getColumn(2).x)* 360 / 3.141592;
+	}
 	return angle;
 }
 
 void BBShipModel::setAngle(float angle1)
 {
+	
 	angle = angle1;
+	if(shipActor!=NULL){
+		NxMat33 temp = shipActor->getGlobalOrientation();
+		float r_angle = angle * 3.141592 / 360;
+		shipActor->setGlobalOrientation(NxMat33(NxVec3(cos(r_angle), 0, sin(r_angle)), NxVec3(0,1,0), NxVec3(-sin(r_angle), 0, cos(r_angle))));
+		temp = shipActor->getGlobalOrientation();
+	}
 }
 
 float BBShipModel::getScale()
