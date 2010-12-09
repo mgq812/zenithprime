@@ -15,18 +15,24 @@ void BBSelectedState::LeftMouseClick(NxRaycastHit& hit, BBControler* control){
 	}
 	else if(hit.shape->isPlane())
 	{
-		if(!control->getModel()->isSelectedShip()){
-			control->getModel()->clearSelectedShips();
-			control->setState(BBNullState::getState());
-		}
+			std::vector<BBShipModel*> list;
+			control->getModel()->getSelectedShips(list);
+
+			for(int i = 0; i < list.size(); i++)
+				list[i]->shipActor->moveGlobalPosition(hit.worldImpact);
+
 	}
 	else
 	{
-		control->getModel()->clearSelectedShips();
+		if(!Keyboard::getCurrentKeyboard()->Keys[VK_SHIFT])
+			control->getModel()->clearSelectedShips();
 		control->getModel()->addSelectedShip((BBShipModel*)hit.shape->userData);	
 	}
 }
 void BBSelectedState::RightMouseClick(NxRaycastHit& hit, BBControler* control){
+	control->getModel()->clearSelectedShips();
+	control->setState(BBNullState::getState());
+
 	if(hit.shape ==NULL){
 	}
 	else if(hit.shape->isPlane())

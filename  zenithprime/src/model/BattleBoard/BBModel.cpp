@@ -60,7 +60,7 @@ void BBModel::getAllShips(std::vector<BBShipModel*>& list)
 		{
 			/* this if for fun */
 			BBShipModel* singleShip = shipNode->getData();
-			float curX = singleShip->getX();
+			/*float curX = singleShip->getX();
 			float curY = singleShip->getY();
 
 			if (curX >= 1000)
@@ -94,7 +94,7 @@ void BBModel::getAllShips(std::vector<BBShipModel*>& list)
 					singleShip->setY(curY -= 2);
 				
 				singleShip->setAngle(singleShip->getAngle() + .1);
-			}
+			}*/
 			list.push_back(singleShip);
 
 			shipNode = shipNode->getNext();

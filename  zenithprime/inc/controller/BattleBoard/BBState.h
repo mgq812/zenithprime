@@ -6,6 +6,7 @@
 #include "NxPhysics.h"
 #include "BBControler.h"
 #include "BBModel.h"
+#include "InputDevice.h"
 
 class BBControler;
 
