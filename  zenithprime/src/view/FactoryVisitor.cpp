@@ -5,8 +5,8 @@
 
 
 void FactoryVisitor::AddBackground(BBModel* model){
-	DrawableModel* backgroundModel = DrawableModelLoader::LoadOBJModel("content/backgrounds/starrybackground.dat");
-	Texture::LoadBitmap("content/backgrounds/TayCustom1.bmp", backgroundModel->cacheTexture);
+	DrawableModel* backgroundModel = DrawableModelLoader::LoadOBJModel("content/backgrounds/planetbackground.obj");
+	Texture::LoadBitmap("content/backgrounds/best/blueplanet.bmp", backgroundModel->cacheTexture);
 
 	model->setBackground(backgroundModel);
 }
@@ -57,16 +57,16 @@ void FactoryVisitor::AddShips(BBPlayerModel* playerModel, BBModel* model){
 
 	}
 
-	OBJModel* planetOBJ = OBJloader::loadModelFromFile("content/ShipModels/betterPlanetSide.obj");
+	/*OBJModel* planetOBJ = OBJloader::loadModelFromFile("content/ShipModels/betterPlanetSide.obj");
 	DrawableModel* planetModel = DrawableModelLoader::LoadOBJModel(planetOBJ);
 	Texture::LoadBitmap("content/ShipModels/Earth.bmp", planetModel->cacheTexture);
 	BBShipModel* planet = new BBShipModel(200, 100, 0, 50, planetModel, playerModel, planetOBJ);
 
-	playerModel->addShip(planet);
+	playerModel->addShip(planet);*/
 
-	OBJModel* planetOBJ1 = OBJloader::loadModelFromFile("content/ShipModels/betterPlanetSide.obj");
+	OBJModel* planetOBJ1 = OBJloader::loadModelFromFile("content/planets/planet.obj");
 	DrawableModel* planetModel1 = DrawableModelLoader::LoadOBJModel(planetOBJ1);
-	Texture::LoadBitmap("content/ShipModels/Mars.bmp", planetModel1->cacheTexture);
+	Texture::LoadBitmap("content/planets/planettexture.bmp", planetModel1->cacheTexture);
 	BBShipModel* planet1 = new BBShipModel(model->getWidth(),model->getHeight(), 0, 10, planetModel1, playerModel, planetOBJ1);
 
 	playerModel->addShip(planet1);
