@@ -104,7 +104,7 @@ float BBShipModel::getAngle()
 	if(shipActor!=NULL){
 		NxMat33 temp = shipActor->getGlobalOrientation();
 		NxVec3 temp2 =  temp.getColumn(2);
-		angle = asin( temp.getColumn(2).x)* 360 / 3.141592;
+		angle = asin( temp.getColumn(2).x) * 180 / 3.141592;
 	}
 	return angle;
 }
@@ -115,7 +115,7 @@ void BBShipModel::setAngle(float angle1)
 	angle = angle1;
 	if(shipActor!=NULL){
 		NxMat33 temp = shipActor->getGlobalOrientation();
-		float r_angle = angle * 3.141592 / 360;
+		float r_angle = angle * 3.141592 / 180;
 		shipActor->setGlobalOrientation(NxMat33(NxVec3(cos(r_angle), 0, sin(r_angle)), NxVec3(0,1,0), NxVec3(-sin(r_angle), 0, cos(r_angle))));
 		temp = shipActor->getGlobalOrientation();
 	}
@@ -178,6 +178,6 @@ void BBShipModel::setupPhysics(OBJModel* model, float scale){
 		shipActor->raiseBodyFlag(NX_BF_FROZEN_POS_Y);
 		shipActor->raiseBodyFlag(NX_BF_FROZEN_ROT_X);
 		shipActor->raiseBodyFlag(NX_BF_FROZEN_ROT_Z);
-		//shipActor->raiseBodyFlag(NX_BF_KINEMATIC);
+	//	shipActor->raiseBodyFlag(NX_BF_KINEMATIC);
 
 }

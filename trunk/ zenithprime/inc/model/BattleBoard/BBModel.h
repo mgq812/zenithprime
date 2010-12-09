@@ -5,9 +5,11 @@
 #include <vector>
 #include "BBPlayerModel.h"
 #include "DrawableModel.h"
+#include "BBShipController.h"
 
 class BBPlayerModel;
 class BBShipModel;
+class BBShipController;
 
 class BBModel
 {
@@ -46,6 +48,7 @@ public:
 	void setBackground(DrawableModel* background);
 	DrawableModel* getBackground();
 
+	BBShipController* getShipController();
 	NxScene* getPScene();
 
 	NxRaycastHit CastRay(float x, float y, float z, float dx, float dy, float dz);
@@ -67,6 +70,7 @@ private:
 	NxScene* pScene;
 	NxActor* boardActor;
 
+	BBShipController* shipController;
 	void setupPhysics();
 	void setupNeutralPlayer();
 };
