@@ -178,6 +178,6 @@ void BBShipModel::setupPhysics(OBJModel* model, float scale){
 		shipActor->raiseBodyFlag(NX_BF_FROZEN_POS_Y);
 		shipActor->raiseBodyFlag(NX_BF_FROZEN_ROT_X);
 		shipActor->raiseBodyFlag(NX_BF_FROZEN_ROT_Z);
-		shipActor->raiseBodyFlag(NX_BF_KINEMATIC);
+		//shipActor->raiseBodyFlag(NX_BF_KINEMATIC);
 
 }
