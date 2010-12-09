@@ -1,15 +1,17 @@
 #ifndef BBPLAYER_MODEL
 #define BBPLAYER_MODEL
 
-#include "ZList.h"
+#include "BBModel.h"
 #include "BBShipModel.h"
+#include "ZList.h"
+
+class BBModel;
 
 class BBPlayerModel
 {
-
+friend class BBShipModel;
 public:
-	BBPlayerModel();
-	BBPlayerModel(ZList<BBShipModel*> ships1);
+	BBPlayerModel(BBModel* parent);
 	ZList<BBShipModel*> getShips();
 	void addShip(BBShipModel* ship);
 	void removeShip(BBShipModel* ship);
@@ -18,6 +20,7 @@ private:
 
 	ZList<BBShipModel*> ships;
 	ZList<BBShipModel*> gostShips;
+	BBModel* parentBoard;
 	
 };
 

@@ -21,6 +21,7 @@ public:
 	int Y;
 	int maxX;
 	int maxY;
+	void* focusID;
 
 	static void setCurrentMouse(Mouse* mouse);
 	static Mouse* getCurrentMouse();

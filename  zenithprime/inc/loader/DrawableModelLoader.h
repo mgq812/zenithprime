@@ -5,4 +5,5 @@ class DrawableModelLoader
 {
 public:
 	static DrawableModel* LoadOBJModel(std::string filename);
+	static DrawableModel* LoadOBJModel(OBJModel* model);
 };

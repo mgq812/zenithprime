@@ -35,6 +35,8 @@ public:
 	float maxX, maxY;
 	float smallestX, smallestY, smallestZ;
 	float largestX, largestY, largestZ;
+
+	static OBJModel* NullOBJModel();
 };
 
 

@@ -1,10 +1,10 @@
 #include "BBPlayerModel.h"
 
-BBPlayerModel::BBPlayerModel()
-{}
-BBPlayerModel::BBPlayerModel(ZList<BBShipModel*> ships1)
-	:ships(ships1)
-{}
+BBPlayerModel::BBPlayerModel(BBModel* parent)
+{
+	parentBoard = parent;
+}
+
 
 ZList<BBShipModel*> BBPlayerModel::getShips()
 {

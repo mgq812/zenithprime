@@ -16,6 +16,7 @@ public:
 	void LeftMouseDrag(NxRaycastHit& hit);
 
 	BBModel* getModel();
+	void setState(BBState* nextState);
 private:
 
 	BBModel* battleBoard;
