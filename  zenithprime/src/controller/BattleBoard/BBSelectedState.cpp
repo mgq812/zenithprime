@@ -18,6 +18,9 @@ void BBSelectedState::LeftMouseClick(NxRaycastHit& hit, BBControler* control){
 			std::vector<BBShipModel*> list;
 			control->getModel()->getSelectedShips(list);
 
+			if(list.size() == 1)
+				control->getModel()->getShipController()->MoveShip(list[0], hit.worldImpact.x, hit.worldImpact.z);
+
 			for(int i = 0; i < list.size(); i++){
 				//list[i]->shipActor->moveGlobalPosition(hit.worldImpact);
 				float dirx = hit.worldImpact.x - list[i]->getX();
@@ -28,8 +31,10 @@ void BBSelectedState::LeftMouseClick(NxRaycastHit& hit, BBControler* control){
 	}
 	else
 	{
-		if(!Keyboard::getCurrentKeyboard()->Keys[VK_SHIFT])
+		if(!Keyboard::getCurrentKeyboard()->Keys[VK_SHIFT]){
+
 			control->getModel()->clearSelectedShips();
+		}
 		control->getModel()->addSelectedShip((BBShipModel*)hit.shape->userData);	
 	}
 }
@@ -54,7 +59,11 @@ void BBSelectedState::MouseHover(NxRaycastHit& hit, BBControler* control){
 	}
 	else if(hit.shape->isPlane())
 	{
-		//Do nothing
+		std::vector<BBShipModel*> list;
+		control->getModel()->getSelectedShips(list);
+
+		if(list.size() == 1)
+			control->getModel()->getShipController()->TryMoveShip(list[0], hit.worldImpact.x, hit.worldImpact.z);
 	}
 	else
 	{

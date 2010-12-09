@@ -8,6 +8,7 @@ BBModel::BBModel(float width1, float height1)
 {
 	setupNeutralPlayer();
 	setupPhysics();
+	shipController = new BBShipController(this);
 }
 
 float BBModel::getWidth()
@@ -170,6 +171,10 @@ void BBModel::setupNeutralPlayer(){
 	players.insert(new BBPlayerModel(this));
 }
 
+
+BBShipController* BBModel::getShipController(){
+	return shipController;
+}
 NxScene* BBModel::getPScene(){
 	return pScene;
 }
@@ -204,7 +209,7 @@ bool  BBModel::isSelectedShip(){
 }
 
 void BBModel::Update(){
-	
+	shipController->Update();
 	pScene->simulate(1/60.0f);      
 	pScene->flushStream();
 	pScene->fetchResults(NX_RIGID_BODY_FINISHED, true);//stop the simulation of this frame
