@@ -102,6 +102,10 @@ void BBModel::getAllShips(std::vector<BBShipModel*>& list)
 
 		playerNode = playerNode->getNext();
 	}
+	pScene->simulate(1/60.0f);      
+	pScene->flushStream();
+	pScene->fetchResults(NX_RIGID_BODY_FINISHED, true);//stop the simulation of this frame
+
 }
 void BBModel::getAllGhostShips(std::vector<BBShipModel*>& list){
 }
@@ -184,6 +188,7 @@ void  BBModel::clearSelectedShips(){
 void BBModel::getHighlightedShips(std::vector<BBShipModel*>& list){
 	for(int i = 0 ; i< highlightShips.size();i++)
 			list.push_back(highlightShips[i]);
+	
 }
 void BBModel::addHighlightedShip(BBShipModel* ship){
 	highlightShips.push_back(ship);
@@ -193,4 +198,8 @@ void BBModel::removeHighlightedShip(BBShipModel* ship){
 }
 void BBModel::clearHighlightedShips(){
 	highlightShips.clear();
+}
+
+bool  BBModel::isSelectedShip(){
+	return !selectedShips.empty();
 }

@@ -1,7 +1,5 @@
 #include <string>
 
-#include "BBModel.h"
-#include "BBControler.h"
 #include "BBState.h"
 
 BBNullState* nullState = NULL;
@@ -22,8 +20,8 @@ void BBNullState::LeftMouseClick(NxRaycastHit& hit, BBControler* control){
 	}
 	else
 	{
-		control->getModel();
-		
+		control->getModel()->addSelectedShip((BBShipModel*)hit.shape->userData);
+		control->setState(BBSelectedState::getState());
 	}
 }
 void BBNullState::RightMouseClick(NxRaycastHit& hit, BBControler* control){

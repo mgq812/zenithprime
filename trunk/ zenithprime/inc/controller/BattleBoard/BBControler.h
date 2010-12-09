@@ -6,6 +6,8 @@
 #include "BBModel.h"
 #include "BBState.h"
 
+class BBState;
+
 class BBControler
 {
 public:

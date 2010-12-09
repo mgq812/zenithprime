@@ -16,7 +16,7 @@ BattleBoardView::BattleBoardView(BBModel* model, BattleBoardController* controll
   showMissles = false;
   showSpecials = false;
   showParticles =false;
-  showSelected = false;
+  showSelected = true;
 	showCursor = true;
 	showGhosts = false;
 	showAnchor = true;
@@ -33,15 +33,15 @@ void BattleBoardView::Draw()
   
 	controller->enablePrespective();
   
-	
+	  if(showShips)
+		DrawShips();
 	 if(showGrid)
 		DrawGrid();
      if(showBoundry)
 		DrawBoundry();
      if(showBackground)
 		DrawBackground();
-     if(showShips)
-		DrawShips();
+
      if(showMissles)
 		DrawMissles();
      if(showSpecials)
@@ -131,14 +131,14 @@ void BattleBoardView::enableLight(){
 	glEnable(GL_LIGHTING);//enable lighting
 	glEnable(GL_LIGHT0); //enable the light source
 
-	GLfloat diffuse[] = {0.7f, 0.7f, 0.7f , 0.7f};
+	GLfloat diffuse[] = {1.0f, 1.0f, 1.0f , 1.0f};
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse); //create a light source
 	GLfloat specular[] = {0.5f, 0.5f, 0.5f , 0.5f};
 	glLightfv(GL_LIGHT0, GL_SPECULAR, specular); //create a light source
 	GLfloat position[] = {1.0f, 0.0f, 0.0f , 0};
 	glLightfv(GL_LIGHT0, GL_POSITION, position);
 	
-	float global_ambient[] = {0.3f, 0.3f, 0.3f, 1.0f};
+	float global_ambient[] = {0.2f, 0.2f, 0.2f, 1.0f};
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);//set the 
 	//global lighting model
 	glEnable(GL_COLOR_MATERIAL);
@@ -255,8 +255,9 @@ void BattleBoardView::DrawShip(BBShipModel* shipModel){
 	setTransforms(shipModel);
 	if(shipModel->getDrawModel()->cacheTexture>0)
 	{
+				glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, shipModel->getDrawModel()->cacheTexture);
-			glEnable(GL_TEXTURE_2D);
+		glColor3f(1,1,1);
 	}
 	else
 	{
@@ -289,7 +290,7 @@ void BattleBoardView::DrawWireframeShip(BBShipModel* shipModel){
 void BattleBoardView::DrawSelectedShip(BBShipModel* shipModel){
 	setTransforms(shipModel);
 
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 
@@ -299,7 +300,7 @@ void BattleBoardView::DrawSelectedShip(BBShipModel* shipModel){
 
 	glCallList(shipModel->getDrawModel()->cacheModel);
 
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glDisable(GL_BLEND);
 
 	clearTransforms();
@@ -309,13 +310,11 @@ void BattleBoardView::DrawHighlightedShip(BBShipModel* shipModel){
 	setTransforms(shipModel);
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
 
 	
 
-	glColor4f(0.5f, 0.5f, 0.0f, 0.2f);
-
+	glColor3f(1.0f, 0.0f, 0.0f);
+	
 	glCallList(shipModel->getDrawModel()->cacheModel);
 
 
@@ -323,17 +322,4 @@ void BattleBoardView::DrawHighlightedShip(BBShipModel* shipModel){
 	glDisable(GL_BLEND);
 
 	clearTransforms();
-
-	glPushMatrix();
-	glTranslatef(shipModel->getX(), 0, shipModel->getY());
-
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-
-	glColor4f(0.5f, 0.5f, 0.0f, 0.2f);
-
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	glDisable(GL_BLEND);
-	glPopMatrix();
 }

@@ -39,7 +39,7 @@ void BBControllerInterface::mouseReleased(float originX, float originY, float or
 }
 void BBControllerInterface::mouseClicked(float originX, float originY, float originZ, float directionX, float directionY, float directionZ, int button){
 	NxRaycastHit hit = model->CastRay(originX, originY, originZ, directionX, directionY, directionZ);
-	if(button & MOUSE_LBUTTON != 0)
+	if(button == MOUSE_LBUTTON)
 		control->LeftMouseClick(hit);
 	else
 		control->RightMouseClick(hit);

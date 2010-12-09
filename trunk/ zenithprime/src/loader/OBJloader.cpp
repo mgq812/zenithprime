@@ -296,14 +296,14 @@ GLuint OBJloader::CacheOBJModel(OBJModel& model){
 	GLuint cacheModel = glGenLists(1);
 
 	glNewList(cacheModel,GL_COMPILE);
-	glColor3f(1,1,1);
-	float diffReflection[] = { 0.8f, 0.8f, 0.8f, 1.0f };
-	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, diffReflection);
-	float specReflection[] = { 1.0f, 1.0f, 1.0f, 0.5f };
-	glMaterialfv(GL_FRONT, GL_SPECULAR, specReflection);
+	//glColor3f(1,1,1);
+	//float diffReflection[] = { 0.8f, 0.8f, 0.8f, 1.0f };
+	//glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, diffReflection);
+	//float specReflection[] = { 1.0f, 1.0f, 1.0f, 0.5f };
+	//glMaterialfv(GL_FRONT, GL_SPECULAR, specReflection);
 	//GLfloat mShininess[] = {4}; //set the shininess of the material
 	//glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mShininess);
-	
+
 	glBegin(GL_TRIANGLES);
 	for(unsigned int i = 0; i< model.Triangles.size(); i++)
 	{

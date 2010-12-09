@@ -4,6 +4,9 @@
 #include <string>
 
 #include "NxPhysics.h"
+#include "BBControler.h"
+#include "BBModel.h"
+
 class BBControler;
 
 class BBState
@@ -28,5 +31,17 @@ public:
 	virtual void LeftMouseDrag(NxRaycastHit& hit, BBControler* control);
 private:
 	BBNullState();
+};
+
+class BBSelectedState : public BBState
+{
+public:
+	static BBSelectedState* getState();
+	virtual void LeftMouseClick(NxRaycastHit& hit, BBControler* control);
+	virtual void RightMouseClick(NxRaycastHit& hit, BBControler* control);
+	virtual void MouseHover(NxRaycastHit& hit, BBControler* control);
+	virtual void LeftMouseDrag(NxRaycastHit& hit, BBControler* control);
+private:
+	BBSelectedState();
 };
 #endif
