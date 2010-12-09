@@ -11,171 +11,69 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{DC9464DD-5E21-4E35-B303-44F079CC08A8}</ProjectGuid>
-    <RootNamespace>MasterOfOrion</RootNamespace>
+    <ProjectGuid>{8C44F63D-F8E0-434F-A32B-D8B8C3761BDB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
+    <RootNamespace>MasterOfOrion</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <CharacterSet>Unicode</CharacterSet>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <CharacterSet>MultiByte</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup>
-    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>C:\Users\Travis\Documents\Visual Studio 2010\Projects\MasterOfOrion%281%29\ zenithprime\inc\view;C:\Users\Travis\Documents\Visual Studio 2010\Projects\MasterOfOrion%281%29\ zenithprime\inc\utils;C:\Users\Travis\Documents\Visual Studio 2010\Projects\MasterOfOrion%281%29\ zenithprime\inc\test;C:\Users\Travis\Documents\Visual Studio 2010\Projects\MasterOfOrion%281%29\ zenithprime\inc\model\BattleBoard;C:\Users\Travis\Documents\Visual Studio 2010\Projects\MasterOfOrion%281%29\ zenithprime\inc\model;C:\Users\Travis\Documents\Visual Studio 2010\Projects\MasterOfOrion%281%29\ zenithprime\inc\math;C:\Users\Travis\Documents\Visual Studio 2010\Projects\MasterOfOrion%281%29\ zenithprime\inc\loader;C:\Users\Travis\Documents\Visual Studio 2010\Projects\MasterOfOrion%281%29\ zenithprime\inc\device;C:\Users\Travis\Documents\Visual Studio 2010\Projects\MasterOfOrion%281%29\ zenithprime\inc\controller;C:\Users\Travis\Documents\Visual Studio 2010\Projects\MasterOfOrion%281%29\ zenithprime\inc\controller\BattleBoard;C:\Users\Travis\Documents\Visual Studio 2010\Projects\MasterOfOrion%281%29\ zenithprime\lib\PhysicsSDKs\PhysXLoader\include;C:\Users\Travis\Documents\Visual Studio 2010\Projects\MasterOfOrion%281%29\ zenithprime\lib\PhysicsSDKs\Physics\include;C:\Users\Travis\Documents\Visual Studio 2010\Projects\MasterOfOrion%281%29\ zenithprime\lib\PhysicsSDKs\Foundation\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MinimalRebuild>true</MinimalRebuild>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;PhysXLoader.lib;PhysXCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>C:\Users\Travis\Documents\Visual Studio 2010\Projects\MasterOfOrion%281%29\ zenithprime\lib\PhysicsSDKs\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <Optimization>MaxSpeed</Optimization>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Console</SubSystem>
-      <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <TargetMachine>MachineX86</TargetMachine>
+      <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\controller\BattleBoard\BBControllerInterface.cpp" />
-    <ClCompile Include="src\controller\BattleBoard\BBPhysics.cpp" />
-    <ClCompile Include="src\view\BattleBoardFactory.cpp" />
-    <ClCompile Include="src\view\BattleBoardGUIController.cpp" />
-    <ClCompile Include="src\view\BattleBoardGUIView.cpp" />
-    <ClCompile Include="src\controller\BattleBoard\BBControler.cpp" />
-    <ClCompile Include="src\model\BattleBoard\BBModel.cpp" />
-    <ClCompile Include="src\model\BattleBoard\BBPlayerModel.cpp" />
-    <ClCompile Include="src\model\BattleBoard\BBShipModel.cpp" />
-    <ClCompile Include="src\controller\BattleBoard\BBStateEnemyShip.cpp" />
-    <ClCompile Include="src\controller\BattleBoard\BBStateShip.cpp" />
-    <ClCompile Include="src\controller\BattleBoard\BBStateStart.cpp" />
-    <ClCompile Include="src\model\Buff.cpp" />
-    <ClCompile Include="src\model\Building.cpp" />
-    <ClCompile Include="src\controller\Controler.cpp" />
-    <ClCompile Include="src\view\Cursor.cpp" />
-    <ClCompile Include="src\view\DrawableModel.cpp" />
-    <ClCompile Include="src\loader\DrawableModelLoader.cpp" />
-    <ClCompile Include="src\driver\DriverMain.cpp" />
-    <ClCompile Include="src\model\Engine.cpp" />
-    <ClCompile Include="src\math\Face.cpp" />
-    <ClCompile Include="src\model\FuelCell.cpp" />
-    <ClCompile Include="src\math\int3.cpp" />
-    <ClCompile Include="src\device\Keyboard.cpp" />
-    <ClCompile Include="src\math\Matrix.cpp" />
-    <ClCompile Include="src\device\Mouse.cpp" />
-    <ClCompile Include="src\loader\OBJloader.cpp" />
-    <ClCompile Include="src\loader\OBJModel.cpp" />
-    <ClCompile Include="src\model\Planet.cpp" />
-    <ClCompile Include="src\model\Ship.cpp" />
-    <ClCompile Include="src\view\ShipGUIController.cpp" />
-    <ClCompile Include="src\view\ShipView.cpp" />
-    <ClCompile Include="src\view\ShipViewport.cpp" />
-    <ClCompile Include="src\model\SolarSystem.cpp" />
-    <ClCompile Include="src\view\SpaceCombatViewport.cpp" />
-    <ClCompile Include="src\loader\TextureLoader.cpp" />
-    <ClCompile Include="src\math\Vector2.cpp" />
-    <ClCompile Include="src\math\Vector3.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="inc\controller\battleboard\bbcontrollerinterface.h" />
-    <ClInclude Include="inc\controller\battleboard\bbphysics.h" />
-    <ClInclude Include="inc\view\BattleBoardFactory.h" />
-    <ClInclude Include="inc\view\BattleBoardGUI.h" />
-    <ClInclude Include="inc\controller\BattleBoard\BBControler.h" />
-    <ClInclude Include="inc\model\BattleBoard\BBModel.h" />
-    <ClInclude Include="inc\model\BattleBoard\BBPlayerModel.h" />
-    <ClInclude Include="inc\model\BattleBoard\BBShipModel.h" />
-    <ClInclude Include="inc\controller\BattleBoard\BBState.h" />
-    <ClInclude Include="inc\controller\BattleBoard\BBStateEnemyShip.h" />
-    <ClInclude Include="inc\controller\BattleBoard\BBStateShip.h" />
-    <ClInclude Include="inc\controller\BattleBoard\BBStateStart.h" />
-    <ClInclude Include="inc\model\Buff.h" />
-    <ClInclude Include="inc\model\Building.h" />
-    <ClInclude Include="inc\controller\Controler.h" />
-    <ClInclude Include="inc\view\cursor.h" />
-    <ClInclude Include="inc\view\DrawableModel.h" />
-    <ClInclude Include="inc\loader\DrawableModelLoader.h" />
-    <ClInclude Include="inc\model\Engine.h" />
-    <ClInclude Include="inc\model\Enums.h" />
-    <ClInclude Include="inc\math\Face.h" />
-    <ClInclude Include="inc\model\FuelCell.h" />
-    <ClInclude Include="inc\device\InputDevice.h" />
-    <ClInclude Include="inc\math\int3.h" />
-    <ClInclude Include="inc\device\Keyboard.h" />
-    <ClInclude Include="inc\math\Matrix.h" />
-    <ClInclude Include="inc\device\Mouse.h" />
-    <ClInclude Include="inc\loader\OBJloader.h" />
-    <ClInclude Include="inc\loader\OBJModel.h" />
-    <ClInclude Include="inc\view\OpenGLViewport.h" />
-    <ClInclude Include="inc\model\Planet.h" />
-    <ClInclude Include="inc\model\BattleBoard\Position.h" />
-    <ClInclude Include="inc\model\Ship.h" />
-    <ClInclude Include="inc\view\ShipGUI.h" />
-    <ClInclude Include="inc\view\ShipViewport.h" />
-    <ClInclude Include="inc\model\SolarSystem.h" />
-    <ClInclude Include="inc\view\SpaceCombatViewport.h" />
-    <ClInclude Include="inc\loader\TextureLoader.h" />
-    <ClInclude Include="inc\math\Vector2.h" />
-    <ClInclude Include="inc\math\Vector3.h" />
-    <ClInclude Include="inc\math\VectorMath.h" />
-    <ClInclude Include="inc\model\ZList.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="content\backgrounds\not as good backgrounds\gcenter.bmp" />
-    <None Include="content\backgrounds\not as good backgrounds\Space_Nebula.bmp" />
-    <None Include="content\backgrounds\not as good backgrounds\starry-night.bmp" />
-    <None Include="content\backgrounds\not as good backgrounds\starsingalaxy.bmp" />
-    <None Include="content\convertedships\awing\AWHuVen.bmp" />
-    <None Include="content\convertedships\combatship\NAVE.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
