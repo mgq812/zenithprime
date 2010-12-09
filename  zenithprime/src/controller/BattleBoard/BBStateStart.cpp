@@ -38,8 +38,9 @@ void BBNullState::RightMouseClick(NxRaycastHit& hit, BBControler* control){
 	}
 }
 void BBNullState::MouseHover(NxRaycastHit& hit, BBControler* control){
+	control->getModel()->clearHighlightedShips();
 	if(hit.shape ==NULL){
-		//Do nothing
+
 	}
 	else if(hit.shape->isPlane())
 	{
@@ -47,7 +48,7 @@ void BBNullState::MouseHover(NxRaycastHit& hit, BBControler* control){
 	}
 	else
 	{
-		control->getModel();
+		control->getModel()->addHighlightedShip((BBShipModel*)hit.shape->userData);
 	}
 }
 void BBNullState::LeftMouseDrag(NxRaycastHit& hit, BBControler* control){

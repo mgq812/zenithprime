@@ -20,6 +20,7 @@ BattleBoardView::BattleBoardView(BBModel* model, BattleBoardController* controll
 	showCursor = true;
 	showGhosts = false;
 	showAnchor = true;
+	showHighlights = true;
 
   x_div = (int)model->getWidth()/10;
   y_div = (int)model->getHeight()/10;
@@ -53,6 +54,8 @@ void BattleBoardView::Draw()
 		 DrawAnchor();
 	 if(showGhosts)
 		 DrawGhosts();
+	 if(showHighlights)
+		 DrawHighlights();
 	 if(showCursor)
 		 DrawCursor();
      if(showForeground)
@@ -95,6 +98,14 @@ void BattleBoardView::DrawGrid(){
 	glDisable(GL_BLEND);
 }
 
+void BattleBoardView::DrawHighlights(){
+	std::vector<BBShipModel*> list;
+	model->getHighlightedShips(list);
+
+	for(unsigned int i = 0; i < list.size() ; i++){
+		DrawHighlightedShip(list[i]);
+	}
+}
 void BattleBoardView::DrawBoundry(){
 }
 
@@ -303,12 +314,26 @@ void BattleBoardView::DrawHighlightedShip(BBShipModel* shipModel){
 
 	
 
-	glColor4f(0.5f, .5f, 0.0f, 0.2f);
+	glColor4f(0.5f, 0.5f, 0.0f, 0.2f);
 
 	glCallList(shipModel->getDrawModel()->cacheModel);
+
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glDisable(GL_BLEND);
 
 	clearTransforms();
+
+	glPushMatrix();
+	glTranslatef(shipModel->getX(), 0, shipModel->getY());
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+
+	glColor4f(0.5f, 0.5f, 0.0f, 0.2f);
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glDisable(GL_BLEND);
+	glPopMatrix();
 }
