@@ -121,19 +121,20 @@ void BattleBoardView::enableLight(){
 	glEnable(GL_LIGHTING);//enable lighting
 	glEnable(GL_LIGHT0); //enable the light source
 
-	GLfloat diffuse[] = {1.0f, 1.0f, 1.0f , 1.0f};
+	GLfloat diffuse[] = {0.7f, 0.7f, 0.7f , 0.7f};
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse); //create a light source
-	GLfloat specular[] = {1.0f, 1.0f, 1.0f , 1.0f};
+	GLfloat specular[] = {0.5f, 0.5f, 0.5f , 0.5f};
 	glLightfv(GL_LIGHT0, GL_SPECULAR, specular); //create a light source
-	GLfloat position[] = {0.0f, 1.0f, 0.0f , 0};
+	GLfloat position[] = {1.0f, 0.0f, 0.0f , 0};
 	glLightfv(GL_LIGHT0, GL_POSITION, position);
 	
 	float global_ambient[] = {0.3f, 0.3f, 0.3f, 1.0f};
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);//set the 
 	//global lighting model
 	glEnable(GL_COLOR_MATERIAL);
-	glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
-	glShadeModel(GL_SMOOTH); 
+	//glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
+	glShadeModel(GL_SMOOTH);
+	//glShadeModel(GL_FLAT);
 	glEnable(GL_NORMALIZE);
 
 }
