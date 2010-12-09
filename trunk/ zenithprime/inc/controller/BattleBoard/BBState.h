@@ -3,21 +3,30 @@
 
 #include <string>
 
-#include "BBShipModel.h"
+#include "NxPhysics.h"
+class BBControler;
 
 class BBState
 {
 public:
-	virtual BBState* LClickNothing(BBModel* model) = 0;
-	virtual BBState* LClickEnemy(BBModel* model, BBPlayerModel* player, BBShipModel* ship) = 0;
-	virtual BBState* LClickShip(BBModel* model, BBShipModel* ship) = 0;
-	virtual BBState* RClickValidMove(BBModel* model) = 0;
-	virtual BBState* RClickBadMove(BBModel* model) = 0;
-
-	virtual string toString() = 0;
+	virtual void LeftMouseClick(NxRaycastHit& hit, BBControler* control)=0;
+	virtual void RightMouseClick(NxRaycastHit& hit, BBControler* control)=0;
+	virtual void MouseHover(NxRaycastHit& hit, BBControler* control)=0;
+	virtual void LeftMouseDrag(NxRaycastHit& hit, BBControler* control)=0;
 
 private:
 
 };
 
+class BBNullState : public BBState
+{
+public:
+	static BBNullState* getState();
+	virtual void LeftMouseClick(NxRaycastHit& hit, BBControler* control);
+	virtual void RightMouseClick(NxRaycastHit& hit, BBControler* control);
+	virtual void MouseHover(NxRaycastHit& hit, BBControler* control);
+	virtual void LeftMouseDrag(NxRaycastHit& hit, BBControler* control);
+private:
+	BBNullState();
+};
 #endif

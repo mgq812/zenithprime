@@ -1,43 +1,68 @@
 #include <string>
 
 #include "BBModel.h"
-
+#include "BBControler.h"
 #include "BBState.h"
-#include "BBStateStart.h"
-#include "BBStateShip.h"
-#include "BBStateEnemyShip.h"
 
+BBNullState* nullState = NULL;
+BBNullState* BBNullState::getState(){
+	if(nullState==NULL){
+		nullState = new BBNullState();
+	}
 
-BBState* BBStateStart::LClickNothing(BBModel* model)
-{
-	// next state
-	return new BBStateStart();
+	return nullState;
 }
-BBState* BBStateStart::LClickEnemy(BBModel* model, BBPlayerModel* player, BBShipModel* ship)
-{
-	// next state
-	return new BBStateEnemyShip();
+void BBNullState::LeftMouseClick(NxRaycastHit& hit, BBControler* control){
+	if(hit.shape ==NULL){
+		//Do Nothing
+	}
+	else if(hit.shape->isPlane())
+	{
+		//
+	}
+	else
+	{
+		control->getModel();
+	}
+}
+void BBNullState::RightMouseClick(NxRaycastHit& hit, BBControler* control){
+	if(hit.shape ==NULL){
+	}
+	else if(hit.shape->isPlane())
+	{
+	}
+	else
+	{
+		control->getModel();
+	}
+}
+void BBNullState::MouseHover(NxRaycastHit& hit, BBControler* control){
+	if(hit.shape ==NULL){
+		//Do nothing
+	}
+	else if(hit.shape->isPlane())
+	{
+		//Do nothing
+	}
+	else
+	{
+		control->getModel();
+	}
+}
+void BBNullState::LeftMouseDrag(NxRaycastHit& hit, BBControler* control){
+	if(hit.shape ==NULL){
+		//Do Nothing
+	}
+	else if(hit.shape->isPlane())
+	{
+	}
+	else
+	{
+		control->getModel();
+	}
 }
 
-BBState* BBStateStart::LClickShip(BBModel* model, BBShipModel* ship)
-{
-	// next state
-	return new BBStateShip();
-}
+BBNullState::BBNullState(){
 
-BBState* BBStateStart::RClickValidMove(BBModel* model)
-{
-	// next state
-	return new BBStateStart();
-}
 
-BBState* BBStateStart::RClickBadMove(BBModel* model)
-{
-	// next state
-	return new BBStateStart();
-}
-
-string BBStateStart::toString()
-{
-	return "Start State";
 }
