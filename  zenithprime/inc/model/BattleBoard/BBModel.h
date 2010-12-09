@@ -32,6 +32,7 @@ public:
 	
 	void getSelectedShips(std::vector<BBShipModel*>& list);
 	void addSelectedShip(BBShipModel* ship);
+	bool isSelectedShip();
 	void removeSelectedShip(BBShipModel* ship);
 	void clearSelectedShips();
 

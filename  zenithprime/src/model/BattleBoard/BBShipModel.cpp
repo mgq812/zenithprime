@@ -90,6 +90,7 @@ void BBShipModel::setY(float y1)
 	y = y1;
 	if(shipActor!=NULL)
 		shipActor->setGlobalPosition(NxVec3(x, 0, y));
+
 }
 
 float BBShipModel::getAngle()
@@ -159,4 +160,6 @@ void BBShipModel::setupPhysics(OBJModel* model, float scale){
 		shipActor->raiseBodyFlag(NX_BF_FROZEN_POS_Y);
 		shipActor->raiseBodyFlag(NX_BF_FROZEN_ROT_X);
 		shipActor->raiseBodyFlag(NX_BF_FROZEN_ROT_Z);
+		shipActor->raiseBodyFlag(NX_BF_KINEMATIC);
+
 }

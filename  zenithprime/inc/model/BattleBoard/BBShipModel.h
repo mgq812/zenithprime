@@ -29,6 +29,9 @@ public:
 	void setShip(Ship* ship);
 	DrawableModel* getDrawModel();
 	
+	
+	NxActor* shipActor;
+
 	/* this is for fun */
 	bool xGoingMax;
 	bool xGoingMin;
@@ -44,7 +47,6 @@ private:
 	float scale;
 
 	NxBodyDesc bodyDesc;
-	NxActor* shipActor;
 	DrawableModel* drawModel;
 	BBPlayerModel* parentPlayer;
 	Ship* ship;	
