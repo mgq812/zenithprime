@@ -151,10 +151,12 @@ void BBShipModel::setupPhysics(OBJModel* model, float scale){
 		NxActorDesc actorDesc;
 		actorDesc.shapes.pushBack( &boxDesc );
 		actorDesc.density = 10;
+		actorDesc.userData = this;
+	
 		actorDesc.body = &bodyDesc;
 		shipActor = parentPlayer->parentBoard->getPScene()->createActor(actorDesc);
 
-		//shipActor->raiseBodyFlag(NX_BF_FROZEN_POS_Y);
-		//shipActor->raiseBodyFlag(NX_BF_FROZEN_ROT_X);
-		//shipActor->raiseBodyFlag(NX_BF_FROZEN_ROT_Z);
+		shipActor->raiseBodyFlag(NX_BF_FROZEN_POS_Y);
+		shipActor->raiseBodyFlag(NX_BF_FROZEN_ROT_X);
+		shipActor->raiseBodyFlag(NX_BF_FROZEN_ROT_Z);
 }

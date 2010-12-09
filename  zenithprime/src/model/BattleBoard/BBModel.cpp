@@ -106,6 +106,8 @@ void BBModel::getAllShips(std::vector<BBShipModel*>& list)
 void BBModel::getAllGhostShips(std::vector<BBShipModel*>& list){
 }
 void BBModel::getSelectedShips(std::vector<BBShipModel*>& list){
+		for(int i = 0 ; i< selectedShips.size();i++)
+			list.push_back(selectedShips[i]);
 }
 
 void BBModel::setBackground(DrawableModel* back){
@@ -167,4 +169,28 @@ void BBModel::setupNeutralPlayer(){
 
 NxScene* BBModel::getPScene(){
 	return pScene;
+}
+
+void  BBModel::addSelectedShip(BBShipModel* ship){
+	selectedShips.push_back(ship);
+
+}
+void  BBModel::removeSelectedShip(BBShipModel* ship){
+
+}
+void  BBModel::clearSelectedShips(){
+	selectedShips.clear();
+}
+void BBModel::getHighlightedShips(std::vector<BBShipModel*>& list){
+	for(int i = 0 ; i< highlightShips.size();i++)
+			list.push_back(highlightShips[i]);
+}
+void BBModel::addHighlightedShip(BBShipModel* ship){
+	highlightShips.push_back(ship);
+}
+void BBModel::removeHighlightedShip(BBShipModel* ship){
+
+}
+void BBModel::clearHighlightedShips(){
+	highlightShips.clear();
 }
