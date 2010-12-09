@@ -19,7 +19,7 @@ void FactoryVisitor::AddPlayers(BBModel* model){
 void FactoryVisitor::AddShips(BBPlayerModel* playerModel, BBModel* model){
 	
 	srand(time(NULL));
-	const int numShips = 1;
+	const int numShips = 6;
 
 	DrawableModel* models[numShips];
 	OBJModel* objs[numShips];
@@ -36,15 +36,18 @@ void FactoryVisitor::AddShips(BBPlayerModel* playerModel, BBModel* model){
 	objs[3] = OBJloader::loadModelFromFile("content/ships/ghouledited.obj");
 	models[3] = DrawableModelLoader::LoadOBJModel(objs[3]);
 
-	objs[4] = OBJloader::loadModelFromFile("content/ShipModels/ship5.obj");
+	objs[4] = OBJloader::loadModelFromFile("content/ships/awing.obj");
 	models[4] = DrawableModelLoader::LoadOBJModel(objs[4]);
 
-	objs[5] = OBJloader::loadModelFromFile("content/ShipModels/ship5.obj");
+	objs[5] = OBJloader::loadModelFromFile("content/ships/combatship.obj");
 	models[5] = DrawableModelLoader::LoadOBJModel(objs[5]);
 
 	Texture::LoadBitmap("content/ShipModels/tayShip2.bmp", models[0]->cacheTexture);
-	Texture::LoadBitmap("content/BlueGrayCarbonScoring.bmp", models[1]->cacheTexture);
+	Texture::LoadBitmap("content/ShipModels/BlueGrayCarbonScoring.bmp", models[1]->cacheTexture);
 	Texture::LoadBitmap("content/ShipModels/Ship5.bmp", models[2]->cacheTexture);
+	Texture::LoadBitmap("content/ships/ghoul_map.bmp", models[3]->cacheTexture);
+	Texture::LoadBitmap("content/ships/AWHuVen.bmp", models[4]->cacheTexture);
+	Texture::LoadBitmap("content/ships/NAVE.bmp", models[5]->cacheTexture);
 
 	for (int i = 0; i < 100; i++)
 	{
