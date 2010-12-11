@@ -22,6 +22,7 @@ void BBShipController::MoveShip(BBShipModel* shipModel,float x, float y){
 	
 	shipModel->setAngle(d_angle);
 
+	//angle = d_angle * 3.141592 / 180;
 	move->shipModel = shipModel;
 	shipModel->getAngle();
 
@@ -105,6 +106,7 @@ void BBShipController::Update(){
 		if(currentMove->step >= currentMove->path.size())
 		{
 			ShipMove* nextmove = currentMove->next;
+			currentMove->shipModel->shipActor->putToSleep();
 
 			if(currentMove->prev!=NULL)
 				currentMove->prev->next = currentMove->next;

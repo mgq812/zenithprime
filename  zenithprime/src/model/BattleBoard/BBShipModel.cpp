@@ -104,7 +104,9 @@ float BBShipModel::getAngle()
 	if(shipActor!=NULL){
 		NxMat33 temp = shipActor->getGlobalOrientation();
 		NxVec3 temp2 =  temp.getColumn(2);
-		angle = asin( temp.getColumn(2).x) * 180 / 3.141592;
+		angle = atan2( temp.getColumn(2).z, temp.getColumn(2).x) * 180 / 3.141592;
+		//if(temp.getColumn(2).z<0)
+			//angle = 360 - angle;
 	}
 	return angle;
 }
@@ -115,8 +117,8 @@ void BBShipModel::setAngle(float angle1)
 	angle = angle1;
 	if(shipActor!=NULL){
 		NxMat33 temp = shipActor->getGlobalOrientation();
-		float r_angle = angle * 3.141592 / 180;
-		shipActor->setGlobalOrientation(NxMat33(NxVec3(cos(r_angle), 0, sin(r_angle)), NxVec3(0,1,0), NxVec3(-sin(r_angle), 0, cos(r_angle))));
+		float r_angle = angle * 3.141592/ 180.0f;
+		shipActor->setGlobalOrientation(NxMat33(NxVec3(cos(r_angle), 0, (float)sin(r_angle)), NxVec3(0,1,0), NxVec3(-sin(r_angle), 0, cos(r_angle))));
 		temp = shipActor->getGlobalOrientation();
 	}
 }
