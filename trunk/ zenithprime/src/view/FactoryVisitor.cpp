@@ -33,14 +33,14 @@ void FactoryVisitor::AddShips(BBPlayerModel* playerModel, BBModel* model){
 	objs[2] = OBJloader::loadModelFromFile("content/ShipModels/ship5.obj");
 	models[2] = DrawableModelLoader::LoadOBJModel(objs[2]);
 
-	//objs[3] = OBJloader::loadModelFromFile("content/ships/ghouledited.obj");
-	//models[3] = DrawableModelLoader::LoadOBJModel(objs[3]);
+	/*objs[3] = OBJloader::loadModelFromFile("content/ships/ghouledited.obj");
+	models[3] = DrawableModelLoader::LoadOBJModel(objs[3]);
 
-	//objs[4] = OBJloader::loadModelFromFile("content/ships/awing.obj");
-	//models[4] = DrawableModelLoader::LoadOBJModel(objs[4]);
+	objs[4] = OBJloader::loadModelFromFile("content/ships/awing.obj");
+	models[4] = DrawableModelLoader::LoadOBJModel(objs[4]);
 
-	//objs[5] = OBJloader::loadModelFromFile("content/ships/combatship.obj");
-	//models[5] = DrawableModelLoader::LoadOBJModel(objs[5]);
+	objs[5] = OBJloader::loadModelFromFile("content/ships/combatship.obj");
+	models[5] = DrawableModelLoader::LoadOBJModel(objs[5]);*/
 
 	Texture::LoadBitmap("content/ShipModels/tayShip2.bmp", models[0]->cacheTexture);
 	Texture::LoadBitmap("content/ShipModels/BlueGrayCarbonScoring.bmp", models[1]->cacheTexture);
@@ -64,12 +64,12 @@ void FactoryVisitor::AddShips(BBPlayerModel* playerModel, BBModel* model){
 		}
 
 
-	/*OBJModel* planetOBJ = OBJloader::loadModelFromFile("content/ShipModels/betterPlanetSide.obj");
+	OBJModel* planetOBJ = OBJloader::loadModelFromFile("content/ShipModels/betterPlanetSide.obj");
 	DrawableModel* planetModel = DrawableModelLoader::LoadOBJModel(planetOBJ);
 	Texture::LoadBitmap("content/ShipModels/Earth.bmp", planetModel->cacheTexture);
-	BBShipModel* planet = new BBShipModel(200, 100, 0, 50, planetModel, playerModel, planetOBJ);
+	BBShipModel* planet = new BBShipModel(model->getWidth(), 100, 0, 50, planetModel, playerModel, planetOBJ);
 
-	playerModel->addShip(planet);*/
+	playerModel->addShip(planet);
 
 	OBJModel* planetOBJ1 = OBJloader::loadModelFromFile("content/planets/planet.obj");
 	DrawableModel* planetModel1 = DrawableModelLoader::LoadOBJModel(planetOBJ1);

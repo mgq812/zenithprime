@@ -69,6 +69,9 @@ private:
 	NxPhysicsSDK* pPhysicsSDK;
 	NxScene* pScene;
 	NxActor* boardActor;
+	NxActor* boundsActor;
+
+	NxBodyDesc hard;
 
 	BBShipController* shipController;
 	void setupPhysics();

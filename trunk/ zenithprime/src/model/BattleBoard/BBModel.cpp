@@ -161,9 +161,33 @@ void BBModel::setupPhysics(){
 	planeDesc2.d = 0.0f;
 	actorDesc.shapes.pushBack( &planeDesc2 );
 
+
 	actorDesc.userData = "ACTOR";
 		// NxScene creates actor and returns a pointer.
 	boardActor = pScene->createActor( actorDesc );
+
+	NxPlaneShapeDesc leftWall;
+	leftWall.normal = NxVec3 ( 0, 1, 0 );
+	 leftWall.d = 0.0f;
+	 leftWall.mass = 100;
+	 //leftWall.group = 1;
+
+	NxActorDesc boundsDesc;
+	boundsDesc.shapes.pushBack( &leftWall);
+	boundsDesc.density = 1.0f;
+
+
+	//NxPlaneShapeDesc rightWall;
+	//rightWall.normal = NxVec3 ( 0, -1, 0 );
+	//rightWall.d = width;
+	
+
+	//boundsDesc.shapes.pushBack(&rightWall);
+
+	boundsDesc.body = &hard;
+
+	boundsActor = pScene->createActor(boundsDesc);
+	//boundsActor->raiseBodyFlag(NX_BF_KINEMATIC);
 	//boardActor->userData = "BLANK";
 }
 
