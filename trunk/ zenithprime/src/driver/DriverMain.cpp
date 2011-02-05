@@ -378,7 +378,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 		fullscreen=true;							// Windowed Mode
 		char tit[80];
 		strcpy_s(tit,"Space Combat Viewport");
-		fullscreen = false;
+		fullscreen = true;
 	// Create Our OpenGL Window
 	
 	

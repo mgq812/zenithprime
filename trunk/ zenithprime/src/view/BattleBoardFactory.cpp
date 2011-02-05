@@ -11,12 +11,18 @@ void BattleBoardFactory::SetFactory(FactoryVisitor* v){
 	visitor = v;
 }
 
-BattleBoardView* BattleBoardFactory::CreateBoard(float width, float height){
+BattleBoardView* BattleBoardFactory::CreateBoard(float width, float height)
+{
 	
 	BBModel* model = new BBModel(width, height);
 	visitor->AddBackground(model);
 	visitor->AddLights(model);
-	visitor->AddShips(model->getPlayers().getHead()->getData(), model);
+
+	ZList<BBPlayerModel*> players = model->getPlayers();
+	for (int i = 0; i < players.getSize(); i++)
+	{
+		visitor->AddShips(players.getHead()->getData(), model);
+	}
 
 	BattleBoardController* controller = new BattleBoardController(model);
 

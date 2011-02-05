@@ -4,22 +4,27 @@
 #include <time.h>
 
 
-void FactoryVisitor::AddBackground(BBModel* model){
+void FactoryVisitor::AddBackground(BBModel* model) 
+{
 	DrawableModel* backgroundModel = DrawableModelLoader::LoadOBJModel("content/backgrounds/planetbackground.obj");
-	Texture::LoadBitmap("content/backgrounds/best/blueplanet.bmp", backgroundModel->cacheTexture);
+	Texture::LoadBitmap("content/backgrounds/best/stars.bmp", backgroundModel->cacheTexture);
 
 	model->setBackground(backgroundModel);
 }
-void FactoryVisitor::AddLights(BBModel* model){
+void FactoryVisitor::AddLights(BBModel* model)
+{
 
 }
-void FactoryVisitor::AddPlayers(BBModel* model){
-
+void FactoryVisitor::AddPlayers(BBModel* model)
+{
+	model->addPlayer(new BBPlayerModel(model));
+	model->addPlayer(new BBPlayerModel(model));
 }
-void FactoryVisitor::AddShips(BBPlayerModel* playerModel, BBModel* model){
+void FactoryVisitor::AddShips(BBPlayerModel* playerModel, BBModel* model)
+{
 	
 	srand(time(NULL));
-	const int numShips = 3;
+	const int numShips = 2;
 
 	DrawableModel* models[numShips];
 	OBJModel* objs[numShips];
@@ -30,38 +35,37 @@ void FactoryVisitor::AddShips(BBPlayerModel* playerModel, BBModel* model){
 	objs[1] = OBJloader::loadModelFromFile("content/Cryslis1.dat");
 	models[1] = DrawableModelLoader::LoadOBJModel(objs[1]);
 
+/*	
 	objs[2] = OBJloader::loadModelFromFile("content/ShipModels/ship5.obj");
 	models[2] = DrawableModelLoader::LoadOBJModel(objs[2]);
-
-	/*objs[3] = OBJloader::loadModelFromFile("content/ships/ghouledited.obj");
+	
+	objs[3] = OBJloader::loadModelFromFile("content/ships/ghouledited.obj");
 	models[3] = DrawableModelLoader::LoadOBJModel(objs[3]);
 
 	objs[4] = OBJloader::loadModelFromFile("content/ships/awing.obj");
 	models[4] = DrawableModelLoader::LoadOBJModel(objs[4]);
 
 	objs[5] = OBJloader::loadModelFromFile("content/ships/combatship.obj");
-	models[5] = DrawableModelLoader::LoadOBJModel(objs[5]);*/
+	models[5] = DrawableModelLoader::LoadOBJModel(objs[5]);
+*/
 
 	Texture::LoadBitmap("content/ShipModels/tayShip2.bmp", models[0]->cacheTexture);
 	Texture::LoadBitmap("content/ShipModels/BlueGrayCarbonScoring.bmp", models[1]->cacheTexture);
+/*
 	Texture::LoadBitmap("content/ShipModels/Ship5.bmp", models[2]->cacheTexture);
-	/*Texture::LoadBitmap("content/ships/ghoul_map.bmp", models[3]->cacheTexture);
+	Texture::LoadBitmap("content/ships/ghoul_map.bmp", models[3]->cacheTexture);
 	Texture::LoadBitmap("content/ships/AWHuVen.bmp", models[4]->cacheTexture);
-	Texture::LoadBitmap("content/ships/NAVE.bmp", models[5]->cacheTexture);*/
-
-	for(int i = 0; i < 10; i++)
-		for(int j = 0; j<3; j++){
-			BBShipModel* ship = new BBShipModel(i*20,j*40+200, 0, 1, models[j], playerModel, objs[j]);
-
+	Texture::LoadBitmap("content/ships/NAVE.bmp", models[5]->cacheTexture);
+*/
+	for(int i = 0; i < 1; i++)
+		for(int j = 0; j < numShips; j++)
+		{
+			
+			BBShipModel* ship = new BBShipModel(i*80, j*40+200, 0, 1, models[j], playerModel, objs[j]);
 			playerModel->addShip(ship);
 		}
 
-	for(int i = 0; i < 10; i++)
-		for(int j = 0; j<3; j++){
-			BBShipModel* ship = new BBShipModel(i*20,model->getHeight()-200- j*40, 180, 1, models[2-j], playerModel, objs[2-j]);
 
-			playerModel->addShip(ship);
-		}
 
 
 	OBJModel* planetOBJ = OBJloader::loadModelFromFile("content/ShipModels/betterPlanetSide.obj");
